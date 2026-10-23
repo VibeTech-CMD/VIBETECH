@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="Vibetech — soluções digitais, sites modernos e tecnologia para impulsionar negócios.">
+  <title>Vibetech — Ideias que viram experiências digitais</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0c1a2c;
+      --panel: rgba(16, 33, 53, .78);
+      --text: #f4f8ff;
+      --muted: #a7b7cc;
+      --line: rgba(174, 202, 238, .15);
+      --cyan: #54e7f2;
+      --blue: #6b8cff;
+      --purple: #b07cff;
+      --radius: 22px;
+      --max: 1160px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0; color: var(--text);
+      background:
+        radial-gradient(ellipse at 80% 5%, rgba(81, 111, 255, .18), transparent 35%),
+        radial-gradient(ellipse at 5% 35%, rgba(47, 224, 231, .10), transparent 32%),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .skip-link { position: absolute; left: -9999px; top: 10px; background: white; color: black; padding: 10px; z-index: 1000; }
+    .skip-link:focus { left: 10px; }
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      border-bottom: 1px solid rgba(174, 202, 238, .1);
+      background: rgba(7, 17, 31, .82); backdrop-filter: blur(18px);
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 850; letter-spacing: -.04em; font-size: 1.35rem; }
+    .brand-mark {
+      display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px;
+      color: #07111f; font-weight: 950;
+      background: linear-gradient(135deg, var(--cyan), var(--blue) 58%, var(--purple));
+      box-shadow: 0 0 28px rgba(84, 231, 242, .18);
+    }
+    .brand span:last-child { background: linear-gradient(90deg, #fff, #9feaf2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .nav-links { display: flex; align-items: center; gap: 28px; color: var(--muted); font-size: .94rem; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); }
+    .nav-cta, .button {
+      display: inline-flex; justify-content: center; align-items: center; gap: 9px;
+      min-height: 46px; padding: 12px 19px; border-radius: 999px; border: 1px solid transparent;
+      font-weight: 750; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      cursor: pointer;
+    }
+    .nav-cta, .button-primary { color: #07111f; background: linear-gradient(100deg, var(--cyan), #8db6ff); box-shadow: 0 10px 30px rgba(84, 231, 242, .13); }
+    .button-secondary { border-color: var(--line); background: rgba(255,255,255,.035); color: var(--text); }
+    .nav-cta:hover, .button:hover { transform: translateY(-2px); box-shadow: 0 13px 32px rgba(84, 231, 242, .17); }
+    .menu-toggle { display: none; background: transparent; color: var(--text); border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; font-size: 1.1rem; }
+    .hero { padding: 92px 0 74px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 54px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; border: 1px solid var(--line); background: rgba(255,255,255,.035); color: #c5f8fa; padding: 7px 12px; border-radius: 999px; font-size: .83rem; font-weight: 700; }
+    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+    h1 { font-size: clamp(2.65rem, 6vw, 5.15rem); line-height: 1.02; letter-spacing: -.065em; margin: 22px 0; max-width: 750px; }
+    .gradient-text { background: linear-gradient(95deg, #fff 8%, #8eeef1 50%, #a9baff 88%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-copy { max-width: 590px; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.16rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
+    .micro-note { margin-top: 18px; color: #7f94ae; font-size: .86rem; }
+    .visual { min-height: 440px; position: relative; display: grid; place-items: center; }
+    .orbit { position: absolute; width: min(100%, 430px); aspect-ratio: 1; border: 1px solid rgba(125, 177, 255, .18); border-radius: 50%; transform: rotate(-24deg); }
+    .orbit::before, .orbit::after { content: ""; position: absolute; inset: 12%; border: 1px solid rgba(84, 231, 242, .16); border-radius: 50%; }
+    .orbit::after { inset: 25%; border-color: rgba(176, 124, 255, .2); }
+    .core-card {
+      width: min(100%, 330px); padding: 27px; position: relative; z-index: 2;
+      border: 1px solid rgba(174, 202, 238, .2); border-radius: 28px;
+      background: linear-gradient(145deg, rgba(25, 49, 77, .93), rgba(9, 22, 39, .94));
+      box-shadow: 0 25px 90px rgba(0,0,0,.34), inset 0 1px rgba(255,255,255,.07);
+      transform: rotate(2deg);
+    }
+    .core-top { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: .78rem; }
+    .status { display: inline-flex; align-items: center; gap: 6px; color: #9cf5da; }
+    .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #58e6b2; }
+    .core-symbol { height: 145px; display: grid; place-items: center; margin: 10px 0; }
+    .core-symbol svg { width: 126px; filter: drop-shadow(0 0 24px rgba(84,231,242,.3)); }
+    .core-card h2 { margin: 0; font-size: 1.5rem; letter-spacing: -.04em; }
+    .core-card p { margin: 5px 0 0; color: var(--muted); font-size: .9rem; }
+    .float-chip { position: absolute; z-index: 3; padding: 12px 15px; border: 1px solid var(--line); border-radius: 15px; background: rgba(12, 26, 44, .9); box-shadow: 0 15px 35px rgba(0,0,0,.22); font-size: .88rem; }
+    .float-chip strong { display: block; font-size: 1rem; }
+    .chip-one { top: 11%; right: -2%; } .chip-two { bottom: 12%; left: -3%; }
+    section { padding: 78px 0; }
+    .section-heading { max-width: 700px; margin-bottom: 34px; }
+    .kicker { color: var(--cyan); text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; font-weight: 850; }
+    h2.section-title { margin: 10px 0 12px; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.1; letter-spacing: -.055em; }
+    .section-heading p { color: var(--muted); margin: 0; font-size: 1.04rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .service-card, .step-card, .contact-panel {
+      border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(16,33,53,.76), rgba(9,22,38,.64));
+    }
+    .service-card { padding: 25px; min-height: 245px; transition: transform .2s ease, border-color .2s ease; }
+    .service-card:hover { transform: translateY(-4px); border-color: rgba(84,231,242,.4); }
+    .service-icon { display: grid; place-items: center; width: 47px; height: 47px; border-radius: 14px; background: rgba(84,231,242,.1); border: 1px solid rgba(84,231,242,.17); color: var(--cyan); font-size: 1.35rem; }
+    .service-card h3 { margin: 21px 0 8px; font-size: 1.17rem; letter-spacing: -.025em; }
+    .service-card p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 55px; align-items: start; }
+    .about-highlight { border-left: 2px solid var(--cyan); padding: 8px 0 8px 22px; color: #dbe9fa; font-size: 1.2rem; }
+    .about-copy { color: var(--muted); }
+    .values { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; margin-top: 24px; }
+    .value { padding: 17px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.025); }
+    .value strong { display: block; margin-bottom: 4px; } .value span { color: var(--muted); font-size: .9rem; }
+    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
+    .step-card { padding: 24px; }
+    .step-number { color: var(--cyan); font-size: .83rem; letter-spacing: .1em; font-weight: 850; }
+    .step-card h3 { margin: 12px 0 8px; } .step-card p { color: var(--muted); margin: 0; font-size: .94rem; }
+    .contact-panel { display: grid; grid-template-columns: 1.2fr .8fr; gap: 30px; padding: clamp(25px, 5vw, 50px); position: relative; overflow: hidden; }
+    .contact-panel::after { content: ""; position: absolute; width: 290px; height: 290px; border-radius: 50%; right: -100px; bottom: -170px; background: rgba(84,231,242,.1); filter: blur(4px); pointer-events: none; }
+    .contact-panel h2 { font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.055em; line-height: 1.08; margin: 10px 0 14px; }
+    .contact-panel p { color: var(--muted); max-width: 550px; }
+    .contact-side { display: flex; flex-direction: column; justify-content: center; gap: 12px; position: relative; z-index: 1; }
+    .contact-side .button { width: 100%; }
+    .contact-hint { color: #7f94ae; font-size: .8rem; text-align: center; }
+    footer { border-top: 1px solid var(--line); padding: 25px 0; color: #8396af; font-size: .88rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .footer-brand { font-weight: 800; color: #dbe9fa; }
+    :focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+    @media (max-width: 850px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 15px; }
+      .hero { padding-top: 64px; }
+      .visual { min-height: 390px; }
+      .services-grid, .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 25px; }
+      .contact-panel { grid-template-columns: 1fr; }
+      .contact-side { max-width: 420px; }
+    }
+    @media (max-width: 640px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .nav { min-height: 68px; }
+      .menu-toggle { display: inline-flex; }
+      .nav-cta { display: none; }
+      .nav-links {
+        display: none; position: absolute; left: 14px; right: 14px; top: 68px;
+        flex-direction: column; align-items: stretch; gap: 0; padding: 9px;
+        border: 1px solid var(--line); border-radius: 17px; background: #0b192a;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px; border-radius: 10px; }
+      .nav-links a:hover { background: rgba(255,255,255,.05); }
+      .hero { padding: 52px 0 35px; }
+      h1 { font-size: clamp(2.6rem, 13vw, 4.3rem); }
+      .visual { min-height: 340px; }
+      .core-card { width: min(86%, 300px); padding: 21px; }
+      .core-symbol { height: 110px; }
+      .core-symbol svg { width: 100px; }
+      .chip-one { right: 0; top: 5%; } .chip-two { left: 0; bottom: 4%; }
+      section { padding: 56px 0; }
+      .services-grid, .process-grid, .values { grid-template-columns: 1fr; }
+      .service-card { min-height: auto; }
+      .hero-actions .button { width: 100%; }
+      .contact-panel { padding: 25px 21px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Vibetech, início">
+        <span class="brand-mark" aria-hidden="true">V</span><span>vibetech</span>
+      </a>
+      <nav class="nav-links" id="nav-links" aria-label="Navegação principal">
+        <a href="#servicos">Serviços</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#processo">Como funciona</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a class="nav-cta" href="#contato">Vamos conversar <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menu">☰</button>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Tecnologia com propósito</div>
+          <h1>Ideias que viram <span class="gradient-text">experiências digitais.</span></h1>
+          <p class="hero-copy">A Vibetech transforma objetivos de negócio em experiências digitais modernas, claras e funcionais. Tecnologia pensada para aproximar marcas e pessoas.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contato">Tirar minha ideia do papel <span aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href="#servicos">Conhecer serviços</a>
+          </div>
+          <p class="micro-note">Sites modernos · Design responsivo · Soluções digitais</p>
+        </div>
+        <div class="visual" aria-label="Ilustração abstrata da identidade tecnológica da Vibetech">
+          <div class="orbit" aria-hidden="true"></div>
+          <div class="float-chip chip-one"><span>Experiência digital</span><strong>Feita para pessoas</strong></div>
+          <div class="core-card">
+            <div class="core-top"><span>VIBETECH / DIGITAL</span><span class="status">Em evolução</span></div>
+            <div class="core-symbol" aria-hidden="true">
+              <svg viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 29L51 112H70L37 29H18Z" fill="#54E7F2"/>
+                <path d="M51 29L84 112H103L70 29H51Z" fill="#6B8CFF"/>
+                <path d="M84 29L117 112H136L103 29H84Z" fill="#B07CFF" transform="translate(-8 0)"/>
+                <path d="M21 29H119" stroke="white" stroke-opacity=".75" stroke-width="3" stroke-linecap="round"/>
+                <path d="M39 112H108" stroke="white" stroke-opacity=".75" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h2>Vibetech</h2>
+            <p>Ideias conectadas ao futuro.</p>
+          </div>
+          <div class="float-chip chip-two"><span>Nosso foco</span><strong>Clareza + tecnologia</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="container">
+        <div class="section-heading">
+          <span class="kicker">O que fazemos</span>
+          <h2 class="section-title">Presença digital que trabalha pelo seu negócio.</h2>
+          <p>Soluções para apresentar sua marca, explicar seu valor e facilitar o próximo passo do cliente.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">⌘</div>
+            <h3>Sites e landing pages</h3>
+            <p>Páginas rápidas, responsivas e organizadas para apresentar serviços, divulgar campanhas e gerar contatos.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">✳</div>
+            <h3>Design de experiência</h3>
+            <p>Hierarquia visual, navegação intuitiva e conteúdo estruturado para que as pessoas encontrem o que precisam.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">⌁</div>
+            <h3>Soluções digitais</h3>
+            <p>Organização de ideias e ferramentas digitais para simplificar tarefas e melhorar a comunicação com clientes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container about-grid">
+        <div>
+          <span class="kicker">Sobre a Vibetech</span>
+          <h2 class="section-title">Tecnologia precisa fazer sentido.</h2>
+          <div class="about-highlight">Mais do que estar online, sua marca precisa transmitir confiança e deixar claro como pode ajudar.</div>
+        </div>
+        <div>
+          <p class="about-copy">A Vibetech nasce com uma proposta simples: combinar pensamento estratégico, design e tecnologia para criar experiências digitais úteis. Cada projeto começa pela necessidade real do negócio e evolui com foco em clareza, usabilidade e resultado.</p>
+          <div class="values">
+            <div class="value"><strong>Design com intenção</strong><span>Visual alinhado à mensagem e ao público.</span></div>
+            <div class="value"><strong>Experiência responsiva</strong><span>Uma boa navegação no celular e no computador.</span></div>
+            <div class="value"><strong>Comunicação clara</strong><span>Conteúdo direto, sem complicar o que é simples.</span></div>
+            <div class="value"><strong>Evolução contínua</strong><span>Estrutura preparada para receber melhorias.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="processo">
+      <div class="container">
+        <div class="section-heading">
+          <span class="kicker">Nosso processo</span>
+          <h2 class="section-title">Do primeiro papo à publicação.</h2>
+          <p>Um caminho simples para transformar uma ideia em uma presença digital concreta.</p>
+        </div>
+        <div class="process-grid">
+          <article class="step-card"><span class="step-number">01 / ENTENDER</span><h3>Alinhamos o objetivo</h3><p>Conversamos sobre seu negócio, seu público e o que o site precisa alcançar.</p></article>
+          <article class="step-card"><span class="step-number">02 / CONSTRUIR</span><h3>Desenhamos a solução</h3><p>Organizamos a estrutura, o conteúdo e a experiência para diferentes telas.</p></article>
+          <article class="step-card"><span class="step-number">03 / PUBLICAR</span><h3>Colocamos no ar</h3><p>Revisamos os detalhes, publicamos e indicamos os próximos passos de evolução.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="container">
+        <div class="contact-panel">
+          <div>
+            <span class="kicker">Vamos começar</span>
+            <h2>Sua próxima ideia pode começar aqui.</h2>
+            <p>Conte um pouco sobre o que você quer criar. Vamos conversar sobre o objetivo e encontrar um caminho digital adequado para o seu projeto.</p>
+          </div>
+          <div class="contact-side">
+            <!-- IMPORTANTE: substitua o número abaixo pelo WhatsApp comercial real, com código do país e DDD, apenas números. -->
+            <a class="button button-primary" id="whatsapp-link" href="https://wa.me/5500000000000?text=Ol%C3%A1%2C%20Vibetech%21%20Quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp <span aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href="mailto:contato@seudominio.com?subject=Projeto%20Vibetech">Enviar um e-mail</a>
+            <div class="contact-hint">Antes de publicar, configure seus contatos reais no arquivo index.html.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-brand">Vibetech · Ideias conectadas ao futuro.</span>
+      <span>© <span id="year"></span> Vibetech. Todos os direitos reservados.</span>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const menuButton = document.getElementById('menu-toggle');
+      const nav = document.getElementById('nav-links');
+
+      menuButton.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        menuButton.setAttribute('aria-expanded', String(isOpen));
+        menuButton.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+        menuButton.textContent = isOpen ? '✕' : '☰';
+      });
+
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('open');
+          menuButton.setAttribute('aria-expanded', 'false');
+          menuButton.setAttribute('aria-label', 'Abrir menu');
+          menuButton.textContent = '☰';
+        });
+      });
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
