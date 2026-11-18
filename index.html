@@ -3,32 +3,60 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#07111f">
-  <meta name="description" content="Vibetech — soluções digitais, sites modernos e tecnologia para impulsionar negócios.">
-  <title>Vibetech — Ideias que viram experiências digitais</title>
+  <meta name="theme-color" content="#030712">
+  <meta name="description" content="VibeTech|CMD — soluções digitais, sites modernos e tecnologia para impulsionar negócios.">
+  <title>VibeTech|CMD — Ideias que viram experiências digitais</title>
+
+  <!-- Favicon (SVG embutido: não precisa de arquivo extra) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2064%2064%27%3E%3Cdefs%3E%3CradialGradient%20id=%27b%27%20cx=%2738%25%27%20cy=%2730%25%27%20r=%2780%25%27%3E%3Cstop%20offset=%270%27%20stop-color=%27%230B55B8%27/%3E%3Cstop%20offset=%271%27%20stop-color=%27%23030712%27/%3E%3C/radialGradient%3E%3ClinearGradient%20id=%27s%27%20x1=%270%27%20x2=%271%27%3E%3Cstop%20offset=%270%27%20stop-color=%27%23075BCE%27/%3E%3Cstop%20offset=%27.55%27%20stop-color=%27%2300D9F5%27/%3E%3Cstop%20offset=%271%27%20stop-color=%27%2300D6A0%27/%3E%3C/linearGradient%3E%3CclipPath%20id=%27c%27%3E%3Ccircle%20cx=%2732%27%20cy=%2732%27%20r=%2722%27/%3E%3C/clipPath%3E%3C/defs%3E%3Cg%20transform=%27rotate%28-20%2032%2032%29%27%20fill=%27none%27%3E%3Cpath%20d=%27M2%2032A30%209%200%200%201%2062%2032%27%20stroke=%27%23087BFF%27%20stroke-opacity=%27.6%27%20stroke-width=%272.5%27/%3E%3C/g%3E%3Ccircle%20cx=%2732%27%20cy=%2732%27%20r=%2722%27%20fill=%27url%28%23b%29%27/%3E%3Cg%20clip-path=%27url%28%23c%29%27%3E%3Cg%20transform=%27translate%2832%2032%29%20rotate%28-20%29%27%3E%3Cpath%20d=%27M-26%20-13Q0%20-3%2026%20-13L26%20-4Q0%207%20-26%20-4Z%27%20fill=%27%23DCE4ED%27/%3E%3Cpath%20d=%27M-26%203Q0%2013%2026%203L26%2012Q0%2022%20-26%2012Z%27%20fill=%27url%28%23s%29%27/%3E%3C/g%3E%3C/g%3E%3Cg%20transform=%27rotate%28-20%2032%2032%29%27%20fill=%27none%27%3E%3Cpath%20d=%27M62%2032A30%209%200%200%201%202%2032%27%20stroke=%27%2300D9F5%27%20stroke-width=%272.8%27%20stroke-linecap=%27round%27/%3E%3C/g%3E%3C/svg%3E">
+
+  <!-- Pré-visualização ao compartilhar o link (WhatsApp, LinkedIn, Instagram...).
+       Requer o arquivo assets/VibeTech-banner.png no repositório.
+       Se usar domínio próprio, troque o endereço abaixo pelo seu domínio. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="VibeTech|CMD — Ideias que viram experiências digitais">
+  <meta property="og:description" content="Sites modernos, design responsivo e soluções digitais para impulsionar o seu negócio.">
+  <meta property="og:image" content="https://vibetech-cmd.github.io/VIBETECH/assets/VibeTech-banner.png">
+  <meta property="og:image:width" content="1672">
+  <meta property="og:image:height" content="941">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #07111f;
-      --bg-soft: #0c1a2c;
-      --panel: rgba(16, 33, 53, .78);
-      --text: #f4f8ff;
-      --muted: #a7b7cc;
-      --line: rgba(174, 202, 238, .15);
-      --cyan: #54e7f2;
-      --blue: #6b8cff;
-      --purple: #b07cff;
-      --radius: 22px;
+      /* Paleta oficial VibeTech|CMD */
+      --black: #030712;
+      --navy: #071426;
+      --blue: #075BCE;
+      --electric: #087BFF;
+      --cyan: #00D9F5;
+      --teal: #00D6A0;
+      --steel: #AAB5C4;
+      --silver: #DCE4ED;
+      --white: #F8FAFC;
+
+      --bg: var(--black);
+      --panel: rgba(7, 20, 38, .72);
+      --text: var(--white);
+      --muted: #9fb0c6;
+      --line: rgba(120, 170, 235, .16);
+      --radius: 20px;
       --max: 1160px;
+      --font-display: Montserrat, "Segoe UI", system-ui, -apple-system, sans-serif;
+      --font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; background: var(--black); }
     body {
-      margin: 0; color: var(--text);
+      margin: 0; color: var(--text); position: relative;
       background:
-        radial-gradient(ellipse at 80% 5%, rgba(81, 111, 255, .18), transparent 35%),
-        radial-gradient(ellipse at 5% 35%, rgba(47, 224, 231, .10), transparent 32%),
-        var(--bg);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        radial-gradient(ellipse 60% 45% at 85% 0%, rgba(8, 123, 255, .20), transparent 70%),
+        radial-gradient(ellipse 50% 40% at 0% 38%, rgba(0, 217, 245, .08), transparent 70%),
+        linear-gradient(180deg, var(--black) 0%, var(--navy) 55%, var(--black) 100%);
+      font-family: var(--font-body);
       line-height: 1.6;
     }
     a { color: inherit; text-decoration: none; }
@@ -36,101 +64,157 @@
     .container { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
     .skip-link { position: absolute; left: -9999px; top: 10px; background: white; color: black; padding: 10px; z-index: 1000; }
     .skip-link:focus { left: 10px; }
+
+    /* ---------- Fundo tecnológico discreto ---------- */
+    .bg-fx { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+    .bg-fx svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .bg-fx::before, .bg-fx::after {
+      content: ""; position: absolute; width: 46vw; height: 46vh; min-width: 280px;
+      background-image: radial-gradient(rgba(8, 123, 255, .42) 1px, transparent 1.3px);
+      background-size: 15px 15px;
+    }
+    .bg-fx::before { top: 0; left: 0; -webkit-mask-image: radial-gradient(ellipse at 0 0, #000, transparent 70%); mask-image: radial-gradient(ellipse at 0 0, #000, transparent 70%); opacity: .55; }
+    .bg-fx::after { right: 0; bottom: 0; -webkit-mask-image: radial-gradient(ellipse at 100% 100%, #000, transparent 70%); mask-image: radial-gradient(ellipse at 100% 100%, #000, transparent 70%); opacity: .6; }
+
+    /* ---------- Wordmark VibeTech|CMD ---------- */
+    .wm { display: inline-flex; align-items: center; font-family: var(--font-display); font-weight: 700; letter-spacing: -.025em; line-height: 1; white-space: nowrap; }
+    .wm > span { -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .wm-vibe { background-image: linear-gradient(95deg, var(--electric) 0%, var(--cyan) 100%); }
+    .wm-tech { background-image: linear-gradient(180deg, var(--white) 10%, var(--steel) 100%); }
+    .wm-sep {
+      display: inline-block; width: 2px; height: 1.2em; margin: 0 .34em; border-radius: 2px;
+      background: linear-gradient(180deg, var(--cyan), var(--teal)) !important; color: initial !important;
+      box-shadow: 0 0 10px rgba(0, 217, 245, .65), 0 0 18px rgba(0, 214, 160, .3);
+    }
+    .wm-cmd { background-image: linear-gradient(180deg, var(--silver) 10%, #8794a8 100%); font-weight: 600; letter-spacing: -.01em; }
+
+    /* ---------- Cabeçalho ---------- */
     .site-header {
       position: sticky; top: 0; z-index: 50;
-      border-bottom: 1px solid rgba(174, 202, 238, .1);
-      background: rgba(7, 17, 31, .82); backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(120, 170, 235, .12);
+      background: rgba(3, 7, 18, .78); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
     }
+    .site-header::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: linear-gradient(90deg, transparent, rgba(0, 217, 245, .45), transparent); opacity: .55; }
     .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
-    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 850; letter-spacing: -.04em; font-size: 1.35rem; }
-    .brand-mark {
-      display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px;
-      color: #07111f; font-weight: 950;
-      background: linear-gradient(135deg, var(--cyan), var(--blue) 58%, var(--purple));
-      box-shadow: 0 0 28px rgba(84, 231, 242, .18);
-    }
-    .brand span:last-child { background: linear-gradient(90deg, #fff, #9feaf2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1.32rem; }
+    .brand-mark { width: 46px; height: 46px; flex: none; display: block; }
     .nav-links { display: flex; align-items: center; gap: 28px; color: var(--muted); font-size: .94rem; }
+    .nav-links a { position: relative; transition: color .2s ease; }
+    .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--electric), var(--cyan)); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
     .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); }
+    .nav-links a:hover::after, .nav-links a:focus-visible::after { transform: scaleX(1); }
+
+    /* ---------- Botões ---------- */
     .nav-cta, .button {
       display: inline-flex; justify-content: center; align-items: center; gap: 9px;
-      min-height: 46px; padding: 12px 19px; border-radius: 999px; border: 1px solid transparent;
-      font-weight: 750; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      min-height: 46px; padding: 12px 21px; border-radius: 999px; border: 1px solid transparent;
+      font-weight: 700; font-size: .95rem; transition: transform .2s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
       cursor: pointer;
     }
-    .nav-cta, .button-primary { color: #07111f; background: linear-gradient(100deg, var(--cyan), #8db6ff); box-shadow: 0 10px 30px rgba(84, 231, 242, .13); }
-    .button-secondary { border-color: var(--line); background: rgba(255,255,255,.035); color: var(--text); }
-    .nav-cta:hover, .button:hover { transform: translateY(-2px); box-shadow: 0 13px 32px rgba(84, 231, 242, .17); }
-    .menu-toggle { display: none; background: transparent; color: var(--text); border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; font-size: 1.1rem; }
-    .hero { padding: 92px 0 74px; overflow: hidden; }
-    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 54px; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 9px; border: 1px solid var(--line); background: rgba(255,255,255,.035); color: #c5f8fa; padding: 7px 12px; border-radius: 999px; font-size: .83rem; font-weight: 700; }
-    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
-    h1 { font-size: clamp(2.65rem, 6vw, 5.15rem); line-height: 1.02; letter-spacing: -.065em; margin: 22px 0; max-width: 750px; }
-    .gradient-text { background: linear-gradient(95deg, #fff 8%, #8eeef1 50%, #a9baff 88%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .hero-copy { max-width: 590px; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.16rem); }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
-    .micro-note { margin-top: 18px; color: #7f94ae; font-size: .86rem; }
-    .visual { min-height: 440px; position: relative; display: grid; place-items: center; }
-    .orbit { position: absolute; width: min(100%, 430px); aspect-ratio: 1; border: 1px solid rgba(125, 177, 255, .18); border-radius: 50%; transform: rotate(-24deg); }
-    .orbit::before, .orbit::after { content: ""; position: absolute; inset: 12%; border: 1px solid rgba(84, 231, 242, .16); border-radius: 50%; }
-    .orbit::after { inset: 25%; border-color: rgba(176, 124, 255, .2); }
-    .core-card {
-      width: min(100%, 330px); padding: 27px; position: relative; z-index: 2;
-      border: 1px solid rgba(174, 202, 238, .2); border-radius: 28px;
-      background: linear-gradient(145deg, rgba(25, 49, 77, .93), rgba(9, 22, 39, .94));
-      box-shadow: 0 25px 90px rgba(0,0,0,.34), inset 0 1px rgba(255,255,255,.07);
-      transform: rotate(2deg);
+    .nav-cta, .button-primary {
+      color: var(--white);
+      background: linear-gradient(100deg, #064DB0 0%, var(--blue) 50%, #0A78F5 100%);
+      border-color: rgba(0, 217, 245, .45);
+      box-shadow: 0 8px 28px rgba(8, 123, 255, .28), inset 0 1px rgba(255, 255, 255, .22);
     }
-    .core-top { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: .78rem; }
-    .status { display: inline-flex; align-items: center; gap: 6px; color: #9cf5da; }
-    .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #58e6b2; }
-    .core-symbol { height: 145px; display: grid; place-items: center; margin: 10px 0; }
-    .core-symbol svg { width: 126px; filter: drop-shadow(0 0 24px rgba(84,231,242,.3)); }
-    .core-card h2 { margin: 0; font-size: 1.5rem; letter-spacing: -.04em; }
-    .core-card p { margin: 5px 0 0; color: var(--muted); font-size: .9rem; }
-    .float-chip { position: absolute; z-index: 3; padding: 12px 15px; border: 1px solid var(--line); border-radius: 15px; background: rgba(12, 26, 44, .9); box-shadow: 0 15px 35px rgba(0,0,0,.22); font-size: .88rem; }
-    .float-chip strong { display: block; font-size: 1rem; }
-    .chip-one { top: 11%; right: -2%; } .chip-two { bottom: 12%; left: -3%; }
+    .button-secondary { border-color: rgba(170, 181, 196, .28); background: rgba(220, 228, 237, .04); color: var(--text); }
+    .nav-cta:hover, .button-primary:hover { transform: translateY(-2px); border-color: var(--cyan); box-shadow: 0 0 0 1px rgba(0, 217, 245, .35), 0 12px 38px rgba(8, 123, 255, .5), 0 0 26px rgba(0, 217, 245, .28), inset 0 1px rgba(255, 255, 255, .3); }
+    .button-secondary:hover { transform: translateY(-2px); border-color: rgba(0, 217, 245, .6); background: rgba(0, 217, 245, .07); box-shadow: 0 0 24px rgba(8, 123, 255, .22); }
+    .menu-toggle { display: none; background: transparent; color: var(--text); border: 1px solid var(--line); border-radius: 12px; padding: 9px 12px; font-size: 1.1rem; }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 88px 0 74px; overflow: hidden; position: relative; }
+    #particles { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 54px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; border: 1px solid rgba(0, 217, 245, .22); background: rgba(8, 123, 255, .07); color: #bff4fb; padding: 7px 13px; border-radius: 999px; font-size: .83rem; font-weight: 600; }
+    .eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px var(--cyan); }
+    h1, h2, h3 { font-family: var(--font-display); }
+    h1 { font-size: clamp(2.45rem, 5.4vw, 4.5rem); font-weight: 800; line-height: 1.05; letter-spacing: -.05em; margin: 22px 0; max-width: 760px; }
+    .gradient-text { background: linear-gradient(95deg, var(--white) 5%, var(--cyan) 55%, var(--electric) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero-copy { max-width: 590px; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.14rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
+    .micro-note { margin-top: 18px; color: #7488a2; font-size: .86rem; }
+
+    .visual { min-height: 470px; position: relative; display: grid; place-items: center; }
+    .halo { position: absolute; width: 112%; aspect-ratio: 1; max-width: 520px; border-radius: 50%; background: radial-gradient(circle, rgba(8, 123, 255, .34) 0%, rgba(0, 217, 245, .10) 38%, transparent 68%); animation: halo-pulse 6s ease-in-out infinite alternate; pointer-events: none; }
+    .orbit { position: absolute; width: min(100%, 450px); aspect-ratio: 1; border: 1px solid rgba(8, 123, 255, .26); border-radius: 50%; transform: rotate(-24deg) scaleY(.62); }
+    .orbit::before, .orbit::after { content: ""; position: absolute; inset: -9%; border: 1px solid rgba(0, 217, 245, .14); border-radius: 50%; }
+    .orbit::after { inset: 14%; border-color: rgba(0, 214, 160, .16); }
+    .core-card {
+      width: min(100%, 340px); padding: 24px 26px 26px; position: relative; z-index: 2;
+      border: 1px solid rgba(8, 123, 255, .3); border-radius: 28px;
+      background: linear-gradient(150deg, rgba(10, 30, 58, .82), rgba(3, 7, 18, .9));
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .55), 0 0 60px rgba(8, 123, 255, .14), inset 0 1px rgba(220, 228, 237, .12);
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    }
+    .core-top { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: .75rem; }
+    .status { display: inline-flex; align-items: center; gap: 6px; color: #8af2d3; }
+    .status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+    .core-symbol { height: 215px; display: grid; place-items: center; margin: 6px 0 4px; }
+    .core-symbol svg { width: 230px; height: 230px; overflow: visible; animation: float 7s ease-in-out infinite alternate; }
+    .core-card h2 { margin: 0; font-size: 1.5rem; }
+    .core-card p { margin: 7px 0 0; color: var(--muted); font-size: .9rem; }
+    .float-chip { position: absolute; z-index: 3; padding: 12px 15px; border: 1px solid rgba(120, 170, 235, .2); border-radius: 15px; background: rgba(7, 20, 38, .86); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: 0 15px 35px rgba(0, 0, 0, .35); font-size: .86rem; color: var(--steel); }
+    .float-chip strong { display: block; font-size: .98rem; color: var(--white); }
+    .chip-one { top: 9%; right: -2%; } .chip-two { bottom: 10%; left: -3%; }
+    .chip-one { border-top-color: rgba(0, 217, 245, .5); } .chip-two { border-bottom-color: rgba(0, 214, 160, .45); }
+
+    /* ---------- Seções ---------- */
     section { padding: 78px 0; }
     .section-heading { max-width: 700px; margin-bottom: 34px; }
-    .kicker { color: var(--cyan); text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; font-weight: 850; }
-    h2.section-title { margin: 10px 0 12px; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.1; letter-spacing: -.055em; }
+    .kicker { color: var(--cyan); text-transform: uppercase; letter-spacing: .14em; font-size: .78rem; font-weight: 700; }
+    h2.section-title { margin: 10px 0 12px; font-size: clamp(1.9rem, 3.8vw, 3rem); font-weight: 800; line-height: 1.12; letter-spacing: -.045em; }
     .section-heading p { color: var(--muted); margin: 0; font-size: 1.04rem; }
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
     .service-card, .step-card, .contact-panel {
-      border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, rgba(16,33,53,.76), rgba(9,22,38,.64));
+      border: 1px solid var(--line); border-radius: var(--radius);
+      background: linear-gradient(150deg, rgba(10, 28, 52, .72), rgba(3, 7, 18, .72));
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .3), inset 0 1px rgba(220, 228, 237, .07);
     }
-    .service-card { padding: 25px; min-height: 245px; transition: transform .2s ease, border-color .2s ease; }
-    .service-card:hover { transform: translateY(-4px); border-color: rgba(84,231,242,.4); }
-    .service-icon { display: grid; place-items: center; width: 47px; height: 47px; border-radius: 14px; background: rgba(84,231,242,.1); border: 1px solid rgba(84,231,242,.17); color: var(--cyan); font-size: 1.35rem; }
-    .service-card h3 { margin: 21px 0 8px; font-size: 1.17rem; letter-spacing: -.025em; }
+    .service-card { padding: 25px; min-height: 245px; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+    .service-card:hover { transform: translateY(-4px); border-color: rgba(0, 217, 245, .5); box-shadow: 0 22px 60px rgba(8, 123, 255, .2), 0 0 0 1px rgba(0, 217, 245, .12), inset 0 1px rgba(220, 228, 237, .1); }
+    .service-icon { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 15px; background: linear-gradient(145deg, rgba(8, 123, 255, .22), rgba(0, 217, 245, .08)); border: 1px solid rgba(0, 217, 245, .28); color: var(--cyan); box-shadow: 0 0 22px rgba(8, 123, 255, .2); }
+    .service-icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .service-card h3 { margin: 21px 0 8px; font-size: 1.14rem; letter-spacing: -.02em; }
     .service-card p { margin: 0; color: var(--muted); font-size: .94rem; }
     .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 55px; align-items: start; }
-    .about-highlight { border-left: 2px solid var(--cyan); padding: 8px 0 8px 22px; color: #dbe9fa; font-size: 1.2rem; }
+    .about-highlight { border-left: 2px solid var(--cyan); border-image: linear-gradient(180deg, var(--cyan), var(--blue)) 1; padding: 8px 0 8px 22px; color: var(--silver); font-size: 1.18rem; }
     .about-copy { color: var(--muted); }
     .values { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; margin-top: 24px; }
-    .value { padding: 17px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.025); }
+    .value { padding: 17px; border: 1px solid var(--line); border-radius: 16px; background: rgba(8, 123, 255, .04); transition: border-color .25s ease, background-color .25s ease; }
+    .value:hover { border-color: rgba(0, 217, 245, .35); background: rgba(8, 123, 255, .08); }
     .value strong { display: block; margin-bottom: 4px; } .value span { color: var(--muted); font-size: .9rem; }
     .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 17px; }
     .step-card { padding: 24px; }
-    .step-number { color: var(--cyan); font-size: .83rem; letter-spacing: .1em; font-weight: 850; }
+    .step-number { color: var(--cyan); font-size: .83rem; letter-spacing: .1em; font-weight: 700; }
     .step-card h3 { margin: 12px 0 8px; } .step-card p { color: var(--muted); margin: 0; font-size: .94rem; }
-    .contact-panel { display: grid; grid-template-columns: 1.2fr .8fr; gap: 30px; padding: clamp(25px, 5vw, 50px); position: relative; overflow: hidden; }
-    .contact-panel::after { content: ""; position: absolute; width: 290px; height: 290px; border-radius: 50%; right: -100px; bottom: -170px; background: rgba(84,231,242,.1); filter: blur(4px); pointer-events: none; }
-    .contact-panel h2 { font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.055em; line-height: 1.08; margin: 10px 0 14px; }
+    .contact-panel { display: grid; grid-template-columns: 1.2fr .8fr; gap: 30px; padding: clamp(25px, 5vw, 50px); position: relative; overflow: hidden; border-color: rgba(8, 123, 255, .3); }
+    .contact-panel::after { content: ""; position: absolute; width: 380px; height: 380px; border-radius: 50%; right: -120px; bottom: -200px; background: radial-gradient(circle, rgba(8, 123, 255, .35), rgba(0, 217, 245, .08) 55%, transparent 70%); pointer-events: none; }
+    .contact-panel h2 { font-size: clamp(1.9rem, 3.8vw, 3rem); font-weight: 800; letter-spacing: -.045em; line-height: 1.1; margin: 10px 0 14px; }
     .contact-panel p { color: var(--muted); max-width: 550px; }
     .contact-side { display: flex; flex-direction: column; justify-content: center; gap: 12px; position: relative; z-index: 1; }
     .contact-side .button { width: 100%; }
-    .contact-hint { color: #7f94ae; font-size: .8rem; text-align: center; }
-    footer { border-top: 1px solid var(--line); padding: 25px 0; color: #8396af; font-size: .88rem; }
+    .contact-hint { color: #7488a2; font-size: .8rem; text-align: center; }
+    footer { border-top: 1px solid var(--line); padding: 25px 0; color: #7f93ad; font-size: .88rem; }
     .footer-inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; flex-wrap: wrap; }
-    .footer-brand { font-weight: 800; color: #dbe9fa; }
+    .footer-brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; color: var(--silver); }
+    .footer-brand .brand-mark { width: 30px; height: 30px; }
+    .footer-brand .wm { font-size: 1.02rem; }
     :focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+
+    /* ---------- Animações da esfera ---------- */
+    .vt-bands { animation: vt-sway 9s ease-in-out infinite alternate; }
+    .vt-spark { stroke-dasharray: 12 300; stroke-dashoffset: 12; animation: vt-orbit 8s linear infinite; }
+    .vt-spark.is-front { animation-delay: -4s; }
+    @keyframes vt-sway { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
+    @keyframes vt-orbit { 0% { stroke-dashoffset: 12; } 50% { stroke-dashoffset: -100; } 100% { stroke-dashoffset: -100; } }
+    @keyframes float { from { transform: translateY(-5px); } to { transform: translateY(6px); } }
+    @keyframes halo-pulse { from { opacity: .65; transform: scale(.97); } to { opacity: 1; transform: scale(1.03); } }
+
     @media (max-width: 850px) {
       .hero-grid { grid-template-columns: 1fr; gap: 15px; }
       .hero { padding-top: 64px; }
-      .visual { min-height: 390px; }
+      .visual { min-height: 440px; }
       .services-grid, .process-grid { grid-template-columns: repeat(2, 1fr); }
       .about-grid { grid-template-columns: 1fr; gap: 25px; }
       .contact-panel { grid-template-columns: 1fr; }
@@ -139,23 +223,26 @@
     @media (max-width: 640px) {
       .container { width: min(var(--max), calc(100% - 28px)); }
       .nav { min-height: 68px; }
+      .brand { font-size: 1.18rem; gap: 9px; }
+      .brand-mark { width: 40px; height: 40px; }
       .menu-toggle { display: inline-flex; }
       .nav-cta { display: none; }
       .nav-links {
         display: none; position: absolute; left: 14px; right: 14px; top: 68px;
         flex-direction: column; align-items: stretch; gap: 0; padding: 9px;
-        border: 1px solid var(--line); border-radius: 17px; background: #0b192a;
+        border: 1px solid var(--line); border-radius: 17px; background: var(--navy);
       }
       .nav-links.open { display: flex; }
       .nav-links a { padding: 12px; border-radius: 10px; }
-      .nav-links a:hover { background: rgba(255,255,255,.05); }
+      .nav-links a::after { display: none; }
+      .nav-links a:hover { background: rgba(255, 255, 255, .05); }
       .hero { padding: 52px 0 35px; }
-      h1 { font-size: clamp(2.6rem, 13vw, 4.3rem); }
-      .visual { min-height: 340px; }
-      .core-card { width: min(86%, 300px); padding: 21px; }
-      .core-symbol { height: 110px; }
-      .core-symbol svg { width: 100px; }
-      .chip-one { right: 0; top: 5%; } .chip-two { left: 0; bottom: 4%; }
+      h1 { font-size: clamp(2.2rem, 10.5vw, 3.4rem); }
+      .visual { min-height: 400px; }
+      .core-card { width: min(86%, 300px); padding: 20px; }
+      .core-symbol { height: 175px; }
+      .core-symbol svg { width: 185px; height: 185px; }
+      .chip-one { right: 0; top: 3%; } .chip-two { left: 0; bottom: 2%; }
       section { padding: 56px 0; }
       .services-grid, .process-grid, .values { grid-template-columns: 1fr; }
       .service-card { min-height: auto; }
@@ -163,16 +250,119 @@
       .contact-panel { padding: 25px 21px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+      .vt-bands, .vt-spark, .halo, .core-symbol svg { animation: none !important; }
+      #particles { display: none; }
     }
   </style>
 </head>
 <body>
+  <!-- ===== Símbolo da marca: esfera 3D tecnológica (SVG reutilizável) ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="vt-base" cx="36%" cy="28%" r="85%">
+        <stop offset="0" stop-color="#0B55B8"/><stop offset=".5" stop-color="#071426"/><stop offset="1" stop-color="#030712"/>
+      </radialGradient>
+      <radialGradient id="vt-teal" cx="55%" cy="105%" r="65%">
+        <stop offset="0" stop-color="#00D6A0" stop-opacity=".85"/><stop offset=".55" stop-color="#00D6A0" stop-opacity=".18"/><stop offset="1" stop-color="#00D6A0" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="vt-silver" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#F8FAFC"/><stop offset=".3" stop-color="#AAB5C4"/><stop offset=".52" stop-color="#E9EEF4"/><stop offset=".78" stop-color="#7B889B"/><stop offset="1" stop-color="#DCE4ED"/>
+      </linearGradient>
+      <linearGradient id="vt-side" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#030712" stop-opacity=".55"/><stop offset=".3" stop-color="#030712" stop-opacity="0"/><stop offset=".7" stop-color="#030712" stop-opacity="0"/><stop offset="1" stop-color="#030712" stop-opacity=".6"/>
+      </linearGradient>
+      <linearGradient id="vt-blue" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#075BCE"/><stop offset=".5" stop-color="#087BFF"/><stop offset="1" stop-color="#00D9F5"/>
+      </linearGradient>
+      <linearGradient id="vt-cyan" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#087BFF"/><stop offset=".6" stop-color="#00D9F5"/><stop offset="1" stop-color="#00D6A0"/>
+      </linearGradient>
+      <linearGradient id="vt-sheen" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#030712" stop-opacity=".4"/>
+      </linearGradient>
+      <linearGradient id="vt-rim" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#00D9F5" stop-opacity=".95"/><stop offset=".5" stop-color="#087BFF" stop-opacity=".1"/><stop offset="1" stop-color="#00D6A0" stop-opacity=".85"/>
+      </linearGradient>
+      <linearGradient id="vt-ring" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#087BFF"/><stop offset=".55" stop-color="#00D9F5"/><stop offset="1" stop-color="#8FF1FF"/>
+      </linearGradient>
+      <radialGradient id="vt-spec" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="vt-glow" x="-30%" y="-60%" width="160%" height="220%">
+        <feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <clipPath id="vt-clip"><circle cx="100" cy="100" r="62"/></clipPath>
+    </defs>
+
+    <symbol id="vt-sphere" viewBox="0 0 200 200">
+      <g transform="translate(100 100) rotate(-20)" fill="none">
+        <!-- anéis orbitais: metade de trás (atrás da esfera) -->
+        <ellipse cx="0" cy="0" rx="98" ry="36" stroke="#087BFF" stroke-opacity=".28" stroke-width="1"/>
+        <path d="M-90 0A90 26 0 0 1 90 0" stroke="url(#vt-ring)" stroke-opacity=".5" stroke-width="2.2" filter="url(#vt-glow)"/>
+        <path class="vt-spark" pathLength="100" d="M-90 0A90 26 0 0 1 90 0" stroke="#F8FAFC" stroke-width="2.6" stroke-linecap="round" filter="url(#vt-glow)"/>
+      </g>
+
+      <!-- esfera -->
+      <g clip-path="url(#vt-clip)">
+        <circle cx="100" cy="100" r="62" fill="url(#vt-base)"/>
+        <circle cx="100" cy="100" r="62" fill="url(#vt-teal)"/>
+        <g transform="translate(100 100) rotate(-20)">
+          <g class="vt-bands">
+            <!-- faixa inferior: azul elétrico → ciano → turquesa -->
+            <path d="M-61 24Q0 58.3 61 24L53 38Q0 67.4 -53 38Z" fill="url(#vt-cyan)"/>
+            <path d="M-61 24Q0 58.3 61 24L53 38Q0 67.4 -53 38Z" fill="url(#vt-sheen)"/>
+            <path d="M-61 24Q0 58.3 61 24" stroke="#fff" stroke-opacity=".55" stroke-width="1" fill="none"/>
+            <!-- faixa central: azul tecnológico -->
+            <path d="M-65 -6Q0 31 65 -6L64 14Q0 50.2 -64 14Z" transform="translate(0 4)" fill="#030712" fill-opacity=".6"/>
+            <path d="M-65 -6Q0 31 65 -6L64 14Q0 50.2 -64 14Z" fill="url(#vt-blue)"/>
+            <path d="M-65 -6Q0 31 65 -6L64 14Q0 50.2 -64 14Z" fill="url(#vt-sheen)"/>
+            <path d="M-65 -6Q0 31 65 -6" stroke="#8FF1FF" stroke-opacity=".8" stroke-width="1.2" fill="none"/>
+            <!-- faixa superior: prata metálica (à frente) -->
+            <path d="M-54 -36Q0 -5.8 54 -36L64 -15Q0 21.1 -64 -15Z" transform="translate(0 4)" fill="#030712" fill-opacity=".6"/>
+            <path d="M-54 -36Q0 -5.8 54 -36L64 -15Q0 21.1 -64 -15Z" fill="url(#vt-silver)"/>
+            <path d="M-54 -36Q0 -5.8 54 -36L64 -15Q0 21.1 -64 -15Z" fill="url(#vt-side)"/>
+            <path d="M-54 -36Q0 -5.8 54 -36" stroke="#fff" stroke-opacity=".9" stroke-width="1.1" fill="none"/>
+          </g>
+        </g>
+        <!-- reflexo especular -->
+        <ellipse cx="76" cy="66" rx="17" ry="8" transform="rotate(-32 76 66)" fill="url(#vt-spec)"/>
+        <circle cx="62" cy="80" r="1.8" fill="#fff" fill-opacity=".85"/>
+      </g>
+      <circle cx="100" cy="100" r="61.5" fill="none" stroke="url(#vt-rim)" stroke-width="1.3"/>
+
+      <!-- anéis orbitais: metade da frente -->
+      <g transform="translate(100 100) rotate(-20)" fill="none">
+        <path d="M90 0A90 26 0 0 1 -90 0" stroke="url(#vt-ring)" stroke-width="2.6" stroke-linecap="round" filter="url(#vt-glow)"/>
+        <path class="vt-spark is-front" pathLength="100" d="M90 0A90 26 0 0 1 -90 0" stroke="#F8FAFC" stroke-width="2.8" stroke-linecap="round" filter="url(#vt-glow)"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- Fundo: curvas orbitais e texturas discretas -->
+  <div class="bg-fx" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="bg-curve" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#087BFF" stop-opacity="0"/><stop offset=".5" stop-color="#087BFF" stop-opacity=".55"/><stop offset="1" stop-color="#00D6A0" stop-opacity=".5"/>
+        </linearGradient>
+      </defs>
+      <g fill="none" stroke="url(#bg-curve)" stroke-width="1.1">
+        <path d="M-60 640C300 800 920 740 1500 360" opacity=".5"/>
+        <path d="M-60 700C320 850 940 800 1500 450" opacity=".28"/>
+        <path d="M-40 -10C260 140 620 80 940 -50" opacity=".4"/>
+      </g>
+    </svg>
+  </div>
+
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <header class="site-header">
     <div class="container nav">
-      <a class="brand" href="#inicio" aria-label="Vibetech, início">
-        <span class="brand-mark" aria-hidden="true">V</span><span>vibetech</span>
+      <a class="brand" href="#inicio" aria-label="VibeTech CMD, início">
+        <svg class="brand-mark" viewBox="0 0 200 200" aria-hidden="true"><use href="#vt-sphere"/></svg>
+        <span class="wm" aria-hidden="true"><span class="wm-vibe">Vibe</span><span class="wm-tech">Tech</span><span class="wm-sep"></span><span class="wm-cmd">CMD</span></span>
       </a>
       <nav class="nav-links" id="nav-links" aria-label="Navegação principal">
         <a href="#servicos">Serviços</a>
@@ -187,32 +377,28 @@
 
   <main id="conteudo">
     <section class="hero" id="inicio">
+      <canvas id="particles" aria-hidden="true"></canvas>
       <div class="container hero-grid">
         <div>
           <div class="eyebrow"><span class="eyebrow-dot"></span> Tecnologia com propósito</div>
           <h1>Ideias que viram <span class="gradient-text">experiências digitais.</span></h1>
-          <p class="hero-copy">A Vibetech transforma objetivos de negócio em experiências digitais modernas, claras e funcionais. Tecnologia pensada para aproximar marcas e pessoas.</p>
+          <p class="hero-copy">A VibeTech transforma objetivos de negócio em experiências digitais modernas, claras e funcionais. Tecnologia pensada para aproximar marcas e pessoas.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#contato">Tirar minha ideia do papel <span aria-hidden="true">↗</span></a>
             <a class="button button-secondary" href="#servicos">Conhecer serviços</a>
           </div>
           <p class="micro-note">Sites modernos · Design responsivo · Soluções digitais</p>
         </div>
-        <div class="visual" aria-label="Ilustração abstrata da identidade tecnológica da Vibetech">
+        <div class="visual" aria-label="Ilustração abstrata da identidade tecnológica da VibeTech">
+          <div class="halo" aria-hidden="true"></div>
           <div class="orbit" aria-hidden="true"></div>
           <div class="float-chip chip-one"><span>Experiência digital</span><strong>Feita para pessoas</strong></div>
           <div class="core-card">
             <div class="core-top"><span>VIBETECH / DIGITAL</span><span class="status">Em evolução</span></div>
             <div class="core-symbol" aria-hidden="true">
-              <svg viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M18 29L51 112H70L37 29H18Z" fill="#54E7F2"/>
-                <path d="M51 29L84 112H103L70 29H51Z" fill="#6B8CFF"/>
-                <path d="M84 29L117 112H136L103 29H84Z" fill="#B07CFF" transform="translate(-8 0)"/>
-                <path d="M21 29H119" stroke="white" stroke-opacity=".75" stroke-width="3" stroke-linecap="round"/>
-                <path d="M39 112H108" stroke="white" stroke-opacity=".75" stroke-width="3" stroke-linecap="round"/>
-              </svg>
+              <svg viewBox="0 0 200 200"><use href="#vt-sphere"/></svg>
             </div>
-            <h2>Vibetech</h2>
+            <h2><span class="wm"><span class="wm-vibe">Vibe</span><span class="wm-tech">Tech</span><span class="wm-sep"></span><span class="wm-cmd">CMD</span></span></h2>
             <p>Ideias conectadas ao futuro.</p>
           </div>
           <div class="float-chip chip-two"><span>Nosso foco</span><strong>Clareza + tecnologia</strong></div>
@@ -229,17 +415,17 @@
         </div>
         <div class="services-grid">
           <article class="service-card">
-            <div class="service-icon" aria-hidden="true">⌘</div>
+            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><path d="m10 13-2 2 2 2M14 13l2 2-2 2"/></svg></div>
             <h3>Sites e landing pages</h3>
             <p>Páginas rápidas, responsivas e organizadas para apresentar serviços, divulgar campanhas e gerar contatos.</p>
           </article>
           <article class="service-card">
-            <div class="service-icon" aria-hidden="true">✳</div>
+            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></div>
             <h3>Design de experiência</h3>
             <p>Hierarquia visual, navegação intuitiva e conteúdo estruturado para que as pessoas encontrem o que precisam.</p>
           </article>
           <article class="service-card">
-            <div class="service-icon" aria-hidden="true">⌁</div>
+            <div class="service-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="8" r="2.5"/><circle cx="9" cy="18" r="2.5"/><path d="m8.5 6.3 7 1.4M7.1 8.4l1.3 7.2M16.7 10.2l-6 6.3"/></svg></div>
             <h3>Soluções digitais</h3>
             <p>Organização de ideias e ferramentas digitais para simplificar tarefas e melhorar a comunicação com clientes.</p>
           </article>
@@ -250,12 +436,12 @@
     <section id="sobre">
       <div class="container about-grid">
         <div>
-          <span class="kicker">Sobre a Vibetech</span>
+          <span class="kicker">Sobre a VibeTech</span>
           <h2 class="section-title">Tecnologia precisa fazer sentido.</h2>
           <div class="about-highlight">Mais do que estar online, sua marca precisa transmitir confiança e deixar claro como pode ajudar.</div>
         </div>
         <div>
-          <p class="about-copy">A Vibetech nasce com uma proposta simples: combinar pensamento estratégico, design e tecnologia para criar experiências digitais úteis. Cada projeto começa pela necessidade real do negócio e evolui com foco em clareza, usabilidade e resultado.</p>
+          <p class="about-copy">A VibeTech nasce com uma proposta simples: combinar pensamento estratégico, design e tecnologia para criar experiências digitais úteis. Cada projeto começa pela necessidade real do negócio e evolui com foco em clareza, usabilidade e resultado.</p>
           <div class="values">
             <div class="value"><strong>Design com intenção</strong><span>Visual alinhado à mensagem e ao público.</span></div>
             <div class="value"><strong>Experiência responsiva</strong><span>Uma boa navegação no celular e no computador.</span></div>
@@ -291,8 +477,8 @@
           </div>
           <div class="contact-side">
             <!-- IMPORTANTE: substitua o número abaixo pelo WhatsApp comercial real, com código do país e DDD, apenas números. -->
-            <a class="button button-primary" id="whatsapp-link" href="https://wa.me/5500000000000?text=Ol%C3%A1%2C%20Vibetech%21%20Quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp <span aria-hidden="true">↗</span></a>
-            <a class="button button-secondary" href="mailto:contato@seudominio.com?subject=Projeto%20Vibetech">Enviar um e-mail</a>
+            <a class="button button-primary" id="whatsapp-link" href="https://wa.me/5500000000000?text=Ol%C3%A1%2C%20VibeTech%21%20Quero%20conversar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer">Conversar pelo WhatsApp <span aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href="mailto:contato@seudominio.com?subject=Projeto%20VibeTech">Enviar um e-mail</a>
             <div class="contact-hint">Antes de publicar, configure seus contatos reais no arquivo index.html.</div>
           </div>
         </div>
@@ -302,8 +488,12 @@
 
   <footer>
     <div class="container footer-inner">
-      <span class="footer-brand">Vibetech · Ideias conectadas ao futuro.</span>
-      <span>© <span id="year"></span> Vibetech. Todos os direitos reservados.</span>
+      <span class="footer-brand">
+        <svg class="brand-mark" viewBox="0 0 200 200" aria-hidden="true"><use href="#vt-sphere"/></svg>
+        <span class="wm" aria-label="VibeTech CMD"><span class="wm-vibe">Vibe</span><span class="wm-tech">Tech</span><span class="wm-sep"></span><span class="wm-cmd">CMD</span></span>
+        <span>· Ideias conectadas ao futuro.</span>
+      </span>
+      <span>© <span id="year"></span> VibeTech|CMD. Todos os direitos reservados.</span>
     </div>
   </footer>
 
@@ -329,6 +519,64 @@
       });
 
       document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+
+    /* Partículas digitais sutis no hero (leve; pausa fora da tela e respeita prefers-reduced-motion) */
+    (() => {
+      const canvas = document.getElementById('particles');
+      if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const ctx = canvas.getContext('2d');
+      const host = canvas.parentElement;
+      let w = 0, h = 0, pts = [], raf = 0, onScreen = true;
+      const LINK = 110;
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const r = host.getBoundingClientRect();
+        w = r.width; h = r.height;
+        canvas.width = w * dpr; canvas.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const n = Math.round(Math.min(46, Math.max(16, w / 30)));
+        pts = Array.from({ length: n }, () => ({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - .5) * .22, vy: (Math.random() - .5) * .22,
+          r: Math.random() * 1.2 + .5
+        }));
+      }
+
+      function frame() {
+        ctx.clearRect(0, 0, w, h);
+        for (const p of pts) {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = w; else if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h; else if (p.y > h) p.y = 0;
+        }
+        for (let i = 0; i < pts.length; i++) {
+          for (let j = i + 1; j < pts.length; j++) {
+            const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+            const d = Math.hypot(dx, dy);
+            if (d < LINK) {
+              ctx.strokeStyle = 'rgba(8,123,255,' + ((1 - d / LINK) * .22).toFixed(3) + ')';
+              ctx.lineWidth = 1;
+              ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
+            }
+          }
+        }
+        ctx.fillStyle = 'rgba(0,217,245,.55)';
+        for (const p of pts) { ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2832); ctx.fill(); }
+        raf = requestAnimationFrame(frame);
+      }
+
+      const start = () => { if (!raf && onScreen && !document.hidden) raf = requestAnimationFrame(frame); };
+      const stop = () => { cancelAnimationFrame(raf); raf = 0; };
+
+      resize();
+      let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(resize, 200); });
+      document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; onScreen ? start() : stop(); }).observe(host);
+      }
+      start();
     })();
   </script>
 </body>
