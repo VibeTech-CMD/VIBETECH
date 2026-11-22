@@ -19,6 +19,7 @@
     // Catálogo curado para exibição comercial segura (sem expor código ou detalhes internos)
     projectCatalog: {
       VIBETECH: {
+        previewId: 'vibetech',
         title: 'VibeTech|CMD — Site Oficial',
         category: 'Site Oficial',
         status: 'Em produção',
@@ -27,6 +28,7 @@
         summary: 'Nossa própria plataforma institucional, projetada e evoluída internamente como vitrine do nosso padrão visual e técnico.'
       },
       '4EVER_CERIMONIAL_OFICIAL': {
+        previewId: '4ever-cerimonial',
         title: '4Ever Cerimonial — Site Oficial',
         category: 'Site Institucional',
         status: 'Em desenvolvimento',
@@ -35,6 +37,7 @@
         summary: 'Site oficial desenvolvido para assessoria e cerimonial de eventos, unindo sofisticação editorial e foco em conversão.'
       },
       '4EVER-Management': {
+        previewId: '4ever-management',
         title: '4Ever Management — Aplicativo',
         category: 'Aplicativo de Gestão',
         status: 'Em desenvolvimento',
@@ -44,6 +47,15 @@
       }
     }
   };
+
+  /* ---------- Detecção de modo embutido (Sala de Demonstração) ---------- */
+  const isEmbedded = new URLSearchParams(window.location.search).get('preview') === '1' || window.self !== window.top;
+  if (isEmbedded) {
+    document.body.classList.add('is-embedded');
+    document.querySelectorAll('.preview-link').forEach((link) => {
+      link.setAttribute('target', '_top');
+    });
+  }
 
   /* ---------- Utilitários ---------- */
   function buildWhatsAppUrl(message) {
@@ -331,6 +343,7 @@
     const mapped = CONFIG.projectCatalog[repo.name];
     if (mapped) {
       return {
+        previewId: mapped.previewId || '',
         title: mapped.title,
         category: mapped.category,
         status: mapped.status,
@@ -348,6 +361,7 @@
       .trim();
 
     return {
+      previewId: '',
       title: cleanTitle,
       category: 'Projeto Digital',
       status: 'Em desenvolvimento',
@@ -399,11 +413,20 @@
       category.className = 'gh-category';
       category.textContent = item.category;
 
-      const cta = document.createElement('button');
-      cta.type = 'button';
-      cta.className = 'button button-secondary button-sm';
-      cta.textContent = 'Ver com a equipe ↗';
-      cta.addEventListener('click', () => triggerDemoRequest(item.title, item.briefType));
+      let cta;
+      if (item.previewId) {
+        cta = document.createElement('a');
+        cta.className = 'button button-secondary button-sm preview-link';
+        cta.href = `preview.html?projeto=${encodeURIComponent(item.previewId)}`;
+        if (isEmbedded) cta.target = '_top';
+        cta.textContent = 'Abrir demonstração ↗';
+      } else {
+        cta = document.createElement('button');
+        cta.type = 'button';
+        cta.className = 'button button-secondary button-sm';
+        cta.textContent = 'Ver com a equipe ↗';
+        cta.addEventListener('click', () => triggerDemoRequest(item.title, item.briefType));
+      }
 
       foot.append(category, cta);
 

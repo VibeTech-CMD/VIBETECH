@@ -7,8 +7,9 @@ Site institucional e vitrine oficial da **VibeTech|CMD**, desenvolvido em HTML, 
 ## Estrutura do projeto
 
 - `index.html` — Estrutura semântica, SEO completo (Open Graph, Twitter Card e JSON-LD) e seções oficiais.
-- `styles/main.css` — Identidade visual dark futurista, responsividade, animações e camadas de marca d’água.
-- `scripts/main.js` — Navegação acessível, partículas otimizadas, vitrine dinâmica sincronizada com GitHub (com proteção visual) e mini-briefing interativo para WhatsApp.
+- `preview.html` — Sala de Demonstração Interativa (modelo híbrido: prévia ao vivo em Desktop/Tablet/Celular + página de apresentação visual com opção de marca d’água suave).
+- `styles/main.css` e `styles/preview.css` — Identidade visual dark futurista, responsividade, animações e sala de demonstração.
+- `scripts/main.js` e `scripts/preview.js` — Navegação acessível, partículas otimizadas, vitrine dinâmica sincronizada com GitHub, controlador da sala de demonstração e mini-briefing interativo para WhatsApp.
 - `assets/vibetech-logo.svg` — Símbolo oficial vetorial da VibeTech|CMD (também usado como favicon).
 - `assets/vibetech-watermark.svg` — Padrão vetorial da marca d’água oficial aplicado nas prévias e vitrine.
 - `assets/VibeTech-banner.png` — Imagem oficial de pré-visualização ao compartilhar o link no WhatsApp, LinkedIn e redes sociais.

@@ -1137,6 +1137,7 @@ h2.section-title {
   box-shadow: 0 16px 40px rgba(0, 214, 160, .52), 0 0 0 1px rgba(255, 255, 255, .4);
 }
 .wa-float svg { width: 20px; height: 20px; flex: none; }
+body.is-embedded .wa-float { display: none; }
 
 /* ---------- Toast de Proteção / Feedback ---------- */
 .toast {

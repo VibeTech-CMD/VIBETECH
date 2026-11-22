@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#030712">
+  <meta name="description" content="Sala de Demonstração Oficial VibeTech|CMD — Visualize sites e aplicativos desenvolvidos pela nossa equipe em Desktop e Celular.">
+  <meta name="robots" content="index, follow">
+  <title>Sala de Demonstração — VibeTech|CMD</title>
+  <link rel="icon" type="image/svg+xml" href="assets/vibetech-logo.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/preview.css">
+</head>
+<body>
+  <div class="studio-shell">
+    <!-- ==================== BARRA SUPERIOR OFICIAL VIBETECH|CMD ==================== -->
+    <header class="studio-bar">
+      <div class="bar-left">
+        <a class="back-btn" href="index.html#projetos" aria-label="Voltar para a página inicial da VibeTech">
+          <span aria-hidden="true">←</span>
+          <span>Voltar</span>
+        </a>
+        <a class="bar-brand" href="index.html" aria-label="VibeTech CMD">
+          <img src="assets/vibetech-logo.svg" alt="" width="30" height="30">
+          <span class="wm" aria-hidden="true">
+            <span class="wm-vibe">Vibe</span><span class="wm-tech">Tech</span><span class="wm-sep"></span><span class="wm-cmd">CMD</span>
+          </span>
+        </a>
+        <span class="studio-badge">Sala de Demonstração</span>
+      </div>
+
+      <div class="bar-center">
+        <div class="segmented" role="group" aria-label="Selecionar projeto oficial">
+          <button type="button" class="seg-btn active" data-project-id="vibetech" aria-pressed="true">VibeTech Oficial</button>
+          <button type="button" class="seg-btn" data-project-id="4ever-cerimonial" aria-pressed="false">4Ever Cerimonial</button>
+          <button type="button" class="seg-btn" data-project-id="4ever-management" aria-pressed="false">4Ever Management</button>
+        </div>
+      </div>
+
+      <div class="bar-right">
+        <a
+          class="cta-wa"
+          id="studio-wa-cta"
+          href="https://wa.me/5522999162793?text=Ol%C3%A1%2C%20VibeTech!%20Quero%20um%20projeto%20nesse%20padr%C3%A3o."
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>Quero um projeto assim</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- ==================== SUB-BARRA CONTEXTUAL (MODO + DISPOSITIVO + MARCA D'ÁGUA) ==================== -->
+    <div class="project-subbar">
+      <div class="project-subbar-info">
+        <h1 id="active-project-title">VibeTech|CMD — Site Oficial</h1>
+        <span class="status-chip" id="active-project-status">Em produção</span>
+      </div>
+
+      <div class="project-subbar-controls">
+        <!-- Alternador Híbrido: Prévia ao Vivo vs Apresentação Visual -->
+        <div class="segmented" id="mode-switcher" role="group" aria-label="Modo de visualização">
+          <button type="button" class="seg-btn active" data-view-mode="live" aria-pressed="true">Prévia ao vivo</button>
+          <button type="button" class="seg-btn" data-view-mode="case" aria-pressed="false">Apresentação</button>
+        </div>
+
+        <!-- Alternador Desktop / Tablet / Celular -->
+        <div class="segmented vp-group" id="vp-switcher" role="group" aria-label="Tamanho da tela">
+          <button type="button" class="seg-btn active" data-viewport="desktop" aria-pressed="true" title="Visualizar em Desktop">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+            <span>Desktop</span>
+          </button>
+          <button type="button" class="seg-btn" data-viewport="tablet" aria-pressed="false" title="Visualizar em Tablet">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M12 17h.01"/></svg>
+            <span>Tablet</span>
+          </button>
+          <button type="button" class="seg-btn" data-viewport="mobile" aria-pressed="false" title="Visualizar em Celular">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M12 17.5h.01"/></svg>
+            <span>Celular</span>
+          </button>
+        </div>
+
+        <!-- Controle da Marca d'água Suave -->
+        <button type="button" class="toggle-chip" id="watermark-toggle" aria-pressed="false" title="Alternar marca d'água suave da VibeTech">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l7 4v5c0 5-3.2 8.2-7 9-3.8-.8-7-4-7-9V7l7-4z"/></svg>
+          <span id="watermark-toggle-label">Marca d’água: Limpa</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================== PALCO PRINCIPAL ==================== -->
+    <main class="studio-stage">
+      <!-- MODO 1: PRÉVIA INTERATIVA AO VIVO -->
+      <div class="live-wrapper" id="live-wrapper">
+        <div class="device-frame" id="device-frame">
+          <div class="device-chrome">
+            <span class="chrome-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="chrome-address">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              <span id="chrome-address-text">vibetech-cmd.github.io/VIBETECH</span>
+            </span>
+            <span class="chrome-vp-label" id="chrome-vp-label">Desktop · 100%</span>
+          </div>
+
+          <div class="iframe-viewport">
+            <iframe id="preview-iframe" title="Prévia interativa VibeTech" loading="eager"></iframe>
+            <!-- Marca d'água opcional (pointer-events: none -> não bloqueia navegação) -->
+            <div class="live-watermark" id="live-watermark" aria-hidden="true"></div>
+            <!-- Selo discreto da assinatura VibeTech|CMD -->
+            <div class="corner-signature" aria-hidden="true">
+              <img src="assets/vibetech-logo.svg" alt="" width="18" height="18">
+              <span>Assinatura VibeTech|CMD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODO 2: PÁGINA DE APRESENTAÇÃO VISUAL (ESTUDO DE CASO) -->
+      <div class="case-view is-hidden" id="case-view">
+        <section class="case-hero">
+          <div>
+            <span class="case-kicker" id="case-kicker">Apresentação oficial</span>
+            <h2 id="case-headline">Projeto desenvolvido pela VibeTech|CMD.</h2>
+            <p id="case-description"></p>
+            <div class="case-tags" id="case-tags"></div>
+            <div class="case-actions">
+              <a
+                class="cta-wa"
+                id="case-wa-cta"
+                href="https://wa.me/5522999162793?text=Ol%C3%A1%2C%20VibeTech!"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Solicitar demonstração guiada ↗
+              </a>
+              <button type="button" class="btn-outline is-hidden" id="case-switch-live">
+                Abrir prévia interativa ↗
+              </button>
+            </div>
+          </div>
+
+          <!-- Palco Visual do Estudo de Caso (com marca d'água suave opcional) -->
+          <div class="case-stage-card">
+            <!-- Mockup Editorial: 4Ever Cerimonial -->
+            <div class="case-mock-shell theme-4ever" id="mock-case-4ever">
+              <div class="e4-header">
+                <span class="e4-logo">4EVER</span>
+                <span class="e4-nav"><span>Início</span><span>Serviços</span><span>Portfólio</span><span>Contato</span></span>
+              </div>
+              <div class="e4-hero-box">
+                <div>
+                  <span class="e4-eyebrow">Cerimonial &amp; Assessoria</span>
+                  <h3 class="e4-title">Cada detalhe pensado para um dia inesquecível.</h3>
+                  <p class="e4-text">Planejamento completo para casamentos, 15 anos e celebrações marcantes com acompanhamento dedicado.</p>
+                  <span class="e4-btn">Solicitar orçamento ↗</span>
+                </div>
+                <div class="e4-gallery" aria-hidden="true">
+                  <div class="e4-tile tall">Cerimônia</div>
+                  <div class="e4-tile">15 Anos</div>
+                  <div class="e4-tile">Recepção</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mockup Painel: 4Ever Management -->
+            <div class="case-mock-shell theme-app is-hidden" id="mock-case-app">
+              <div class="app-mock-top">
+                <strong>4Ever Management · Painel</strong>
+                <span class="app-mock-pill">Aplicativo Web</span>
+              </div>
+              <div class="app-mock-kpis">
+                <div class="app-mock-kpi"><strong>Contratos</strong><span>Gestão centralizada</span></div>
+                <div class="app-mock-kpi"><strong>Eventos</strong><span>Cronograma ativo</span></div>
+                <div class="app-mock-kpi"><strong>Equipe</strong><span>Acesso rápido</span></div>
+              </div>
+              <div class="app-mock-rows">
+                <div class="app-mock-row"><b>Contratos &amp; Pacotes de Serviços</b><span>Organizado</span></div>
+                <div class="app-mock-row"><b>Checklist de Cerimonial e Equipe</b><span>Em tempo real</span></div>
+                <div class="app-mock-row"><b>Painel Responsivo Desktop + Mobile</b><span>Sob medida</span></div>
+              </div>
+            </div>
+
+            <!-- Mockup Plataforma: VibeTech Oficial -->
+            <div class="case-mock-shell theme-app is-hidden" id="mock-case-vibetech">
+              <div class="app-mock-top">
+                <strong>VibeTech|CMD · Site Oficial</strong>
+                <span class="app-mock-pill">Em produção</span>
+              </div>
+              <div class="app-mock-kpis">
+                <div class="app-mock-kpi"><strong>Design</strong><span>Identidade própria</span></div>
+                <div class="app-mock-kpi"><strong>Mobile</strong><span>100% responsivo</span></div>
+                <div class="app-mock-kpi"><strong>WhatsApp</strong><span>Mini-briefing</span></div>
+              </div>
+              <div class="app-mock-rows">
+                <div class="app-mock-row"><b>Vitrine de Projetos + Sala de Demonstração</b><span>Ativo</span></div>
+                <div class="app-mock-row"><b>SEO Técnico, Open Graph e Performance</b><span>Otimizado</span></div>
+                <div class="app-mock-row"><b>Hospedagem Integrada no GitHub Pages</b><span>Online</span></div>
+              </div>
+            </div>
+
+            <div class="case-stage-wm" id="case-stage-wm" aria-hidden="true"></div>
+            <div class="corner-signature" aria-hidden="true">
+              <img src="assets/vibetech-logo.svg" alt="" width="18" height="18">
+              <span>Assinatura VibeTech|CMD</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3 Pilares do Case -->
+        <section class="case-grid" id="case-pillars" aria-label="Detalhes do projeto"></section>
+
+        <!-- Faixa final de conversão -->
+        <section class="case-banner-cta">
+          <div>
+            <h3>Quer ver esse projeto em detalhes ou criar algo sob medida para sua marca?</h3>
+            <p>Fale direto com a equipe da VibeTech|CMD pelo WhatsApp (22) 99916-2793.</p>
+          </div>
+          <a
+            class="cta-wa"
+            id="case-banner-wa"
+            href="https://wa.me/5522999162793?text=Ol%C3%A1%2C%20VibeTech!"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Conversar no WhatsApp ↗
+          </a>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="scripts/preview.js" defer></script>
+</body>
+</html>
