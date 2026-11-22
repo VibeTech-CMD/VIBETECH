@@ -1,37 +1,27 @@
-# Vibetech — site institucional
+# VibeTech|CMD — Site Oficial
 
-Landing page estática em HTML, CSS e JavaScript, pronta para GitHub Pages.
+Site institucional e vitrine oficial da **VibeTech|CMD**, desenvolvido em HTML, CSS e JavaScript puros, 100% compatível com **GitHub Pages** sem necessidade de servidor ou etapa de build.
 
-## Arquivos
-- `index.html`: site completo. Não precisa instalar dependências nem compilar.
+🌐 **Site publicado:** https://vibetech-cmd.github.io/VIBETECH/
 
-## Antes de publicar
-1. Abra `index.html` e localize `https://wa.me/5500000000000`.
-2. Troque `5500000000000` pelo número comercial real, com código do país e DDD, somente números.
-3. Localize `contato@seudominio.com` e substitua pelo e-mail real.
-4. Confira o texto dos serviços e ajuste para refletir exatamente o que a Vibetech oferece.
+## Estrutura do projeto
 
-## Publicar pelo celular no GitHub
-1. Entre em https://github.com e abra seu repositório (ou crie um novo).
-2. Na página principal do repositório, toque em **Add file** → **Create new file**.
-3. No nome do arquivo, digite exatamente `index.html` (na raiz, sem pasta antes).
-4. Cole todo o conteúdo do arquivo `index.html` e toque em **Commit changes**.
-5. Abra **Settings** → **Pages**.
-6. Em **Build and deployment**, selecione **Deploy from a branch**.
-7. Em **Branch**, escolha `main` e pasta `/(root)`; toque em **Save**.
-8. Aguarde a publicação. Volte a **Settings → Pages** para ver o endereço do site.
+- `index.html` — Estrutura semântica, SEO completo (Open Graph, Twitter Card e JSON-LD) e seções oficiais.
+- `styles/main.css` — Identidade visual dark futurista, responsividade, animações e camadas de marca d’água.
+- `scripts/main.js` — Navegação acessível, partículas otimizadas, vitrine dinâmica sincronizada com GitHub (com proteção visual) e mini-briefing interativo para WhatsApp.
+- `assets/vibetech-logo.svg` — Símbolo oficial vetorial da VibeTech|CMD (também usado como favicon).
+- `assets/vibetech-watermark.svg` — Padrão vetorial da marca d’água oficial aplicado nas prévias e vitrine.
+- `assets/VibeTech-banner.png` — Imagem oficial de pré-visualização ao compartilhar o link no WhatsApp, LinkedIn e redes sociais.
+- `robots.txt` e `sitemap.xml` — Arquivos de indexação para mecanismos de busca.
 
-## Se o site já está em um repositório
-- Se já houver um `index.html` na raiz, edite/substitua esse arquivo em vez de criar outro.
-- O arquivo precisa se chamar `index.html`, com letras minúsculas.
-- Não coloque o `index.html` dentro de uma pasta como `site/` se o Pages estiver configurado para `/(root)`.
+## Como atualizar contatos e configurações
 
-## Checklist de teste
-- Abra o endereço publicado em uma janela anônima.
-- Teste no celular e no computador, se possível.
-- Toque nos links do menu e nos botões de contato.
-- Confirme que WhatsApp e e-mail apontam para seus contatos reais.
-- Se não atualizar, aguarde alguns minutos e recarregue a página; confira se o Pages usa `main` e `/(root)`.
+Abra `scripts/main.js` e edite o bloco `CONFIG` no topo do arquivo:
+- `whatsappNumber`: número comercial com DDI e DDD (atual: `5522999162793`).
+- `email`: quando tiver o e-mail comercial definitivo, basta preencher nesse campo.
+- `hiddenRepos`: lista de repositórios que não devem aparecer na vitrine dinâmica.
+- `projectCatalog`: títulos comerciais, categorias e descrições exibidos na vitrine protegida.
 
-## Observações
-Este projeto é estático e não precisa de Node.js, npm ou build. O formulário de contato não foi incluído porque um site estático, sozinho, não envia formulários para um servidor. Os botões de contato usam links externos.
+## Publicação
+
+O site é publicado automaticamente pelo **GitHub Pages** a partir da branch `main` (`/(root)`). Toda atualização enviada via `git push` entra no ar em poucos instantes.

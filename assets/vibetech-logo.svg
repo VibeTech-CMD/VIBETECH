@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Logo VibeTech CMD">
+  <defs>
+    <radialGradient id="vt-base" cx="36%" cy="28%" r="85%">
+      <stop offset="0" stop-color="#0B55B8"/>
+      <stop offset=".5" stop-color="#071426"/>
+      <stop offset="1" stop-color="#030712"/>
+    </radialGradient>
+    <radialGradient id="vt-teal" cx="55%" cy="105%" r="65%">
+      <stop offset="0" stop-color="#00D6A0" stop-opacity=".85"/>
+      <stop offset=".55" stop-color="#00D6A0" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#00D6A0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vt-silver" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F8FAFC"/>
+      <stop offset=".3" stop-color="#AAB5C4"/>
+      <stop offset=".52" stop-color="#E9EEF4"/>
+      <stop offset=".78" stop-color="#7B889B"/>
+      <stop offset="1" stop-color="#DCE4ED"/>
+    </linearGradient>
+    <linearGradient id="vt-side" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#030712" stop-opacity=".55"/>
+      <stop offset=".3" stop-color="#030712" stop-opacity="0"/>
+      <stop offset=".7" stop-color="#030712" stop-opacity="0"/>
+      <stop offset="1" stop-color="#030712" stop-opacity=".6"/>
+    </linearGradient>
+    <linearGradient id="vt-blue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#075BCE"/>
+      <stop offset=".5" stop-color="#087BFF"/>
+      <stop offset="1" stop-color="#00D9F5"/>
+    </linearGradient>
+    <linearGradient id="vt-cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#087BFF"/>
+      <stop offset=".6" stop-color="#00D9F5"/>
+      <stop offset="1" stop-color="#00D6A0"/>
+    </linearGradient>
+    <linearGradient id="vt-sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".5"/>
+      <stop offset=".4" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#030712" stop-opacity=".4"/>
+    </linearGradient>
+    <linearGradient id="vt-rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00D9F5" stop-opacity=".95"/>
+      <stop offset=".5" stop-color="#087BFF" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#00D6A0" stop-opacity=".85"/>
+    </linearGradient>
+    <linearGradient id="vt-ring" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#087BFF"/>
+      <stop offset=".55" stop-color="#00D9F5"/>
+      <stop offset="1" stop-color="#8FF1FF"/>
+    </linearGradient>
+    <radialGradient id="vt-spec" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".75"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="vt-glow" x="-30%" y="-60%" width="160%" height="220%">
+      <feGaussianBlur stdDeviation="2.4" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="vt-clip"><circle cx="100" cy="100" r="62"/></clipPath>
+  </defs>
+
+  <g transform="translate(100 100) rotate(-20)" fill="none">
+    <ellipse cx="0" cy="0" rx="98" ry="36" stroke="#087BFF" stroke-opacity=".28" stroke-width="1"/>
+    <path d="M-90 0A90 26 0 0 1 90 0" stroke="url(#vt-ring)" stroke-opacity=".5" stroke-width="2.2" filter="url(#vt-glow)"/>
+  </g>
+
+  <g clip-path="url(#vt-clip)">
+    <circle cx="100" cy="100" r="62" fill="url(#vt-base)"/>
+    <circle cx="100" cy="100" r="62" fill="url(#vt-teal)"/>
+    <g transform="translate(100 100) rotate(-20)">
+      <path d="M-61 24Q0 58.3 61 24L53 38Q0 67.4 -53 38Z" fill="url(#vt-cyan)"/>
+      <path d="M-61 24Q0 58.3 61 24L53 38Q0 67.4 -53 38Z" fill="url(#vt-sheen)"/>
+      <path d="M-61 24Q0 58.3 61 24" stroke="#fff" stroke-opacity=".55" stroke-width="1" fill="none"/>
+
+      <path d="M-65 -6Q0 31 65 -6L64 14Q0 50.2 -64 14Z" transform="translate(0 4)" fill="#030712" fill-opacity=".6"/>
+      <path d="M-65 -6Q0 31 65 -6L64 14Q0 50.2 -64 14Z" fill="url(#vt-blue)"/>
+      <path d="M-65 -6Q0 31 65 -6L64 14Q0 50.2 -64 14Z" fill="url(#vt-sheen)"/>
+      <path d="M-65 -6Q0 31 65 -6" stroke="#8FF1FF" stroke-opacity=".8" stroke-width="1.2" fill="none"/>
+
+      <path d="M-54 -36Q0 -5.8 54 -36L64 -15Q0 21.1 -64 -15Z" transform="translate(0 4)" fill="#030712" fill-opacity=".6"/>
+      <path d="M-54 -36Q0 -5.8 54 -36L64 -15Q0 21.1 -64 -15Z" fill="url(#vt-silver)"/>
+      <path d="M-54 -36Q0 -5.8 54 -36L64 -15Q0 21.1 -64 -15Z" fill="url(#vt-side)"/>
+      <path d="M-54 -36Q0 -5.8 54 -36" stroke="#fff" stroke-opacity=".9" stroke-width="1.1" fill="none"/>
+    </g>
+    <ellipse cx="76" cy="66" rx="17" ry="8" transform="rotate(-32 76 66)" fill="url(#vt-spec)"/>
+    <circle cx="62" cy="80" r="1.8" fill="#fff" fill-opacity=".85"/>
+  </g>
+  <circle cx="100" cy="100" r="61.5" fill="none" stroke="url(#vt-rim)" stroke-width="1.3"/>
+
+  <g transform="translate(100 100) rotate(-20)" fill="none">
+    <path d="M90 0A90 26 0 0 1 -90 0" stroke="url(#vt-ring)" stroke-width="2.6" stroke-linecap="round" filter="url(#vt-glow)"/>
+  </g>
+</svg>

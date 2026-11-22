@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="140" viewBox="0 0 240 140">
+  <g transform="translate(120 70) rotate(-24) translate(-120 -70)" opacity="0.22">
+    <!-- Mini esfera oficial VibeTech -->
+    <g transform="translate(26 48) scale(0.22)">
+      <ellipse cx="100" cy="100" rx="92" ry="28" transform="rotate(-20 100 100)" fill="none" stroke="#00D9F5" stroke-width="6"/>
+      <circle cx="100" cy="100" r="60" fill="#071426" stroke="#00D9F5" stroke-width="4"/>
+      <path d="M46 78 Q100 104 154 78 L158 96 Q100 124 42 96 Z" transform="rotate(-20 100 100)" fill="#DCE4ED"/>
+      <path d="M40 104 Q100 132 160 104 L156 122 Q100 148 44 122 Z" transform="rotate(-20 100 100)" fill="#00D9F5"/>
+    </g>
+    <text x="76" y="75" font-family="Montserrat, Segoe UI, system-ui, sans-serif" font-size="16" font-weight="800" letter-spacing="0.4" fill="#DCE4ED">VibeTech<tspan fill="#00D9F5"> | </tspan><tspan font-weight="600" fill="#AAB5C4">CMD</tspan></text>
+    <text x="76" y="90" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="7.5" font-weight="600" letter-spacing="2.2" fill="#00D9F5">PRÉVIA PROTEGIDA</text>
+  </g>
+</svg>
