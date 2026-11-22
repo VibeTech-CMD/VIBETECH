@@ -505,76 +505,148 @@
 
   loadGitHubShowcase();
 
-  /* ---------- Partículas digitais sutis no Hero (otimizadas) ---------- */
+  /* ---------- Fundo espacial global: constelações e estrelas piscando ---------- */
   (() => {
     const canvas = document.getElementById('particles');
     if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const ctx = canvas.getContext('2d');
-    const host = canvas.parentElement;
-    if (!ctx || !host) return;
+    if (!ctx) return;
 
     let w = 0;
     let h = 0;
-    let pts = [];
+    let nodes = [];
+    let stars = [];
     let raf = 0;
-    let onScreen = true;
-    const LINK = 115;
+    let lastScrollY = window.scrollY || 0;
+    const LINK = 128;
+
+    const STAR_COLORS = [
+      [248, 250, 252], // branco estelar
+      [0, 217, 245],   // ciano VibeTech
+      [143, 241, 255], // azul gelo
+      [0, 214, 160]    // turquesa sutil
+    ];
 
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const r = host.getBoundingClientRect();
-      w = r.width;
-      h = r.height;
+      w = window.innerWidth;
+      h = window.innerHeight;
       canvas.width = w * dpr;
       canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.round(Math.min(48, Math.max(16, w / 28)));
-      pts = Array.from({ length: n }, () => ({
+
+      const areaFactor = (w * h) / (1440 * 900);
+      const nodeCount = Math.round(Math.min(62, Math.max(22, 46 * Math.sqrt(areaFactor))));
+      const starCount = Math.round(Math.min(115, Math.max(42, 85 * Math.sqrt(areaFactor))));
+
+      nodes = Array.from({ length: nodeCount }, () => ({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.22,
-        vy: (Math.random() - 0.5) * 0.22,
-        r: Math.random() * 1.2 + 0.55
+        vx: (Math.random() - 0.5) * 0.24,
+        vy: (Math.random() - 0.5) * 0.24,
+        r: Math.random() * 1.35 + 0.6,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.012 + Math.random() * 0.018
       }));
+
+      stars = Array.from({ length: starCount }, () => {
+        const rgb = STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)];
+        return {
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.15 + 0.35,
+          minA: 0.06 + Math.random() * 0.14,
+          maxA: 0.42 + Math.random() * 0.48,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.008 + Math.random() * 0.026,
+          depth: 0.08 + Math.random() * 0.24,
+          rgb,
+          sparkle: Math.random() < 0.22
+        };
+      });
+    }
+
+    function wrap(val, max) {
+      if (val < -8) return max + 8;
+      if (val > max + 8) return -8;
+      return val;
     }
 
     function frame() {
+      const scrollY = window.scrollY || 0;
+      const scrollDelta = scrollY - lastScrollY;
+      lastScrollY = scrollY;
+
       ctx.clearRect(0, 0, w, h);
-      for (const p of pts) {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = w;
-        else if (p.x > w) p.x = 0;
-        if (p.y < 0) p.y = h;
-        else if (p.y > h) p.y = 0;
+
+      // 1. Estrelas espaciais piscando suavemente
+      for (const s of stars) {
+        s.phase += s.speed;
+        if (scrollDelta !== 0) {
+          s.y = wrap(s.y - scrollDelta * s.depth, h);
+        }
+        const wave = (Math.sin(s.phase) + 1) * 0.5;
+        const alpha = s.minA + (s.maxA - s.minA) * wave;
+        const [r, g, b] = s.rgb;
+
+        ctx.fillStyle = `rgba(${r},${g},${b},${alpha.toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Brilho cruzado sutil nas estrelas mais brilhantes no pico do piscar
+        if (s.sparkle && wave > 0.78) {
+          const glowAlpha = ((wave - 0.78) / 0.22) * 0.45;
+          const arm = s.r * 3.6;
+          ctx.strokeStyle = `rgba(${r},${g},${b},${glowAlpha.toFixed(3)})`;
+          ctx.lineWidth = 0.75;
+          ctx.beginPath();
+          ctx.moveTo(s.x - arm, s.y);
+          ctx.lineTo(s.x + arm, s.y);
+          ctx.moveTo(s.x, s.y - arm);
+          ctx.lineTo(s.x, s.y + arm);
+          ctx.stroke();
+        }
       }
-      for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 1; j < pts.length; j++) {
-          const dx = pts[i].x - pts[j].x;
-          const dy = pts[i].y - pts[j].y;
+
+      // 2. Nós de constelação e linhas conectivas
+      for (const p of nodes) {
+        p.x = wrap(p.x + p.vx, w);
+        p.y = wrap(p.y + p.vy - scrollDelta * 0.14, h);
+        p.phase += p.speed;
+      }
+
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
           const d = Math.hypot(dx, dy);
           if (d < LINK) {
-            ctx.strokeStyle = `rgba(8,123,255,${((1 - d / LINK) * 0.22).toFixed(3)})`;
+            const lineAlpha = (1 - d / LINK) * 0.24;
+            ctx.strokeStyle = `rgba(8,123,255,${lineAlpha.toFixed(3)})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.moveTo(pts[i].x, pts[i].y);
-            ctx.lineTo(pts[j].x, pts[j].y);
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
             ctx.stroke();
           }
         }
       }
-      ctx.fillStyle = 'rgba(0,217,245,.55)';
-      for (const p of pts) {
+
+      for (const p of nodes) {
+        const pulse = 0.45 + ((Math.sin(p.phase) + 1) * 0.5) * 0.4;
+        ctx.fillStyle = `rgba(0,217,245,${pulse.toFixed(3)})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       }
+
       raf = requestAnimationFrame(frame);
     }
 
     const start = () => {
-      if (!raf && onScreen && !document.hidden) raf = requestAnimationFrame(frame);
+      if (!raf && !document.hidden) raf = requestAnimationFrame(frame);
     };
     const stop = () => {
       cancelAnimationFrame(raf);
@@ -588,12 +660,6 @@
       resizeTimer = setTimeout(resize, 200);
     });
     document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(([entry]) => {
-        onScreen = entry.isIntersecting;
-        onScreen ? start() : stop();
-      }).observe(host);
-    }
     start();
   })();
 })();
