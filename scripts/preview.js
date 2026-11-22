@@ -21,7 +21,7 @@
       defaultMode: 'live',
       defaultWatermark: false,
       liveUrl: 'index.html?preview=1',
-      addressLabel: 'vibetech-cmd.github.io/VIBETECH',
+      addressLabel: 'vibetech.cmd · site oficial',
       headline: 'Nossa própria plataforma digital, construída do zero pela VibeTech.',
       description:
         'Criamos o site oficial da VibeTech|CMD como vitrine viva do nosso padrão de qualidade: identidade dark futurista, carregamento ultraleve, animações sutis, portfólio integrado e conversão direta no WhatsApp.',
@@ -130,8 +130,7 @@
 
   const titleEl = document.getElementById('active-project-title');
   const statusEl = document.getElementById('active-project-status');
-  const wmToggleBtn = document.getElementById('watermark-toggle');
-  const wmToggleLabel = document.getElementById('watermark-toggle-label');
+  const wmBadge = document.getElementById('watermark-badge');
   const waCtaTop = document.getElementById('studio-wa-cta');
   const waCtaCase = document.getElementById('case-wa-cta');
   const waCtaBanner = document.getElementById('case-banner-wa');
@@ -165,15 +164,12 @@
   }
 
   function updateWatermarkUi() {
-    if (liveWatermark) liveWatermark.classList.toggle('is-active', watermarkEnabled);
-    if (caseStageWm) caseStageWm.classList.toggle('is-active', watermarkEnabled);
-    if (wmToggleBtn) {
-      wmToggleBtn.classList.toggle('active', watermarkEnabled);
-      wmToggleBtn.setAttribute('aria-pressed', String(watermarkEnabled));
-    }
-    if (wmToggleLabel) {
-      wmToggleLabel.textContent = watermarkEnabled ? 'Marca d’água: Suave' : 'Marca d’água: Limpa';
-    }
+    // Projetos em desenvolvimento mantêm marca d'água permanente e obrigatória;
+    // projetos já finalizados e no ar ficam 100% limpos, sem marca d'água.
+    const mustProtect = Boolean(currentProject.isDev);
+    if (liveWatermark) liveWatermark.classList.toggle('is-active', mustProtect);
+    if (caseStageWm) caseStageWm.classList.toggle('is-active', mustProtect);
+    if (wmBadge) wmBadge.classList.toggle('is-hidden', !mustProtect);
   }
 
   function setViewport(vp) {
@@ -315,13 +311,6 @@
 
   if (caseSwitchLiveBtn) {
     caseSwitchLiveBtn.addEventListener('click', () => setViewMode('live'));
-  }
-
-  if (wmToggleBtn) {
-    wmToggleBtn.addEventListener('click', () => {
-      watermarkEnabled = !watermarkEnabled;
-      updateWatermarkUi();
-    });
   }
 
   /* ---------- Inicialização a partir da URL ---------- */

@@ -14,8 +14,8 @@
     // Quando tiver o e-mail comercial da VibeTech, basta preencher abaixo:
     email: '',
     githubUser: 'VibeTech-CMD',
-    // Repositórios ocultos da vitrine pública (ex.: versões antigas/obsoletas)
-    hiddenRepos: ['4ever-Cerimonial-obsoleto'],
+    // Repositórios ocultos da vitrine "Em desenvolvimento" (obsoletos ou já publicados no Portfólio Oficial)
+    hiddenRepos: ['4ever-Cerimonial-obsoleto', 'VIBETECH'],
     // Catálogo curado para exibição comercial segura (sem expor código ou detalhes internos)
     projectCatalog: {
       VIBETECH: {
@@ -436,16 +436,24 @@
   }
 
   function getFallbackShowcaseItems() {
-    return Object.values(CONFIG.projectCatalog).map((entry) => ({
-      ...entry,
-      updatedLabel: 'Sincronizado · VibeTech'
-    }));
+    return Object.values(CONFIG.projectCatalog)
+      .filter((entry) => entry.isDev)
+      .map((entry) => ({
+        ...entry,
+        updatedLabel: 'Atualizado · VibeTech'
+      }));
+  }
+
+  function formatShowcaseCountLabel(count) {
+    return count === 1
+      ? 'Vitrine ao vivo · 1 projeto em andamento'
+      : `Vitrine ao vivo · ${count} projetos em andamento`;
   }
 
   async function loadGitHubShowcase() {
     if (!ghGrid) return;
 
-    const cacheKey = `vt_gh_showcase_${CONFIG.githubUser}`;
+    const cacheKey = `vt_live_showcase_v2_${CONFIG.githubUser}`;
     const cacheTtlMs = 5 * 60 * 1000;
 
     try {
@@ -454,7 +462,7 @@
         const cached = JSON.parse(cachedRaw);
         if (cached && Date.now() - cached.ts < cacheTtlMs && Array.isArray(cached.items) && cached.items.length) {
           renderShowcaseCards(cached.items);
-          if (ghSyncLabel) ghSyncLabel.textContent = `Sincronizado ao vivo · ${cached.items.length} projetos ativos`;
+          if (ghSyncLabel) ghSyncLabel.textContent = formatShowcaseCountLabel(cached.items.length);
           return;
         }
       }
@@ -472,8 +480,8 @@
       const repos = await response.json();
       const hidden = new Set(CONFIG.hiddenRepos.map((n) => n.toLowerCase()));
 
-      // Ordena priorizando os 3 projetos oficiais, depois os mais recentes
-      const priorityOrder = ['VIBETECH', '4EVER_CERIMONIAL_OFICIAL', '4EVER-Management'];
+      // Ordena priorizando os projetos oficiais em desenvolvimento, depois os mais recentes
+      const priorityOrder = ['4EVER_CERIMONIAL_OFICIAL', '4EVER-Management'];
       const filtered = repos
         .filter((repo) => repo && !repo.fork && !repo.archived && !hidden.has(String(repo.name).toLowerCase()))
         .sort((a, b) => {
@@ -489,7 +497,7 @@
 
       const finalItems = filtered.length ? filtered : getFallbackShowcaseItems();
       renderShowcaseCards(finalItems);
-      if (ghSyncLabel) ghSyncLabel.textContent = `Sincronizado ao vivo · ${finalItems.length} projetos ativos`;
+      if (ghSyncLabel) ghSyncLabel.textContent = formatShowcaseCountLabel(finalItems.length);
 
       try {
         sessionStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), items: finalItems }));
@@ -499,7 +507,7 @@
     } catch {
       const fallback = getFallbackShowcaseItems();
       renderShowcaseCards(fallback);
-      if (ghSyncLabel) ghSyncLabel.textContent = `Vitrine oficial · ${fallback.length} projetos ativos`;
+      if (ghSyncLabel) ghSyncLabel.textContent = formatShowcaseCountLabel(fallback.length);
     }
   }
 

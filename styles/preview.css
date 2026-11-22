@@ -246,26 +246,21 @@ button { font-family: inherit; cursor: pointer; }
   flex-wrap: wrap;
 }
 
-.toggle-chip {
+.protection-pill {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   padding: 6px 12px;
   border-radius: 999px;
-  border: 1px solid var(--line);
-  background: rgba(3, 7, 18, .66);
-  color: var(--muted);
+  border: 1px solid rgba(0, 217, 245, .42);
+  background: rgba(0, 217, 245, .10);
+  color: #c8f5fc;
   font-size: .76rem;
-  font-weight: 600;
-  transition: all .2s ease;
+  font-weight: 700;
+  white-space: nowrap;
+  user-select: none;
 }
-.toggle-chip:hover { border-color: rgba(0, 217, 245, .45); color: var(--white); }
-.toggle-chip.active {
-  border-color: rgba(0, 217, 245, .5);
-  background: rgba(0, 217, 245, .12);
-  color: var(--white);
-}
-.toggle-chip svg { width: 14px; height: 14px; color: var(--cyan); }
+.protection-pill svg { width: 14px; height: 14px; color: var(--teal); flex: none; }
 
 /* ---------- Palco Principal ---------- */
 .studio-stage {

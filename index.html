@@ -351,8 +351,8 @@
         </div>
 
         <!-- 3 Projetos Oficiais em destaque -->
-        <div class="portfolio-grid" data-protected="true">
-          <!-- Projeto 1: Site Oficial da própria VibeTech -->
+        <div class="portfolio-grid">
+          <!-- Projeto 1: Site Oficial da própria VibeTech (já publicado — sem marca d'água) -->
           <article class="card-surface project-card reveal">
             <div class="project-preview">
               <div class="mock-frame mock-vibetech" aria-hidden="true">
@@ -372,11 +372,6 @@
                   </div>
                 </div>
               </div>
-              <div class="watermark-layer" aria-hidden="true"></div>
-              <span class="watermark-seal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-                VibeTech|CMD
-              </span>
             </div>
 
             <div class="project-meta">
@@ -387,13 +382,13 @@
             <p>Criamos a nossa própria plataforma digital do zero. Este site que você está navegando agora é a prova prática do nível de design, velocidade e cuidado que entregamos.</p>
             <div class="project-footer">
               <span class="project-type">Site Institucional · Vitrine</span>
-              <a class="button button-primary button-sm preview-link" href="preview.html?projeto=vibetech">Visualizar projeto ↗</a>
+              <a class="button button-primary button-sm preview-link" href="preview.html?projeto=vibetech">Abrir demonstração ↗</a>
             </div>
           </article>
 
-          <!-- Projeto 2: 4Ever Cerimonial Oficial -->
+          <!-- Projeto 2: 4Ever Cerimonial Oficial (em desenvolvimento — protegido com marca d'água) -->
           <article class="card-surface project-card reveal">
-            <div class="project-preview">
+            <div class="project-preview" data-protected="true">
               <div class="mock-frame mock-4ever" aria-hidden="true">
                 <div class="mock-topbar">
                   <span class="mock-dots"><i></i><i></i><i></i></span>
@@ -416,19 +411,19 @@
 
             <div class="project-meta">
               <span class="project-tag">Site Oficial</span>
-              <span class="project-status is-dev">Em evolução</span>
+              <span class="project-status is-dev">Em desenvolvimento</span>
             </div>
             <h3>4Ever Cerimonial — Site Oficial</h3>
             <p>Site institucional desenvolvido para a equipe do 4Ever Cerimonial, com estética sofisticada para apresentar eventos, histórias reais e gerar pedidos de orçamento.</p>
             <div class="project-footer">
               <span class="project-type">Site Institucional · Eventos</span>
-              <a class="button button-primary button-sm preview-link" href="preview.html?projeto=4ever-cerimonial">Ver apresentação ↗</a>
+              <a class="button button-primary button-sm preview-link" href="preview.html?projeto=4ever-cerimonial">Abrir demonstração ↗</a>
             </div>
           </article>
 
-          <!-- Projeto 3: 4Ever Management Aplicativo -->
+          <!-- Projeto 3: 4Ever Management Aplicativo (em desenvolvimento — protegido com marca d'água) -->
           <article class="card-surface project-card reveal">
-            <div class="project-preview">
+            <div class="project-preview" data-protected="true">
               <div class="mock-frame mock-app" aria-hidden="true">
                 <div class="mock-topbar">
                   <span class="mock-dots"><i></i><i></i><i></i></span>
@@ -470,32 +465,32 @@
             <p>Aplicativo de gestão sob medida criado para centralizar contratos, serviços e acompanhamento operacional do 4Ever Cerimonial com agilidade e controle.</p>
             <div class="project-footer">
               <span class="project-type">Aplicativo · Gestão Interna</span>
-              <a class="button button-primary button-sm preview-link" href="preview.html?projeto=4ever-management">Visualizar aplicativo ↗</a>
+              <a class="button button-primary button-sm preview-link" href="preview.html?projeto=4ever-management">Abrir demonstração ↗</a>
             </div>
           </article>
         </div>
 
-        <!-- Vitrine Dinâmica Sincronizada com GitHub (Protegida com Marca d'água) -->
+        <!-- Vitrine Dinâmica de Projetos em Desenvolvimento (Protegida com Marca d'água) -->
         <div class="github-showcase reveal" data-protected="true" aria-labelledby="vitrine-github-title">
           <div class="github-showcase-head">
             <div>
-              <span class="kicker">Vitrine ao vivo · Sincronizada com o GitHub</span>
-              <h3 id="vitrine-github-title">Projetos em atividade na esteira da VibeTech</h3>
-              <p>Acompanhe em tempo real o status dos nossos projetos oficiais em desenvolvimento e produção. Por segurança e propriedade intelectual, o código-fonte e os detalhes internos ficam restritos e protegidos pela marca d’água VibeTech|CMD.</p>
+              <span class="kicker">Vitrine ao vivo · Em desenvolvimento</span>
+              <h3 id="vitrine-github-title">Projetos em desenvolvimento na esteira da VibeTech</h3>
+              <p>Acompanhe em tempo real o andamento dos projetos que estamos construindo agora. Por segurança e propriedade intelectual, os detalhes internos ficam restritos e toda prévia permanece protegida pela marca d’água oficial VibeTech|CMD.</p>
             </div>
             <div class="sync-pill">
               <span class="sync-dot" aria-hidden="true"></span>
-              <span id="github-sync-label">Sincronizando vitrine...</span>
+              <span id="github-sync-label">Carregando vitrine...</span>
             </div>
           </div>
 
           <div class="github-grid" id="github-showcase-grid" aria-live="polite">
-            <!-- Preenchido dinamicamente via API do GitHub com fallback seguro -->
+            <!-- Preenchido dinamicamente com fallback seguro -->
           </div>
 
           <p class="gh-protection-note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l7 4v5c0 5-3.2 8.2-7 9-3.8-.8-7-4-7-9V7l7-4z"/><path d="M9.5 12.2l1.8 1.8 3.4-3.6"/></svg>
-            <span>Vitrine protegida com marca d’água oficial <strong>VibeTech|CMD</strong>. Nenhum código-fonte ou arquivo interno é exposto nesta página — para demonstração guiada, fale com nossa equipe.</span>
+            <span>Vitrine protegida com marca d’água oficial <strong>VibeTech|CMD</strong>. Projetos em andamento permanecem protegidos até o lançamento oficial — para demonstração guiada, fale com nossa equipe.</span>
           </p>
         </div>
       </div>

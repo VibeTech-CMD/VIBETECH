@@ -84,11 +84,11 @@
           </button>
         </div>
 
-        <!-- Controle da Marca d'água Suave -->
-        <button type="button" class="toggle-chip" id="watermark-toggle" aria-pressed="false" title="Alternar marca d'água suave da VibeTech">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l7 4v5c0 5-3.2 8.2-7 9-3.8-.8-7-4-7-9V7l7-4z"/></svg>
-          <span id="watermark-toggle-label">Marca d’água: Limpa</span>
-        </button>
+        <!-- Selo fixo de proteção (aparece apenas para projetos em desenvolvimento, sem opção de desativar) -->
+        <span class="protection-pill is-hidden" id="watermark-badge" aria-label="Prévia protegida com marca d'água obrigatória">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l7 4v5c0 5-3.2 8.2-7 9-3.8-.8-7-4-7-9V7l7-4z"/><path d="M9.5 12.2l1.8 1.8 3.4-3.6"/></svg>
+          <span>Proteção ativa · Marca d’água</span>
+        </span>
       </div>
     </div>
 
@@ -101,7 +101,7 @@
             <span class="chrome-dots" aria-hidden="true"><i></i><i></i><i></i></span>
             <span class="chrome-address">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-              <span id="chrome-address-text">vibetech-cmd.github.io/VIBETECH</span>
+              <span id="chrome-address-text">vibetech.cmd · site oficial</span>
             </span>
             <span class="chrome-vp-label" id="chrome-vp-label">Desktop · 100%</span>
           </div>
@@ -198,7 +198,7 @@
               <div class="app-mock-rows">
                 <div class="app-mock-row"><b>Vitrine de Projetos + Sala de Demonstração</b><span>Ativo</span></div>
                 <div class="app-mock-row"><b>SEO Técnico, Open Graph e Performance</b><span>Otimizado</span></div>
-                <div class="app-mock-row"><b>Hospedagem Integrada no GitHub Pages</b><span>Online</span></div>
+                <div class="app-mock-row"><b>Infraestrutura em Nuvem de Alta Velocidade</b><span>Online</span></div>
               </div>
             </div>
 
