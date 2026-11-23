@@ -2,7 +2,7 @@
 
 Site institucional e vitrine oficial da **VibeTech|CMD**, desenvolvido em HTML, CSS e JavaScript puros, 100% compatível com **GitHub Pages** sem necessidade de servidor ou etapa de build.
 
-🌐 **Site publicado:** https://vibetech-cmd.github.io/VIBETECH/
+🌐 **Site publicado:** https://vibetechcmd.com.br/
 
 ## Estrutura do projeto
 

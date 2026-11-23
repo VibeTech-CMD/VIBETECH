@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vibetech-cmd.github.io/VIBETECH/sitemap.xml
+Sitemap: https://vibetechcmd.com.br/sitemap.xml

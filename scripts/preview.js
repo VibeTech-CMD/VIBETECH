@@ -21,7 +21,7 @@
       defaultMode: 'live',
       defaultWatermark: false,
       liveUrl: 'index.html?preview=1',
-      addressLabel: 'vibetech.cmd · site oficial',
+      addressLabel: 'vibetechcmd.com.br',
       headline: 'Nossa própria plataforma digital, construída do zero pela VibeTech.',
       description:
         'Criamos o site oficial da VibeTech|CMD como vitrine viva do nosso padrão de qualidade: identidade dark futurista, carregamento ultraleve, animações sutis, portfólio integrado e conversão direta no WhatsApp.',
