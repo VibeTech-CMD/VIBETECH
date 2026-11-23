@@ -51,18 +51,17 @@
       id: '4ever-cerimonial',
       name: '4Ever Cerimonial — Site Oficial',
       shortName: '4Ever Cerimonial',
-      kicker: 'Site Institucional · Em desenvolvimento',
-      status: 'Em desenvolvimento',
-      isDev: true,
-      defaultMode: 'case',
-      defaultWatermark: true,
-      // Assim que o 4EVER_CERIMONIAL_OFICIAL for publicado, coloque a URL aqui:
-      liveUrl: '',
-      addressLabel: '4ever-cerimonial · prévia protegida',
+      kicker: 'Site Institucional · Em produção',
+      status: 'Em produção',
+      isDev: false,
+      defaultMode: 'live',
+      defaultWatermark: false,
+      liveUrl: 'https://vibetech-cmd.github.io/4EVER_CERIMONIAL_OFICIAL/',
+      addressLabel: '4ever-cerimonial · site oficial',
       headline: 'Elegância editorial e narrativa visual para um cerimonial memorável.',
       description:
-        'Projeto oficial concebido para o 4Ever Cerimonial, combinando paleta sofisticada, curadoria de momentos reais (casamentos, 15 anos e eventos) e jornada pensada para transformar visitantes em pedidos de orçamento.',
-      tags: ['Site Institucional', 'Eventos & Cerimonial', 'Identidade Editorial', 'Em Desenvolvimento'],
+        'Site oficial no ar desenvolvido para o 4Ever Cerimonial, combinando paleta sofisticada, curadoria de momentos reais (casamentos, 15 anos e eventos) e jornada pensada para transformar visitantes em pedidos de orçamento.',
+      tags: ['Site Institucional', 'Eventos & Cerimonial', 'Identidade Editorial', 'No Ar'],
       mockTheme: '4ever',
       pillars: [
         {
@@ -76,12 +75,12 @@
           text: 'Estrutura editorial pensada para valorizar fotografia, história da equipe e serviços de forma leve tanto no celular quanto no desktop.'
         },
         {
-          num: '03 / PRÓXIMO PASSO',
-          title: 'Demonstração guiada disponível',
-          text: 'Como o projeto está em etapa final de publicação, apresentamos a prévia completa em uma demonstração rápida pelo WhatsApp.'
+          num: '03 / RESULTADO',
+          title: 'Publicado e pronto para converter',
+          text: 'Site oficial no ar com navegação fluida em qualquer dispositivo e canais diretos para solicitação de orçamento.'
         }
       ],
-      waMessage: 'Olá, VibeTech! Vi a apresentação do site do 4Ever Cerimonial e gostaria de conversar sobre um site para minha marca.'
+      waMessage: 'Olá, VibeTech! Vi o site oficial do 4Ever Cerimonial na Sala de Demonstração e gostaria de conversar sobre um site para minha marca.'
     },
 
     '4ever-management': {
@@ -316,6 +315,10 @@
   /* ---------- Inicialização a partir da URL ---------- */
   const params = new URLSearchParams(window.location.search);
   const initialProject = params.get('projeto') || 'vibetech';
+  const initialMode = params.get('modo');
   setViewport('desktop');
   loadProject(initialProject, false);
+  if (initialMode === 'case' || initialMode === 'live') {
+    setViewMode(initialMode);
+  }
 })();

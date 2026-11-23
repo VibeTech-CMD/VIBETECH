@@ -15,7 +15,7 @@
     email: '',
     githubUser: 'VibeTech-CMD',
     // Repositórios ocultos da vitrine "Em desenvolvimento" (obsoletos ou já publicados no Portfólio Oficial)
-    hiddenRepos: ['4ever-Cerimonial-obsoleto', 'VIBETECH'],
+    hiddenRepos: ['4ever-Cerimonial-obsoleto', 'VIBETECH', '4EVER_CERIMONIAL_OFICIAL'],
     // Catálogo curado para exibição comercial segura (sem expor código ou detalhes internos)
     projectCatalog: {
       VIBETECH: {
@@ -31,10 +31,10 @@
         previewId: '4ever-cerimonial',
         title: '4Ever Cerimonial — Site Oficial',
         category: 'Site Institucional',
-        status: 'Em desenvolvimento',
-        isDev: true,
+        status: 'Em produção',
+        isDev: false,
         briefType: 'Site Institucional',
-        summary: 'Site oficial desenvolvido para assessoria e cerimonial de eventos, unindo sofisticação editorial e foco em conversão.'
+        summary: 'Site oficial publicado para assessoria e cerimonial de eventos, unindo sofisticação editorial e foco em conversão.'
       },
       '4EVER-Management': {
         previewId: '4ever-management',
@@ -453,7 +453,7 @@
   async function loadGitHubShowcase() {
     if (!ghGrid) return;
 
-    const cacheKey = `vt_live_showcase_v2_${CONFIG.githubUser}`;
+    const cacheKey = `vt_live_showcase_v3_${CONFIG.githubUser}`;
     const cacheTtlMs = 5 * 60 * 1000;
 
     try {
