@@ -14,8 +14,10 @@
     // Quando tiver o e-mail comercial da VibeTech, basta preencher abaixo:
     email: '',
     githubUser: 'VibeTech-CMD',
-    // Repositórios ocultos da vitrine "Em desenvolvimento" (obsoletos ou já publicados no Portfólio Oficial)
-    hiddenRepos: ['4ever-Cerimonial-obsoleto', 'VIBETECH', '4EVER_CERIMONIAL_OFICIAL'],
+    // Repositórios já concluídos e no ar (nunca voltam para a vitrine "Em desenvolvimento")
+    completedRepos: ['VIBETECH', '4EVER_CERIMONIAL_OFICIAL'],
+    // Repositórios ocultos (obsoletos/arquivados)
+    hiddenRepos: ['4ever-Cerimonial-obsoleto'],
     // Catálogo curado para exibição comercial segura (sem expor código ou detalhes internos)
     projectCatalog: {
       VIBETECH: {
@@ -453,7 +455,7 @@
   async function loadGitHubShowcase() {
     if (!ghGrid) return;
 
-    const cacheKey = `vt_live_showcase_v3_${CONFIG.githubUser}`;
+    const cacheKey = `vt_live_showcase_v4_${CONFIG.githubUser}`;
     const cacheTtlMs = 5 * 60 * 1000;
 
     try {
@@ -478,12 +480,21 @@
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       const repos = await response.json();
-      const hidden = new Set(CONFIG.hiddenRepos.map((n) => n.toLowerCase()));
+      const excluded = new Set(
+        [...CONFIG.hiddenRepos, ...CONFIG.completedRepos].map((n) => n.toLowerCase())
+      );
 
       // Ordena priorizando os projetos oficiais em desenvolvimento, depois os mais recentes
-      const priorityOrder = ['4EVER_CERIMONIAL_OFICIAL', '4EVER-Management'];
+      const priorityOrder = ['4EVER-Management'];
       const filtered = repos
-        .filter((repo) => repo && !repo.fork && !repo.archived && !hidden.has(String(repo.name).toLowerCase()))
+        .filter((repo) => {
+          if (!repo || repo.fork || repo.archived) return false;
+          const lowerName = String(repo.name).toLowerCase();
+          if (excluded.has(lowerName)) return false;
+          const catalogEntry = CONFIG.projectCatalog[repo.name];
+          if (catalogEntry && catalogEntry.isDev === false) return false;
+          return true;
+        })
         .sort((a, b) => {
           const ia = priorityOrder.indexOf(a.name);
           const ib = priorityOrder.indexOf(b.name);

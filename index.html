@@ -28,24 +28,72 @@
   <meta name="twitter:description" content="Sites modernos, aplicativos sob medida e soluções digitais para impulsionar o seu negócio.">
   <meta name="twitter:image" content="https://vibetechcmd.com.br/assets/VibeTech-banner.png">
 
-  <!-- Dados estruturados para Google (JSON-LD) -->
+  <!-- Dados estruturados para Google Search (JSON-LD: Serviço + Site + FAQ) -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
-      "name": "VibeTech|CMD",
-      "url": "https://vibetechcmd.com.br/",
-      "logo": "https://vibetechcmd.com.br/assets/vibetech-logo.svg",
-      "image": "https://vibetechcmd.com.br/assets/VibeTech-banner.png",
-      "description": "Empresa especializada na criação de sites profissionais, aplicativos web e soluções digitais sob medida.",
-      "telephone": "+55-22-99916-2793",
-      "areaServed": "BR",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+55-22-99916-2793",
-        "contactType": "sales",
-        "availableLanguage": ["Portuguese"]
-      }
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://vibetechcmd.com.br/#organization",
+          "name": "VibeTech|CMD",
+          "alternateName": "VibeTech",
+          "url": "https://vibetechcmd.com.br/",
+          "logo": "https://vibetechcmd.com.br/assets/vibetech-logo.svg",
+          "image": "https://vibetechcmd.com.br/assets/VibeTech-banner.png",
+          "description": "Empresa especializada na criação de sites profissionais, landing pages, aplicativos web e soluções digitais sob medida.",
+          "telephone": "+55-22-99916-2793",
+          "areaServed": {
+            "@type": "Country",
+            "name": "Brasil"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+55-22-99916-2793",
+            "contactType": "sales",
+            "availableLanguage": ["Portuguese"]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://vibetechcmd.com.br/#website",
+          "url": "https://vibetechcmd.com.br/",
+          "name": "VibeTech|CMD",
+          "inLanguage": "pt-BR",
+          "publisher": {
+            "@id": "https://vibetechcmd.com.br/#organization"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Quais tipos de projetos a VibeTech desenvolve?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Desenvolvemos sites institucionais, landing pages de alta conversão, portfólios digitais, aplicativos web e sistemas personalizados de gestão."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Em quanto tempo meu site ou aplicativo fica pronto?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Landing pages e sites institucionais costumam ficar prontos em poucos dias após o alinhamento do conteúdo, enquanto aplicativos e sistemas sob medida seguem entregas por etapas."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "O site vai funcionar bem no celular e aparecer no Google?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sim. Todos os projetos são construídos com navegação mobile-first, carregamento rápido e boas práticas técnicas de SEO."
+              }
+            }
+          ]
+        }
+      ]
     }
   </script>
 
