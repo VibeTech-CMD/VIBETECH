@@ -56,8 +56,8 @@
       isDev: false,
       defaultMode: 'live',
       defaultWatermark: false,
-      liveUrl: 'https://vibetech-cmd.github.io/4EVER_CERIMONIAL_OFICIAL/',
-      addressLabel: '4ever-cerimonial · site oficial',
+      liveUrl: 'https://4evercerimonial.com.br/',
+      addressLabel: '4evercerimonial.com.br',
       headline: 'Elegância editorial e narrativa visual para um cerimonial memorável.',
       description:
         'Site oficial no ar desenvolvido para o 4Ever Cerimonial, combinando paleta sofisticada, curadoria de momentos reais (casamentos, 15 anos e eventos) e jornada pensada para transformar visitantes em pedidos de orçamento.',
