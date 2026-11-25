@@ -332,15 +332,18 @@ button { font-family: inherit; cursor: pointer; }
   position: relative;
   flex: 1;
   width: 100%;
+  overflow: hidden;
   background: #030712;
 }
 .iframe-viewport iframe {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   border: 0;
   background: #030712;
+  transform-origin: top left;
 }
 
 /* Marca d'água suave opcional (pointer-events: none para não travar a navegação!) */
@@ -657,13 +660,32 @@ button { font-family: inherit; cursor: pointer; }
 @media (max-width: 960px) {
   .case-hero { grid-template-columns: 1fr; }
   .case-grid { grid-template-columns: 1fr; }
-  .bar-center { order: 3; width: 100%; justify-content: center; overflow-x: auto; }
+  .bar-center { order: 3; width: 100%; justify-content: center; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
 @media (max-width: 680px) {
-  .studio-bar { padding: 10px 12px; gap: 10px; }
-  .studio-badge, .vp-group { display: none; }
-  .project-subbar { padding: 10px 12px; }
-  .studio-stage { padding: 12px; }
-  .device-frame { height: calc(100dvh - 190px); min-height: 460px; border-radius: 16px; }
+  .studio-bar { padding: 10px 12px; gap: 8px; }
+  .studio-badge { display: none; }
+  .bar-brand .wm { font-size: .88rem; }
+  .bar-brand img { width: 26px; height: 26px; }
+  .back-btn { padding: 7px 11px; font-size: .78rem; }
+  .cta-wa { padding: 8px 12px; font-size: .76rem; }
+  .bar-center { justify-content: flex-start; padding-bottom: 2px; }
+  .bar-center .segmented { width: 100%; justify-content: space-between; }
+  .bar-center .seg-btn { flex: 1; justify-content: center; padding: 7px 8px; font-size: .74rem; }
+
+  .project-subbar { padding: 10px 12px; gap: 10px; }
+  .project-subbar-info { width: 100%; justify-content: space-between; }
+  .project-subbar h1 { font-size: .92rem; }
+  .project-subbar-controls { width: 100%; gap: 8px; }
+  .project-subbar-controls .segmented { width: 100%; justify-content: space-between; }
+  .project-subbar-controls .seg-btn { flex: 1; justify-content: center; padding: 7px 8px; font-size: .75rem; }
+  .protection-pill { width: 100%; justify-content: center; }
+
+  .studio-stage { padding: 10px; }
+  .device-frame { height: calc(100dvh - 235px); min-height: 460px; border-radius: 16px; }
+  .device-frame.vp-tablet,
+  .device-frame.vp-mobile { max-width: 100%; border-radius: 16px; border-width: 1px; }
+  .chrome-address { font-size: .68rem; padding: 3px 9px; }
+  .chrome-vp-label { font-size: .68rem; }
   .e4-hero-box { grid-template-columns: 1fr; }
 }

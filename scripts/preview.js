@@ -171,6 +171,32 @@
     if (wmBadge) wmBadge.classList.toggle('is-hidden', !mustProtect);
   }
 
+  function applyIframeScale() {
+    if (!previewIframe || !previewIframe.parentElement) return;
+    const containerWidth = previewIframe.parentElement.clientWidth;
+    if (!containerWidth) return;
+
+    const targetWidths = {
+      desktop: 1280,
+      tablet: 820,
+      mobile: 390
+    };
+    const targetW = targetWidths[currentViewport] || 1280;
+
+    // Se a tela do visitante (ex.: celular) for menor que o dispositivo escolhido,
+    // escala proporcionalmente para mostrar o layout real de Desktop ou Tablet no telefone.
+    if (currentViewport !== 'mobile' && containerWidth < targetW) {
+      const scale = containerWidth / targetW;
+      previewIframe.style.width = `${targetW}px`;
+      previewIframe.style.height = `${(100 / scale).toFixed(2)}%`;
+      previewIframe.style.transform = `scale(${scale.toFixed(4)})`;
+    } else {
+      previewIframe.style.width = '100%';
+      previewIframe.style.height = '100%';
+      previewIframe.style.transform = 'none';
+    }
+  }
+
   function setViewport(vp) {
     currentViewport = vp;
     if (deviceFrame) {
@@ -179,9 +205,9 @@
       if (vp === 'mobile') deviceFrame.classList.add('vp-mobile');
     }
     const labels = {
-      desktop: 'Desktop · 100%',
+      desktop: 'Desktop · 1280px',
       tablet: 'Tablet · 820px',
-      mobile: 'Celular · 405px'
+      mobile: 'Celular · 390px'
     };
     if (chromeVpLabel) chromeVpLabel.textContent = labels[vp] || labels.desktop;
 
@@ -190,6 +216,8 @@
       btn.classList.toggle('active', isActive);
       btn.setAttribute('aria-pressed', String(isActive));
     });
+
+    requestAnimationFrame(applyIframeScale);
   }
 
   function setViewMode(mode) {
@@ -316,9 +344,11 @@
   const params = new URLSearchParams(window.location.search);
   const initialProject = params.get('projeto') || 'vibetech';
   const initialMode = params.get('modo');
-  setViewport('desktop');
+  const defaultVp = window.innerWidth <= 680 ? 'mobile' : 'desktop';
+  setViewport(defaultVp);
   loadProject(initialProject, false);
   if (initialMode === 'case' || initialMode === 'live') {
     setViewMode(initialMode);
   }
+  window.addEventListener('resize', applyIframeScale, { passive: true });
 })();
