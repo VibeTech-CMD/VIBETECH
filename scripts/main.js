@@ -275,9 +275,27 @@
       if (goal) lines.push(`• Ideia / Objetivo: ${goal}`);
 
       const url = buildWhatsAppUrl(lines.join('\n'));
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'generate_lead', {
+          event_category: 'whatsapp',
+          event_label: type
+        });
+      }
       window.open(url, '_blank', 'noopener,noreferrer');
     });
   }
+
+  /* ---------- Rastreamento GA4 de cliques diretos no WhatsApp ---------- */
+  document.querySelectorAll('a[href^="https://wa.me/"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'whatsapp_click', {
+          event_category: 'contact',
+          event_label: link.id || link.className || 'whatsapp_link'
+        });
+      }
+    });
+  });
 
   /* ---------- FAQ: comportamento limpo de acordeão ---------- */
   const faqItems = Array.from(document.querySelectorAll('.faq-item'));
