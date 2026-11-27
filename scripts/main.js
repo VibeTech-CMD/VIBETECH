@@ -719,23 +719,28 @@
       // ignora
     }
 
-    // 2. Clique triplo rápido na marca do rodapé abre o Painel Master
-    if (footerBrand) {
+    // 2. Clique triplo rápido na logo do cabeçalho OU na logo do rodapé abre o Painel Master
+    const attachTripleClick = (el) => {
+      if (!el) return;
       let clicks = 0;
       let timer = 0;
-      footerBrand.addEventListener('click', () => {
+      el.addEventListener('click', (event) => {
         clicks += 1;
         clearTimeout(timer);
         if (clicks >= 3) {
+          event.preventDefault();
           clicks = 0;
           window.location.href = '/admin/';
           return;
         }
         timer = setTimeout(() => {
           clicks = 0;
-        }, 700);
+        }, 900);
       });
-    }
+    };
+
+    attachTripleClick(document.querySelector('.brand'));
+    attachTripleClick(footerBrand);
 
     // 3. Atalho de teclado Ctrl + Shift + M
     document.addEventListener('keydown', (event) => {

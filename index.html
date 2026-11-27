@@ -122,7 +122,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/main.css?v=20261127">
 
   <!-- Google tag (gtag.js) — Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-93015S10D6"></script>
@@ -176,13 +176,16 @@
         <feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
       </filter>
       <clipPath id="vt-clip"><circle cx="100" cy="100" r="62"/></clipPath>
+      <mask id="vt-orbit-mask" maskUnits="userSpaceOnUse" x="-120" y="-120" width="240" height="240">
+        <rect x="-120" y="-120" width="240" height="240" fill="#fff"/>
+        <path d="M-62 0 A62 62 0 0 1 62 0 Z" fill="#000"/>
+      </mask>
     </defs>
 
     <symbol id="vt-sphere" viewBox="0 0 200 200">
       <g transform="translate(100 100) rotate(-20)" fill="none">
         <ellipse cx="0" cy="0" rx="98" ry="36" stroke="#087BFF" stroke-opacity=".28" stroke-width="1"/>
         <path d="M-90 0A90 26 0 0 1 90 0" stroke="url(#vt-ring)" stroke-opacity=".5" stroke-width="2.2" filter="url(#vt-glow)"/>
-        <path class="vt-spark" pathLength="100" d="M-90 0A90 26 0 0 1 90 0" stroke="#F8FAFC" stroke-width="2.6" stroke-linecap="round" filter="url(#vt-glow)"/>
       </g>
 
       <g clip-path="url(#vt-clip)">
@@ -212,7 +215,7 @@
 
       <g transform="translate(100 100) rotate(-20)" fill="none">
         <path d="M90 0A90 26 0 0 1 -90 0" stroke="url(#vt-ring)" stroke-width="2.6" stroke-linecap="round" filter="url(#vt-glow)"/>
-        <path class="vt-spark is-front" pathLength="100" d="M90 0A90 26 0 0 1 -90 0" stroke="#F8FAFC" stroke-width="2.8" stroke-linecap="round" filter="url(#vt-glow)"/>
+        <path class="vt-spark" pathLength="100" d="M0 -26 A90 26 0 1 1 0 26 A90 26 0 1 1 0 -26" stroke="#F8FAFC" stroke-width="2.9" stroke-linecap="round" filter="url(#vt-glow)" mask="url(#vt-orbit-mask)"/>
       </g>
     </symbol>
   </svg>
@@ -838,6 +841,6 @@
   <!-- Toast de aviso amigável -->
   <div class="toast" id="vt-toast" role="status" aria-live="polite"></div>
 
-  <script src="scripts/main.js" defer></script>
+  <script src="scripts/main.js?v=20261127" defer></script>
 </body>
 </html>

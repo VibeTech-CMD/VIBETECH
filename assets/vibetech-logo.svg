@@ -1,12 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Logo VibeTech CMD">
   <style>
-    .vt-spark { stroke-dasharray: 16 200; stroke-dashoffset: 16; animation: vt-orbit 6s linear infinite; }
-    .vt-spark.is-front { animation-delay: -3s; }
-    @keyframes vt-orbit {
-      0% { stroke-dashoffset: 16; }
-      58% { stroke-dashoffset: -100; }
-      100% { stroke-dashoffset: -100; }
-    }
+    .vt-spark { stroke-dasharray: 20 80; stroke-dashoffset: 0; animation: vt-orbit 4.5s linear infinite; }
+    @keyframes vt-orbit { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -100; } }
     @media (prefers-reduced-motion: reduce) {
       .vt-spark { animation: none; opacity: 0; }
     }
@@ -72,12 +67,15 @@
       </feMerge>
     </filter>
     <clipPath id="vt-clip"><circle cx="100" cy="100" r="62"/></clipPath>
+    <mask id="vt-orbit-mask" maskUnits="userSpaceOnUse" x="-120" y="-120" width="240" height="240">
+      <rect x="-120" y="-120" width="240" height="240" fill="#fff"/>
+      <path d="M-62 0 A62 62 0 0 1 62 0 Z" fill="#000"/>
+    </mask>
   </defs>
 
   <g transform="translate(100 100) rotate(-20)" fill="none">
     <ellipse cx="0" cy="0" rx="98" ry="36" stroke="#087BFF" stroke-opacity=".28" stroke-width="1"/>
     <path d="M-90 0A90 26 0 0 1 90 0" stroke="url(#vt-ring)" stroke-opacity=".5" stroke-width="2.2" filter="url(#vt-glow)"/>
-    <path class="vt-spark" pathLength="100" d="M-90 0A90 26 0 0 1 90 0" stroke="#F8FAFC" stroke-width="2.6" stroke-linecap="round" filter="url(#vt-glow)"/>
   </g>
 
   <g clip-path="url(#vt-clip)">
@@ -105,6 +103,6 @@
 
   <g transform="translate(100 100) rotate(-20)" fill="none">
     <path d="M90 0A90 26 0 0 1 -90 0" stroke="url(#vt-ring)" stroke-width="2.6" stroke-linecap="round" filter="url(#vt-glow)"/>
-    <path class="vt-spark is-front" pathLength="100" d="M90 0A90 26 0 0 1 -90 0" stroke="#F8FAFC" stroke-width="2.8" stroke-linecap="round" filter="url(#vt-glow)"/>
+    <path class="vt-spark" pathLength="100" d="M0 -26 A90 26 0 1 1 0 26 A90 26 0 1 1 0 -26" stroke="#F8FAFC" stroke-width="2.9" stroke-linecap="round" filter="url(#vt-glow)" mask="url(#vt-orbit-mask)"/>
   </g>
 </svg>

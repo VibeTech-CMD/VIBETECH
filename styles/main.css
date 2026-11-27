@@ -1223,17 +1223,12 @@ html.js-reveal .reveal.is-visible {
   min-width: 0;
 }
 
-/* ---------- Animações da Esfera (órbita 360° contínua sem pausas) ---------- */
+/* ---------- Animações da Esfera (órbita 360° única e contínua) ---------- */
 .vt-bands { animation: vt-sway 9s ease-in-out infinite alternate; }
-.vt-spark { stroke-dasharray: 16 200; stroke-dashoffset: 16; animation: vt-orbit 6s linear infinite; }
-.vt-spark.is-front { animation-delay: -3s; }
+.vt-spark { stroke-dasharray: 20 80; stroke-dashoffset: 0; animation: vt-orbit 4.5s linear infinite; }
 
 @keyframes vt-sway { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
-@keyframes vt-orbit {
-  0% { stroke-dashoffset: 16; }
-  58% { stroke-dashoffset: -100; }
-  100% { stroke-dashoffset: -100; }
-}
+@keyframes vt-orbit { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -100; } }
 @keyframes float { from { transform: translateY(-5px); } to { transform: translateY(6px); } }
 @keyframes halo-pulse { from { opacity: .65; transform: scale(.97); } to { opacity: 1; transform: scale(1.03); } }
 @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .55; transform: scale(.86); } }
