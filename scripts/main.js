@@ -699,4 +699,50 @@
     document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
     start();
   })();
+
+  /* ---------- Atalho discreto do Painel Master (invisível para visitantes) ---------- */
+  (() => {
+    const footerBrand = document.querySelector('.footer-brand');
+    const footerLinks = document.querySelector('.footer-links');
+
+    // 1. Se o proprietário já autenticou neste navegador, exibe link discreto no rodapé
+    try {
+      if (localStorage.getItem('vt_master_hint') === '1' && footerLinks) {
+        const masterLink = document.createElement('a');
+        masterLink.href = '/admin/';
+        masterLink.textContent = 'Painel Master';
+        masterLink.style.color = '#00D9F5';
+        masterLink.style.fontWeight = '600';
+        footerLinks.appendChild(masterLink);
+      }
+    } catch {
+      // ignora
+    }
+
+    // 2. Clique triplo rápido na marca do rodapé abre o Painel Master
+    if (footerBrand) {
+      let clicks = 0;
+      let timer = 0;
+      footerBrand.addEventListener('click', () => {
+        clicks += 1;
+        clearTimeout(timer);
+        if (clicks >= 3) {
+          clicks = 0;
+          window.location.href = '/admin/';
+          return;
+        }
+        timer = setTimeout(() => {
+          clicks = 0;
+        }, 700);
+      });
+    }
+
+    // 3. Atalho de teclado Ctrl + Shift + M
+    document.addEventListener('keydown', (event) => {
+      if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'm') {
+        event.preventDefault();
+        window.location.href = '/admin/';
+      }
+    });
+  })();
 })();

@@ -1,7 +1,16 @@
 {
   "name": "vibetechcmd",
+  "main": "src/worker.js",
   "compatibility_date": "2026-11-24",
   "assets": {
-    "directory": "."
-  }
+    "directory": ".",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "vibetech-db",
+      "database_id": "e8ed8ee1-de86-471c-8ddb-94a6a5e36501"
+    }
+  ]
 }
