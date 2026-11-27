@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#030712">
+  <meta name="robots" content="noindex, follow">
+  <title>Briefing Interativo — VibeTech|CMD</title>
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/briefing/briefing.css">
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-inner">
+      <a class="brand" href="/">
+        <img src="/assets/vibetech-logo.svg" alt="VibeTech|CMD">
+        <strong>VibeTech|CMD</strong>
+      </a>
+      <a class="back-link" href="/">← Voltar ao site</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="hero-head">
+      <span class="kicker">Briefing Interativo · Etapa de Alinhamento</span>
+      <h1>Conte sobre o seu projeto em poucos minutos.</h1>
+      <p>Escolha o cenário que mais combina com o seu momento atual. Suas respostas vão direto para o nosso painel de Brainstorm para montarmos a proposta sob medida.</p>
+    </div>
+
+    <!-- Seletor de 3 Trilhas Condicionais -->
+    <div class="tracks-grid" id="tracks-grid" role="group" aria-label="Escolha sua trilha de briefing">
+      <button type="button" class="track-card active" data-track="ideia">
+        <span class="track-tag">Trilha 1 · 10 perguntas</span>
+        <h2>Só tenho a ideia</h2>
+        <p>Começando do zero — vamos mapear negócio, público, estilo visual, materiais e objetivos.</p>
+      </button>
+      <button type="button" class="track-card" data-track="base">
+        <span class="track-tag">Trilha 2 · Direto ao ponto</span>
+        <h2>Já tenho uma base</h2>
+        <p>Já possui marca/materiais definidos — foco no escopo técnico, estética faltante e recursos.</p>
+      </button>
+      <button type="button" class="track-card" data-track="redesign">
+        <span class="track-tag">Trilha 3 · Evolução</span>
+        <h2>Redesign / Restart</h2>
+        <p>Já tem um site no ar e quer modernizar visual, estrutura ou reconstruir do zero.</p>
+      </button>
+    </div>
+
+    <!-- Formulário Dinâmico -->
+    <form class="form-panel" id="briefing-form">
+      <div class="group-title">Seus Dados de Contato</div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="b-name">Seu nome completo *</label>
+          <input class="input" id="b-name" type="text" required placeholder="Como devemos te chamar?">
+        </div>
+        <div class="field">
+          <label for="b-company">Nome da empresa ou projeto</label>
+          <input class="input" id="b-company" type="text" placeholder="Ex.: Clínica Vida / Studio Alpha">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label for="b-wa">WhatsApp com DDD *</label>
+          <input class="input" id="b-wa" type="tel" required placeholder="(22) 99999-9999">
+        </div>
+        <div class="field">
+          <label for="b-email">E-mail (opcional)</label>
+          <input class="input" id="b-email" type="email" placeholder="voce@empresa.com.br">
+        </div>
+      </div>
+
+      <!-- Perguntas dinâmicas por trilha -->
+      <div id="dynamic-questions"></div>
+
+      <div class="submit-row">
+        <span style="font-size:.82rem;color:#9eb0c8;">Ao enviar, o resumo fica registrado para nossa reunião de Brainstorm.</span>
+        <button type="submit" class="btn btn-primary" id="btn-submit-briefing">Enviar Briefing para a VibeTech ↗</button>
+      </div>
+    </form>
+
+    <!-- Tela de Confirmação + Resumo Estruturado -->
+    <section class="form-panel is-hidden" id="briefing-success">
+      <span class="kicker">Briefing recebido com sucesso</span>
+      <h2 style="margin:0 0 8px;font-family:Montserrat,sans-serif;">Tudo pronto para o nosso Brainstorm!</h2>
+      <p style="margin:0;color:#9eb0c8;font-size:.94rem;">Suas respostas foram registradas com segurança no painel da VibeTech|CMD. Abaixo está o resumo estruturado que você também pode enviar direto para o desenvolvedor no WhatsApp:</p>
+      <div class="summary-box" id="summary-output"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a class="btn btn-whatsapp" id="btn-wa-notify" href="#" target="_blank" rel="noopener noreferrer">Avisar desenvolvedor no WhatsApp ↗</a>
+        <button type="button" class="btn btn-secondary" id="btn-copy-summary">Copiar resumo</button>
+        <a class="btn btn-secondary" href="/">Voltar ao site</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/briefing/briefing.js" defer></script>
+</body>
+</html>

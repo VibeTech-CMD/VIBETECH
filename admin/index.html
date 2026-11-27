@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#030712">
   <meta name="robots" content="noindex, nofollow">
-  <title>Acesso Master — VibeTech|CMD</title>
+  <title>Ecossistema Master — VibeTech|CMD</title>
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,20 +14,19 @@
   <link rel="stylesheet" href="/admin/admin.css">
 </head>
 <body>
-  <!-- ==================== TELA DE LOGIN / PRIMEIRO ACESSO MASTER ==================== -->
+  <!-- ==================== LOGIN MASTER ==================== -->
   <section class="auth-screen" id="auth-screen">
     <div class="auth-card">
       <div class="auth-brand">
         <img src="/assets/vibetech-logo.svg" alt="VibeTech|CMD">
         <div>
           <strong>VibeTech|CMD</strong>
-          <span>Acesso Master Restrito</span>
+          <span>Ecossistema Master</span>
         </div>
       </div>
 
       <h1 id="auth-title">Entrar no Painel Master</h1>
-      <p class="auth-desc" id="auth-desc">Área exclusiva do proprietário para geração de orçamentos, validação e emissão de contratos sincronizados na nuvem.</p>
-
+      <p class="auth-desc" id="auth-desc">Acesso exclusivo do proprietário para gestão de briefings, CRM, Kanban, manutenção, orçamentos e contratos.</p>
       <p class="auth-error is-hidden" id="auth-error"></p>
 
       <form id="auth-form">
@@ -52,191 +51,82 @@
     </div>
   </section>
 
-  <!-- ==================== PAINEL MASTER AUTENTICADO ==================== -->
+  <!-- ==================== PAINEL MASTER COMPLETO (5 MÓDULOS PRD) ==================== -->
   <div class="app-shell is-hidden" id="app-shell">
     <header class="master-bar no-print">
       <div class="bar-brand">
         <img src="/assets/vibetech-logo.svg" alt="VibeTech|CMD">
         <strong>VibeTech|CMD</strong>
-        <span class="master-pill">Painel Master</span>
+        <span class="master-pill">Master</span>
       </div>
 
-      <nav class="nav-tabs" aria-label="Abas do Painel Master">
-        <button type="button" class="tab-btn active" data-tab="quote">1. Orçamento</button>
-        <button type="button" class="tab-btn" data-tab="contract">2. Contrato</button>
-        <button type="button" class="tab-btn" data-tab="history">3. Histórico (D1)</button>
-        <button type="button" class="tab-btn" data-tab="profile">4. Dados VibeTech</button>
+      <nav class="nav-tabs" aria-label="Módulos do Ecossistema Master">
+        <button type="button" class="tab-btn active" data-tab="dashboard">Dashboard</button>
+        <button type="button" class="tab-btn" data-tab="crm">CRM &amp; Kanban</button>
+        <button type="button" class="tab-btn" data-tab="maintenance">Manutenção</button>
+        <button type="button" class="tab-btn" data-tab="quote">Orçamentos</button>
+        <button type="button" class="tab-btn" data-tab="contract">Contratos</button>
+        <button type="button" class="tab-btn" data-tab="profile">Dados &amp; Backup</button>
       </nav>
 
       <div class="bar-actions">
-        <button type="button" class="btn btn-secondary btn-sm" id="btn-new-proposal">+ Novo Orçamento</button>
-        <a href="/" class="btn btn-secondary btn-sm">Ver Site</a>
+        <button type="button" class="btn btn-secondary btn-sm" id="btn-copy-briefing-link">Link /briefing</button>
+        <button type="button" class="btn btn-primary btn-sm" id="btn-new-proposal">+ Orçamento</button>
         <button type="button" class="btn btn-danger btn-sm" id="btn-logout">Sair</button>
       </div>
     </header>
 
     <main class="main-wrap">
-      <!-- ==================== ABA 1: MONTAR ORÇAMENTO ==================== -->
-      <section id="tab-quote" class="tab-view">
-        <div class="split-layout">
-          <!-- Editor à esquerda -->
-          <div class="panel no-print">
-            <h2>
-              <span>Montador de Orçamento</span>
-              <span class="code-tag" id="editor-code-badge">Novo</span>
-            </h2>
+      <!-- ==================== MÓDULO 5: DASHBOARD ANALÍTICO & ALERTA DIA 15 ==================== -->
+      <section id="tab-dashboard" class="tab-view no-print">
+        <div class="alert-day15 is-hidden" id="day15-alert-box">
+          <h3>🔔 Alerta Pós-Venda (Dia 15 da Garantia de 30 dias)</h3>
+          <div class="alert-day15-list" id="day15-alert-list"></div>
+        </div>
 
-            <div class="section-divider">Modelos pré-configurados VibeTech</div>
-            <div class="template-pills" id="template-pills">
-              <button type="button" class="tpl-pill active" data-template="site-institucional">Site Institucional</button>
-              <button type="button" class="tpl-pill" data-template="landing-page">Landing Page</button>
-              <button type="button" class="tpl-pill" data-template="aplicativo-web">Aplicativo Web</button>
-              <button type="button" class="tpl-pill" data-template="combo-site-app">Combo Site + App</button>
-              <button type="button" class="tpl-pill" data-template="personalizado">Personalizado</button>
-            </div>
-
-            <div class="section-divider">Dados do Cliente</div>
-            <div class="grid-2">
-              <div class="field">
-                <label for="f-client-name">Nome do cliente *</label>
-                <input class="input" id="f-client-name" type="text" placeholder="Ex.: Maria Silva">
-              </div>
-              <div class="field">
-                <label for="f-client-company">Empresa / Projeto</label>
-                <input class="input" id="f-client-company" type="text" placeholder="Ex.: Studio Bela Arte">
-              </div>
-            </div>
-            <div class="grid-3">
-              <div class="field">
-                <label for="f-client-doc">CPF ou CNPJ</label>
-                <input class="input" id="f-client-doc" type="text" placeholder="000.000.000-00">
-              </div>
-              <div class="field">
-                <label for="f-client-wa">WhatsApp</label>
-                <input class="input" id="f-client-wa" type="text" placeholder="(22) 99999-9999">
-              </div>
-              <div class="field">
-                <label for="f-client-email">E-mail</label>
-                <input class="input" id="f-client-email" type="email" placeholder="cliente@email.com">
-              </div>
-            </div>
-
-            <div class="section-divider">Escopo &amp; Valores</div>
-            <div class="field">
-              <label for="f-project-title">Título da proposta *</label>
-              <input class="input" id="f-project-title" type="text" placeholder="Ex.: Criação de Site Institucional Profissional">
-            </div>
-            <div class="field">
-              <label for="f-project-summary">Resumo da solução</label>
-              <textarea class="textarea" id="f-project-summary" placeholder="Breve apresentação do objetivo do projeto..."></textarea>
-            </div>
-
-            <div class="field">
-              <label>Itens / Entregáveis inclusos</label>
-              <div class="items-list" id="items-list"></div>
-              <button type="button" class="btn btn-secondary btn-sm" id="btn-add-item">+ Adicionar item</button>
-            </div>
-
-            <div class="grid-3">
-              <div class="field">
-                <label for="f-discount">Desconto (R$)</label>
-                <input class="input" id="f-discount" type="number" min="0" step="10" value="0">
-              </div>
-              <div class="field">
-                <label for="f-delivery">Prazo estimado</label>
-                <input class="input" id="f-delivery" type="text" value="10 a 15 dias úteis">
-              </div>
-              <div class="field">
-                <label for="f-validity">Validade (dias)</label>
-                <input class="input" id="f-validity" type="number" min="1" value="15">
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="f-payment">Condições de pagamento</label>
-              <input class="input" id="f-payment" type="text" value="50% na aprovação da proposta (PIX/Transferência) e 50% na entrega final.">
-            </div>
-
-            <div class="field">
-              <label for="f-notes">Observações adicionais</label>
-              <textarea class="textarea" id="f-notes" placeholder="Domínio, hospedagem, revisões incluídas..."></textarea>
-            </div>
-
-            <div class="field">
-              <label for="f-status">Status atual</label>
-              <select class="select" id="f-status">
-                <option value="rascunho">Rascunho</option>
-                <option value="enviado">Enviado ao cliente</option>
-                <option value="validado">Validado / Aprovado</option>
-                <option value="contrato_gerado">Contrato gerado</option>
-              </select>
-            </div>
-
-            <div class="action-bar">
-              <button type="button" class="btn btn-primary" id="btn-save-quote">Salvar na Nuvem (D1)</button>
-              <button type="button" class="btn btn-secondary" id="btn-print-quote">Baixar / Imprimir PDF</button>
-              <button type="button" class="btn btn-secondary" id="btn-send-wa">Enviar no WhatsApp</button>
-              <button type="button" class="btn btn-success" id="btn-validate-contract">Validar e Gerar Contrato →</button>
-            </div>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <small>Faturamento do Mês</small>
+            <strong id="kpi-month-rev">R$ 0,00</strong>
+            <span class="kpi-sub" id="kpi-goal-status">Meta Fase 1: R$ 300 a R$ 500/mês</span>
           </div>
-
-          <!-- Prévia A4 em tempo real à direita -->
-          <div class="preview-column">
-            <div class="preview-toolbar no-print">
-              <span style="font-size:.82rem;color:#9eb0c8;">Prévia oficial A4 em tempo real (Orçamento)</span>
-              <button type="button" class="btn btn-primary btn-sm" id="btn-print-quote-top">Imprimir / Salvar PDF ↗</button>
-            </div>
-            <article class="doc-paper" id="quote-preview-doc"></article>
+          <div class="kpi-card">
+            <small>Recorrência (Manutenção MRR)</small>
+            <strong id="kpi-mrr">R$ 0,00</strong>
+            <span class="kpi-sub" id="kpi-mrr-clients">0 planos ativos</span>
+          </div>
+          <div class="kpi-card">
+            <small>Projetos no Kanban</small>
+            <strong id="kpi-projects">0</strong>
+            <span class="kpi-sub" id="kpi-briefings">0 briefings recebidos</span>
+          </div>
+          <div class="kpi-card">
+            <small>Atendimentos no Mês</small>
+            <strong id="kpi-maint-count">0</strong>
+            <span class="kpi-sub">Regra operacional 30–45 min</span>
           </div>
         </div>
-      </section>
 
-      <!-- ==================== ABA 2: CONTRATO (PÓS-VALIDAÇÃO) ==================== -->
-      <section id="tab-contract" class="tab-view is-hidden">
-        <div class="split-layout">
-          <div class="panel no-print">
-            <h2>
-              <span>Gerador de Contrato</span>
-              <span class="code-tag" id="contract-code-badge">Base Oficial</span>
-            </h2>
-
-            <div class="info-banner">
-              <strong>Modelo base estruturado:</strong> os dados do cliente, da VibeTech|CMD, valores, prazos e escopo são puxados automaticamente do orçamento validado. Edite as cláusulas abaixo livremente — quando você trouxer sua base jurídica definitiva, atualizamos o modelo padrão aqui!
-            </div>
-
-            <div class="field">
-              <label for="f-contract-clauses">Cláusulas do Contrato (editáveis)</label>
-              <textarea class="textarea" id="f-contract-clauses" style="min-height:420px;font-size:.83rem;"></textarea>
-            </div>
-
-            <div class="action-bar">
-              <button type="button" class="btn btn-primary" id="btn-save-contract">Salvar Contrato no D1</button>
-              <button type="button" class="btn btn-success" id="btn-print-contract">Baixar / Imprimir Contrato PDF</button>
-              <button type="button" class="btn btn-secondary" id="btn-reset-clauses">Restaurar Cláusulas Base</button>
-            </div>
+        <div class="chart-grid">
+          <div class="panel">
+            <h2><span>Faturamento Mensal (Propostas Validadas / Contratos)</span><span class="code-tag">Meta: R$ 500/mês</span></h2>
+            <div class="bar-chart" id="revenue-chart"></div>
           </div>
-
-          <div class="preview-column">
-            <div class="preview-toolbar no-print">
-              <span style="font-size:.82rem;color:#9eb0c8;">Prévia oficial A4 em tempo real (Contrato)</span>
-              <button type="button" class="btn btn-success btn-sm" id="btn-print-contract-top">Imprimir / Salvar PDF ↗</button>
-            </div>
-            <article class="doc-paper" id="contract-preview-doc"></article>
+          <div class="panel">
+            <h2><span>Distribuição do Kanban</span></h2>
+            <div id="kanban-summary-bars" style="display:grid;gap:12px;"></div>
           </div>
         </div>
-      </section>
 
-      <!-- ==================== ABA 3: HISTÓRICO NO CLOUDFLARE D1 ==================== -->
-      <section id="tab-history" class="tab-view is-hidden no-print">
         <div class="panel">
-          <div class="history-toolbar">
+          <div class="history-toolbar" style="margin-bottom:14px;">
             <div>
-              <h2 style="margin-bottom:4px;">Histórico de Orçamentos e Contratos (Nuvem D1)</h2>
-              <span id="history-summary" style="font-size:.84rem;color:#9eb0c8;">Carregando registros...</span>
+              <h2 style="margin-bottom:4px;">Propostas e Contratos Recentes (Nuvem D1)</h2>
+              <span id="history-summary" style="font-size:.82rem;color:#9eb0c8;">Carregando...</span>
             </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <input class="input" id="history-search" type="search" placeholder="Buscar cliente, empresa ou código..." style="width:260px;">
-              <select class="select" id="history-filter" style="width:170px;">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <input class="input" id="history-search" type="search" placeholder="Buscar cliente ou código..." style="width:230px;">
+              <select class="select" id="history-filter" style="width:165px;">
                 <option value="all">Todos os status</option>
                 <option value="rascunho">Rascunho</option>
                 <option value="enviado">Enviado</option>
@@ -249,61 +139,286 @@
         </div>
       </section>
 
-      <!-- ==================== ABA 4: DADOS DA VIBETECH ==================== -->
-      <section id="tab-profile" class="tab-view is-hidden no-print">
-        <div class="panel" style="max-width:760px;margin:0 auto;">
-          <h2>Dados Oficiais da VibeTech|CMD (salvos no D1)</h2>
-          <p style="margin:0 0 18px;color:#9eb0c8;font-size:.88rem;">Essas informações aparecem automaticamente no cabeçalho e na qualificação de todos os orçamentos e contratos — e ficam protegidas exclusivamente no banco D1 (nunca expostas no site público).</p>
+      <!-- ==================== MÓDULOS 1 & 4: CRM, KANBAN & BRIEFINGS ==================== -->
+      <section id="tab-crm" class="tab-view is-hidden no-print">
+        <!-- Briefings recebidos de /briefing -->
+        <div class="panel" style="margin-bottom:20px;">
+          <h2>
+            <span>Briefings Recebidos (/briefing)</span>
+            <a href="/briefing/" target="_blank" class="btn btn-secondary btn-sm">Abrir /briefing ↗</a>
+          </h2>
+          <div class="history-grid" id="briefings-list"></div>
+        </div>
 
-          <form id="profile-form">
-            <div class="grid-2">
-              <div class="field">
-                <label for="p-company">Nome da Empresa / Marca</label>
-                <input class="input" id="p-company" type="text" required>
-              </div>
-              <div class="field">
-                <label for="p-owner">Nome Completo do Proprietário</label>
-                <input class="input" id="p-owner" type="text" required>
-              </div>
+        <!-- Kanban 5 Colunas -->
+        <div class="panel" style="margin-bottom:20px;">
+          <h2>
+            <span>Kanban de Projetos (5 Etapas)</span>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-add-project">+ Novo Projeto</button>
+          </h2>
+          <div class="kanban-board" id="kanban-board"></div>
+        </div>
+
+        <!-- CRM de Clientes -->
+        <div class="panel">
+          <h2><span>CRM de Clientes &amp; Pastas de Referência</span></h2>
+          <form id="client-form" style="margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid rgba(120,170,235,.14);">
+            <input type="hidden" id="c-id">
+            <div class="grid-3">
+              <div class="field"><label for="c-name">Nome / Razão Social *</label><input class="input" id="c-name" required></div>
+              <div class="field"><label for="c-company">Empresa / Marca</label><input class="input" id="c-company"></div>
+              <div class="field"><label for="c-doc">CPF / CNPJ</label><input class="input" id="c-doc"></div>
             </div>
             <div class="grid-3">
-              <div class="field">
-                <label for="p-doc">CPF ou CNPJ</label>
-                <input class="input" id="p-doc" type="text" required>
-              </div>
-              <div class="field">
-                <label for="p-city">Cidade</label>
-                <input class="input" id="p-city" type="text" required>
-              </div>
-              <div class="field">
-                <label for="p-state">Estado (UF)</label>
-                <input class="input" id="p-state" type="text" maxlength="2" required>
-              </div>
+              <div class="field"><label for="c-wa">WhatsApp</label><input class="input" id="c-wa" placeholder="(22) 99999-9999"></div>
+              <div class="field"><label for="c-email">E-mail</label><input class="input" id="c-email" type="email"></div>
+              <div class="field"><label for="c-addr">Endereço completo</label><input class="input" id="c-addr" placeholder="Rua, nº, Bairro, Cidade/UF"></div>
             </div>
             <div class="grid-3">
+              <div class="field"><label for="c-domain">Domínio</label><input class="input" id="c-domain" placeholder="exemplo.com.br"></div>
+              <div class="field"><label for="c-hosting">Provedor de Hospedagem</label><input class="input" id="c-hosting" placeholder="Cloudflare / GitHub Pages / Hostinger"></div>
               <div class="field">
-                <label for="p-wa">WhatsApp Comercial</label>
-                <input class="input" id="p-wa" type="text" required>
-              </div>
-              <div class="field">
-                <label for="p-email">E-mail Comercial</label>
-                <input class="input" id="p-email" type="email" required>
-              </div>
-              <div class="field">
-                <label for="p-web">Site Oficial</label>
-                <input class="input" id="p-web" type="url" required>
+                <label for="c-plan">Plano de Manutenção Mensal</label>
+                <select class="select" id="c-plan">
+                  <option value="nenhum">Sem plano mensal</option>
+                  <option value="basico">Básico — R$ 80/mês (2 atend.)</option>
+                  <option value="medio">Médio — R$ 150/mês (4 atend.)</option>
+                  <option value="avancado">Avançado — R$ 300/mês (10 atend.)</option>
+                </select>
               </div>
             </div>
-            <div class="action-bar">
-              <button type="submit" class="btn btn-primary">Salvar Dados na Nuvem (D1)</button>
+            <div class="field">
+              <label for="c-folder">Pasta de referência (01-Briefing, 02-Contrato-Comprovantes, 03-Materiais-Cliente, 04-Entrega-Backup)</label>
+              <input class="input" id="c-folder" placeholder="Ex.: Drive/Clientes/4Ever-Cerimonial">
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button type="submit" class="btn btn-primary btn-sm" id="btn-save-client">Salvar Cliente no CRM</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-reset-client">Limpar formulário</button>
             </div>
           </form>
+          <div class="history-grid" id="clients-grid"></div>
+        </div>
+      </section>
+
+      <!-- ==================== MÓDULO 4B: GESTOR DE MANUTENÇÃO ==================== -->
+      <section id="tab-maintenance" class="tab-view is-hidden no-print">
+        <div class="split-layout">
+          <div class="panel">
+            <h2><span>Registrar Atendimento de Manutenção</span></h2>
+            <div class="info-banner">
+              <strong>Regra operacional (30 a 45 min):</strong> 1 atendimento = ajustes simples em até 45 min. Se ultrapassar 45 min, o sistema debita automaticamente <strong>2 atendimentos</strong> (ou múltiplo proporcional). Indicação fechada gera <strong>+2 atendimentos grátis</strong> no mês.
+            </div>
+            <form id="maint-form">
+              <div class="field">
+                <label for="m-client">Cliente *</label>
+                <select class="select" id="m-client" required></select>
+              </div>
+              <div class="field">
+                <label for="m-desc">Lista de ajustes executados *</label>
+                <textarea class="textarea" id="m-desc" required placeholder="Ex.: Atualização de textos na seção Serviços + troca de 2 fotos + ajuste de link do WhatsApp"></textarea>
+              </div>
+              <div class="grid-2">
+                <div class="field">
+                  <label for="m-minutes">Tempo operacional (minutos)</label>
+                  <input class="input" id="m-minutes" type="number" min="5" max="300" value="35">
+                </div>
+                <div class="field">
+                  <label>Débito calculado automaticamente</label>
+                  <div class="input" id="m-debit-preview" style="color:#00D9F5;font-weight:700;">1 atendimento</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <button type="submit" class="btn btn-primary">Registrar Atendimento</button>
+                <button type="button" class="btn btn-success" id="btn-referral-bonus">+2 Grátis (Indicação)</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <h2><span>Cotas Mensais Ativas &amp; Histórico do Mês</span><span class="code-tag" id="maint-month-label"></span></h2>
+            <div id="maint-clients-quotas" style="display:grid;gap:12px;margin-bottom:20px;"></div>
+            <div class="section-divider">Atendimentos Registrados neste Mês</div>
+            <div id="maint-logs-list" style="display:grid;gap:8px;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== MÓDULO 2: GERADOR OFICIAL DE ORÇAMENTOS ==================== -->
+      <section id="tab-quote" class="tab-view is-hidden">
+        <div class="split-layout">
+          <div class="panel no-print">
+            <h2>
+              <span>Gerador de Propostas Comerciais</span>
+              <span class="code-tag" id="editor-code-badge">Novo</span>
+            </h2>
+
+            <div class="field">
+              <label for="f-crm-select">Puxar cliente do CRM (opcional)</label>
+              <select class="select" id="f-crm-select"><option value="">— Preenchimento manual —</option></select>
+            </div>
+
+            <div class="grid-2">
+              <div class="field"><label for="f-client-name">Cliente / Empresa *</label><input class="input" id="f-client-name" type="text"></div>
+              <div class="field"><label for="f-client-company">Marca / Projeto</label><input class="input" id="f-client-company" type="text"></div>
+            </div>
+            <div class="grid-3">
+              <div class="field"><label for="f-client-doc">CPF / CNPJ</label><input class="input" id="f-client-doc" type="text"></div>
+              <div class="field"><label for="f-client-wa">WhatsApp</label><input class="input" id="f-client-wa" type="text"></div>
+              <div class="field"><label for="f-client-email">E-mail</label><input class="input" id="f-client-email" type="email"></div>
+            </div>
+            <div class="field"><label for="f-client-addr">Endereço do cliente (para o Contrato)</label><input class="input" id="f-client-addr" type="text" placeholder="Rua, nº, Bairro, Cidade/UF"></div>
+
+            <div class="section-divider">Pacote Oficial VibeTech (Tabela 2.1)</div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="f-package">Pacote principal</label>
+                <select class="select" id="f-package"></select>
+              </div>
+              <div class="field">
+                <label for="f-base-price">Valor Base (R$)</label>
+                <input class="input" id="f-base-price" type="number" min="0" step="10" value="950">
+              </div>
+            </div>
+
+            <div class="field"><label for="f-project-title">Título / Pacote exibido na Proposta</label><input class="input" id="f-project-title" type="text"></div>
+            <div class="field"><label for="f-project-summary">Objetivo do Projeto (Seção 2 da Proposta)</label><textarea class="textarea" id="f-project-summary"></textarea></div>
+            <div class="field"><label for="f-scope-desc">Estrutura prevista (seções, páginas e funcionalidades)</label><textarea class="textarea" id="f-scope-desc"></textarea></div>
+
+            <div class="section-divider">Adicionais &amp; Regras Financeiras (Tabela 2.2)</div>
+            <div class="addons-grid" id="addons-grid"></div>
+
+            <label class="addon-check" style="margin-bottom:12px;">
+              <input type="checkbox" id="f-footer-waiver">
+              <span><strong>Isenção de crédito no rodapé</strong> (vibetechcmd.com.br): <b>+20% (mín. R$ 250)</b></span>
+            </label>
+
+            <div class="grid-3">
+              <div class="field">
+                <label for="f-urgency">Taxa de Urgência</label>
+                <select class="select" id="f-urgency">
+                  <option value="0">Sem urgência (0%)</option>
+                  <option value="30">Urgência +30%</option>
+                  <option value="40">Urgência +40%</option>
+                  <option value="50">Urgência +50%</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-discount-pct">Desconto (0% a 10%)</label>
+                <input class="input" id="f-discount-pct" type="number" min="0" max="10" step="1" value="0">
+              </div>
+              <div class="field">
+                <label for="f-audit-credit">Abatimento Auditoria (R$)</label>
+                <input class="input" id="f-audit-credit" type="number" min="0" step="10" value="0">
+              </div>
+            </div>
+
+            <div class="grid-3">
+              <div class="field"><label for="f-delivery">Prazo de desenvolvimento</label><input class="input" id="f-delivery" type="text" value="Até 15 dias"></div>
+              <div class="field"><label for="f-revisions">Rodadas de revisão</label><input class="input" id="f-revisions" type="number" min="1" max="5" value="2"></div>
+              <div class="field">
+                <label for="f-status">Status</label>
+                <select class="select" id="f-status">
+                  <option value="rascunho">Rascunho</option>
+                  <option value="enviado">Enviado</option>
+                  <option value="validado">Validado</option>
+                  <option value="contrato_gerado">Contrato gerado</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="action-bar">
+              <button type="button" class="btn btn-primary" id="btn-save-quote">Salvar no D1</button>
+              <button type="button" class="btn btn-secondary" id="btn-print-quote">Imprimir / PDF</button>
+              <button type="button" class="btn btn-secondary" id="btn-copy-wa">Copiar Resumo WhatsApp</button>
+              <button type="button" class="btn btn-success" id="btn-validate-contract">Validar → Gerar Contrato</button>
+            </div>
+          </div>
+
+          <div class="preview-column">
+            <div class="preview-toolbar no-print">
+              <span style="font-size:.82rem;color:#9eb0c8;">Modelo Oficial de Proposta Comercial (A4 · Validade automática 7 dias)</span>
+              <button type="button" class="btn btn-primary btn-sm" id="btn-print-quote-top">Imprimir / Salvar PDF ↗</button>
+            </div>
+            <article class="doc-paper" id="quote-preview-doc"></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== MÓDULO 3: CONTRATO INTEGRAL (14 CLÁUSULAS) ==================== -->
+      <section id="tab-contract" class="tab-view is-hidden">
+        <div class="split-layout">
+          <div class="panel no-print">
+            <h2>
+              <span>Contrato Integral (14 Cláusulas)</span>
+              <span class="code-tag" id="contract-code-badge">Oficial</span>
+            </h2>
+            <div class="info-banner">
+              Preenchido automaticamente com dados do cliente, <strong>Cleisson Martins Diogo</strong>, valor por extenso, regra Pix (40/30/30 vs 50/50) e cláusula de rodapé (crédito vs isenção).
+            </div>
+            <div class="field">
+              <label for="f-contract-clauses">Texto Integral do Contrato (editável se precisar ajustar algum caso específico)</label>
+              <textarea class="textarea" id="f-contract-clauses" style="min-height:460px;font-size:.82rem;"></textarea>
+            </div>
+            <div class="action-bar">
+              <button type="button" class="btn btn-primary" id="btn-save-contract">Salvar Contrato no D1</button>
+              <button type="button" class="btn btn-success" id="btn-print-contract">Imprimir / Salvar Contrato PDF</button>
+              <button type="button" class="btn btn-secondary" id="btn-reset-clauses">Regerar Cláusulas Oficiais</button>
+            </div>
+          </div>
+
+          <div class="preview-column">
+            <div class="preview-toolbar no-print">
+              <span style="font-size:.82rem;color:#9eb0c8;">Contrato Particular de Prestação de Serviços (A4)</span>
+              <button type="button" class="btn btn-success btn-sm" id="btn-print-contract-top">Imprimir / Salvar PDF ↗</button>
+            </div>
+            <article class="doc-paper" id="contract-preview-doc"></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== DADOS VIBETECH & CENTRAL DE BACKUP ==================== -->
+      <section id="tab-profile" class="tab-view is-hidden no-print">
+        <div class="split-layout">
+          <div class="panel">
+            <h2>Dados Oficiais da CONTRATADA (salvos no D1)</h2>
+            <form id="profile-form">
+              <div class="grid-2">
+                <div class="field"><label for="p-company">Marca Comercial</label><input class="input" id="p-company" required></div>
+                <div class="field"><label for="p-owner">Nome Completo do Proprietário</label><input class="input" id="p-owner" required></div>
+              </div>
+              <div class="grid-2">
+                <div class="field"><label for="p-doc">CPF / CNPJ</label><input class="input" id="p-doc" required></div>
+                <div class="field"><label for="p-pix">Chave Pix Oficial (Cláusula 6ª)</label><input class="input" id="p-pix" placeholder="CPF, e-mail, telefone ou chave aleatória"></div>
+              </div>
+              <div class="field"><label for="p-addr">Endereço Completo (Cláusula de Qualificação)</label><input class="input" id="p-addr" placeholder="Rua, nº, Bairro, Macaé – RJ"></div>
+              <div class="grid-2">
+                <div class="field"><label for="p-city">Cidade</label><input class="input" id="p-city" required></div>
+                <div class="field"><label for="p-state">UF</label><input class="input" id="p-state" maxlength="2" required></div>
+              </div>
+              <div class="grid-3">
+                <div class="field"><label for="p-wa">WhatsApp</label><input class="input" id="p-wa" required></div>
+                <div class="field"><label for="p-email">E-mail</label><input class="input" id="p-email" type="email" required></div>
+                <div class="field"><label for="p-web">Site Oficial</label><input class="input" id="p-web" type="url" required></div>
+              </div>
+              <button type="submit" class="btn btn-primary">Salvar Dados na Nuvem (D1)</button>
+            </form>
+          </div>
+
+          <div class="panel">
+            <h2>Central de Backup Físico Local</h2>
+            <p style="color:#9eb0c8;font-size:.88rem;line-height:1.6;">Baixe uma cópia completa de toda a base armazenada no Cloudflare D1 (Clientes, Briefings, Propostas, Contratos, Projetos Kanban e Histórico de Manutenção) para guardar no seu computador.</p>
+            <div style="display:grid;gap:12px;margin-top:18px;">
+              <button type="button" class="btn btn-primary" id="btn-export-json">⬇ Exportar Backup Completo (.JSON)</button>
+              <button type="button" class="btn btn-success" id="btn-export-csv">⬇ Exportar Planilha Consolidada (.CSV)</button>
+            </div>
+          </div>
         </div>
       </section>
     </main>
   </div>
 
   <div class="toast" id="admin-toast" role="status" aria-live="polite"></div>
+  <script src="/admin/prd-data.js" defer></script>
   <script src="/admin/admin.js" defer></script>
 </body>
 </html>

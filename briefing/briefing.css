@@ -1,0 +1,219 @@
+/* ==========================================================================
+   VibeTech|CMD — Briefing Interativo Dinâmico (/briefing)
+   Herda 100% da paleta, tipografia e identidade visual oficial
+   ========================================================================== */
+
+:root {
+  --black: #030712;
+  --navy: #071426;
+  --blue: #075BCE;
+  --electric: #087BFF;
+  --cyan: #00D9F5;
+  --teal: #00D6A0;
+  --silver: #DCE4ED;
+  --white: #F8FAFC;
+  --muted: #9eb0c8;
+  --line: rgba(120, 170, 235, .18);
+  --font-display: Montserrat, "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-body: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse 60% 42% at 85% 0%, rgba(8, 123, 255, .20), transparent 65%),
+    radial-gradient(ellipse 46% 38% at 0% 80%, rgba(0, 214, 160, .09), transparent 65%),
+    linear-gradient(180deg, var(--black) 0%, var(--navy) 100%);
+  color: var(--white);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button, input, textarea, select { font-family: inherit; }
+.is-hidden { display: none !important; }
+
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(120, 170, 235, .14);
+  background: rgba(3, 7, 18, .86);
+  backdrop-filter: blur(16px);
+}
+.top-inner {
+  width: min(920px, 100%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.brand { display: inline-flex; align-items: center; gap: 11px; }
+.brand img { width: 38px; height: 38px; }
+.brand strong { font-family: var(--font-display); font-size: 1.08rem; }
+.back-link {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(220, 228, 237, .04);
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--silver);
+}
+.back-link:hover { border-color: var(--cyan); color: var(--white); }
+
+.wrap {
+  width: min(920px, calc(100% - 32px));
+  margin: 34px auto 64px;
+}
+.hero-head { text-align: center; margin-bottom: 28px; }
+.kicker {
+  display: inline-block;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: .76rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.hero-head h1 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -.035em;
+}
+.hero-head p { margin: 0 auto; max-width: 640px; color: var(--muted); font-size: .96rem; }
+
+/* Seletor de 3 Trilhas */
+.tracks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 26px;
+}
+.track-card {
+  text-align: left;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: linear-gradient(155deg, rgba(10, 28, 52, .80), rgba(3, 7, 18, .88));
+  color: var(--white);
+  cursor: pointer;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.track-card:hover { transform: translateY(-2px); border-color: rgba(0, 217, 245, .5); }
+.track-card.active {
+  border-color: var(--cyan);
+  background: linear-gradient(155deg, rgba(8, 123, 255, .22), rgba(7, 20, 38, .94));
+  box-shadow: 0 0 0 1px rgba(0, 217, 245, .3), 0 16px 40px rgba(8, 123, 255, .20);
+}
+.track-tag {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--cyan);
+  margin-bottom: 8px;
+}
+.track-card h2 { margin: 0 0 6px; font-family: var(--font-display); font-size: 1.05rem; }
+.track-card p { margin: 0; font-size: .84rem; color: var(--muted); }
+
+.form-panel {
+  padding: clamp(22px, 4vw, 34px);
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: linear-gradient(155deg, rgba(10, 28, 52, .84), rgba(3, 7, 18, .92));
+  box-shadow: 0 24px 64px rgba(0, 0, 0, .48);
+}
+.group-title {
+  margin: 22px 0 14px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(120, 170, 235, .14);
+  font-size: .76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--cyan);
+}
+.group-title:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.field label { font-size: .84rem; font-weight: 600; color: var(--silver); }
+.field small { font-size: .76rem; color: var(--muted); }
+.input, .textarea, .select {
+  width: 100%;
+  padding: 11px 13px;
+  border-radius: 12px;
+  border: 1px solid rgba(120, 170, 235, .22);
+  background: rgba(3, 7, 18, .80);
+  color: var(--white);
+  font-size: .9rem;
+}
+.input:focus, .textarea:focus, .select:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(0, 217, 245, .15);
+}
+.textarea { min-height: 86px; resize: vertical; }
+
+.submit-row {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-weight: 700;
+  font-size: .92rem;
+  cursor: pointer;
+}
+.btn-primary {
+  background: linear-gradient(100deg, #064DB0, var(--electric));
+  border-color: rgba(0, 217, 245, .45);
+  color: var(--white);
+  box-shadow: 0 10px 28px rgba(8, 123, 255, .32);
+}
+.btn-whatsapp {
+  background: linear-gradient(100deg, #00C896, #1DE9B6);
+  color: #031510;
+  box-shadow: 0 10px 28px rgba(0, 214, 160, .30);
+}
+.btn-secondary {
+  background: rgba(220, 228, 237, .06);
+  border-color: var(--line);
+  color: var(--silver);
+}
+
+.summary-box {
+  white-space: pre-wrap;
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(3, 7, 18, .82);
+  border: 1px solid rgba(0, 217, 245, .26);
+  font-size: .85rem;
+  color: var(--silver);
+  margin: 18px 0;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+@media (max-width: 760px) {
+  .tracks-grid, .grid-2 { grid-template-columns: 1fr; }
+  .submit-row .btn { width: 100%; }
+}
