@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Favicon VibeTech|CMD">
+  <defs>
+    <!-- Fundo gradiente marcante: azul noturno -> azul elétrico profundo -> verde-água sutil -->
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050D1F"/>
+      <stop offset=".48" stop-color="#0A2854"/>
+      <stop offset="1" stop-color="#063F4B"/>
+    </linearGradient>
+    <!-- Halo luminoso central atrás do planeta para destacar com força no Google -->
+    <radialGradient id="bg-halo" cx="50%" cy="50%" r="54%">
+      <stop offset="0" stop-color="#00D9F5" stop-opacity=".42"/>
+      <stop offset=".52" stop-color="#087BFF" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#030712" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="vt-base" cx="35%" cy="26%" r="85%">
+      <stop offset="0" stop-color="#0E66D4"/>
+      <stop offset=".52" stop-color="#071830"/>
+      <stop offset="1" stop-color="#030712"/>
+    </radialGradient>
+    <radialGradient id="vt-teal" cx="55%" cy="105%" r="68%">
+      <stop offset="0" stop-color="#00E5A8" stop-opacity=".95"/>
+      <stop offset=".55" stop-color="#00D6A0" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#00D6A0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vt-silver" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".32" stop-color="#C2CDD9"/>
+      <stop offset=".54" stop-color="#F2F6FA"/>
+      <stop offset=".8" stop-color="#8A98AA"/>
+      <stop offset="1" stop-color="#E6EDF5"/>
+    </linearGradient>
+    <linearGradient id="vt-side" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#030712" stop-opacity=".5"/>
+      <stop offset=".28" stop-color="#030712" stop-opacity="0"/>
+      <stop offset=".72" stop-color="#030712" stop-opacity="0"/>
+      <stop offset="1" stop-color="#030712" stop-opacity=".55"/>
+    </linearGradient>
+    <linearGradient id="vt-blue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#075BCE"/>
+      <stop offset=".48" stop-color="#0A84FF"/>
+      <stop offset="1" stop-color="#00E1FF"/>
+    </linearGradient>
+    <linearGradient id="vt-cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#087BFF"/>
+      <stop offset=".55" stop-color="#00E1FF"/>
+      <stop offset="1" stop-color="#00E5A8"/>
+    </linearGradient>
+    <linearGradient id="vt-sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".55"/>
+      <stop offset=".4" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#030712" stop-opacity=".35"/>
+    </linearGradient>
+    <linearGradient id="vt-rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4DF0FF" stop-opacity="1"/>
+      <stop offset=".5" stop-color="#087BFF" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#00E5A8" stop-opacity=".95"/>
+    </linearGradient>
+    <linearGradient id="vt-ring" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1E90FF"/>
+      <stop offset=".5" stop-color="#00E5FF"/>
+      <stop offset="1" stop-color="#A8F9FF"/>
+    </linearGradient>
+    <radialGradient id="vt-spec" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".88"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="vt-glow" x="-30%" y="-60%" width="160%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="vt-clip"><circle cx="100" cy="100" r="62"/></clipPath>
+  </defs>
+
+  <!-- Fundo gradiente preenchido 100% (sem fundo branco no Google) -->
+  <rect width="200" height="200" fill="url(#bg-grad)"/>
+  <circle cx="100" cy="100" r="96" fill="url(#bg-halo)"/>
+
+  <!-- Planeta VibeTech com leve ampliação e anel reforçado para brilhar em tamanho pequeno -->
+  <g transform="translate(100 100) scale(0.92) translate(-100 -100)">
+    <g transform="translate(100 100) rotate(-20)" fill="none">
+      <ellipse cx="0" cy="0" rx="96" ry="35" stroke="#00D9F5" stroke-opacity=".34" stroke-width="1.6"/>
+      <path d="M-90 0A90 26 0 0 1 90 0" stroke="url(#vt-ring)" stroke-opacity=".68" stroke-width="3.6" filter="url(#vt-glow)"/>
+    </g>
+
+    <g clip-path="url(#vt-clip)">
+      <circle cx="100" cy="100" r="62" fill="url(#vt-base)"/>
+      <circle cx="100" cy="100" r="62" fill="url(#vt-teal)"/>
+      <g transform="translate(100 100) rotate(-20)">
+        <path d="M-61 24Q0 58.3 61 24L53 38Q0 67.4 -53 38Z" fill="url(#vt-cyan)"/>
+        <path d="M-61 24Q0 58.3 61 24L53 38Q0 67.4 -53 38Z" fill="url(#vt-sheen)"/>
+        <path d="M-61 24Q0 58.3 61 24" stroke="#fff" stroke-opacity=".68" stroke-width="1.4" fill="none"/>
+
+        <path d="M-65 -6Q0 31 65 -6L64 14Q0 50.2 -64 14Z" transform="translate(0 4)" fill="#030712" fill-opacity=".62"/>
+        <path d="M-65 -6Q0 31 65 -6L64 14Q0 50.2 -64 14Z" fill="url(#vt-blue)"/>
+        <path d="M-65 -6Q0 31 65 -6L64 14Q0 50.2 -64 14Z" fill="url(#vt-sheen)"/>
+        <path d="M-65 -6Q0 31 65 -6" stroke="#99F6FF" stroke-opacity=".9" stroke-width="1.6" fill="none"/>
+
+        <path d="M-54 -36Q0 -5.8 54 -36L64 -15Q0 21.1 -64 -15Z" transform="translate(0 4)" fill="#030712" fill-opacity=".62"/>
+        <path d="M-54 -36Q0 -5.8 54 -36L64 -15Q0 21.1 -64 -15Z" fill="url(#vt-silver)"/>
+        <path d="M-54 -36Q0 -5.8 54 -36L64 -15Q0 21.1 -64 -15Z" fill="url(#vt-side)"/>
+        <path d="M-54 -36Q0 -5.8 54 -36" stroke="#fff" stroke-opacity=".95" stroke-width="1.5" fill="none"/>
+      </g>
+      <ellipse cx="76" cy="65" rx="18" ry="8.5" transform="rotate(-32 76 65)" fill="url(#vt-spec)"/>
+      <circle cx="62" cy="80" r="2.2" fill="#fff" fill-opacity=".92"/>
+    </g>
+
+    <circle cx="100" cy="100" r="61.5" fill="none" stroke="url(#vt-rim)" stroke-width="2.2"/>
+
+    <g transform="translate(100 100) rotate(-20)" fill="none">
+      <path d="M90 0A90 26 0 0 1 -90 0" stroke="url(#vt-ring)" stroke-width="4.2" stroke-linecap="round" filter="url(#vt-glow)"/>
+    </g>
+  </g>
+</svg>
