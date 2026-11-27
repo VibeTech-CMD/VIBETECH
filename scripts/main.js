@@ -260,6 +260,24 @@
     });
   });
 
+  function notifyWhatsAppLead(payload) {
+    try {
+      const body = JSON.stringify(payload);
+      if (navigator.sendBeacon) {
+        const blob = new Blob([body], { type: 'application/json' });
+        if (navigator.sendBeacon('/api/public/whatsapp-lead', blob)) return;
+      }
+      fetch('/api/public/whatsapp-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+        keepalive: true
+      }).catch(() => {});
+    } catch {
+      // Silencioso para nunca atrasar a abertura do WhatsApp
+    }
+  }
+
   if (briefingForm) {
     briefingForm.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -274,6 +292,15 @@
       if (company) lines.push(`• Empresa / Projeto: ${company}`);
       if (goal) lines.push(`• Ideia / Objetivo: ${goal}`);
 
+      notifyWhatsAppLead({
+        source: 'resumo_rapido_whatsapp',
+        type,
+        name,
+        company,
+        goal,
+        page: window.location.href
+      });
+
       const url = buildWhatsAppUrl(lines.join('\n'));
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'generate_lead', {
@@ -285,13 +312,24 @@
     });
   }
 
-  /* ---------- Rastreamento GA4 de cliques diretos no WhatsApp ---------- */
+  /* ---------- Rastreamento GA4 + Notificação por e-mail de cliques diretos no WhatsApp ---------- */
+  let lastWaNotifyAt = 0;
   document.querySelectorAll('a[href^="https://wa.me/"]').forEach((link) => {
     link.addEventListener('click', () => {
+      const label = (link.textContent || '').trim() || link.getAttribute('aria-label') || link.id || 'Botão WhatsApp';
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'whatsapp_click', {
           event_category: 'contact',
           event_label: link.id || link.className || 'whatsapp_link'
+        });
+      }
+      const nowMs = Date.now();
+      if (nowMs - lastWaNotifyAt > 60000) {
+        lastWaNotifyAt = nowMs;
+        notifyWhatsAppLead({
+          source: 'clique_direto_whatsapp',
+          type: label,
+          page: window.location.href
         });
       }
     });

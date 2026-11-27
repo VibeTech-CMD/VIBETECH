@@ -12,5 +12,11 @@
       "database_name": "vibetech-db",
       "database_id": "e8ed8ee1-de86-471c-8ddb-94a6a5e36501"
     }
+  ],
+  "send_email": [
+    {
+      "name": "NOTIFY_EMAIL",
+      "destination_address": "cleisson.md@gmail.com"
+    }
   ]
 }

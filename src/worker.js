@@ -6,9 +6,76 @@
  * - Persiste Clientes, Briefings, Propostas/Contratos, Kanban, Manutenção e Configurações no D1
  */
 
+import { EmailMessage } from 'cloudflare:email';
+
 const MASTER_EMAIL = 'cleisson.md@gmail.com';
+const NOTIFY_FROM = 'notificacoes@vibetechcmd.com.br';
 const SESSION_COOKIE = 'vt_master_session';
 const SESSION_TTL_SECONDS = 60 * 60 * 24 * 30; // 30 dias
+
+function toBase64Utf8(str) {
+  const bytes = new TextEncoder().encode(String(str || ''));
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
+
+function foldBase64(b64) {
+  return b64.replace(/.{1,76}/g, '$&\r\n').trimEnd();
+}
+
+function escapeHtmlEmail(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+async function sendOwnerNotificationEmail(env, { subject, textBody, htmlBody, replyTo }) {
+  if (!env.NOTIFY_EMAIL) return { sent: false, reason: 'binding_unavailable' };
+  try {
+    const boundary = `vt_${crypto.randomUUID().replace(/-/g, '')}`;
+    const cleanReplyTo =
+      replyTo && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(replyTo).trim()) ? String(replyTo).trim() : '';
+
+    const headers = [
+      `From: VibeTech|CMD <${NOTIFY_FROM}>`,
+      `To: <${MASTER_EMAIL}>`,
+      ...(cleanReplyTo ? [`Reply-To: <${cleanReplyTo}>`] : []),
+      `Subject: =?UTF-8?B?${toBase64Utf8(subject)}?=`,
+      `Date: ${new Date().toUTCString()}`,
+      `Message-ID: <${crypto.randomUUID()}@vibetechcmd.com.br>`,
+      'MIME-Version: 1.0',
+      `Content-Type: multipart/alternative; boundary="${boundary}"`
+    ];
+
+    const raw = [
+      ...headers,
+      '',
+      `--${boundary}`,
+      'Content-Type: text/plain; charset="UTF-8"',
+      'Content-Transfer-Encoding: base64',
+      '',
+      foldBase64(toBase64Utf8(textBody)),
+      '',
+      `--${boundary}`,
+      'Content-Type: text/html; charset="UTF-8"',
+      'Content-Transfer-Encoding: base64',
+      '',
+      foldBase64(toBase64Utf8(htmlBody)),
+      '',
+      `--${boundary}--`,
+      ''
+    ].join('\r\n');
+
+    const msg = new EmailMessage(NOTIFY_FROM, MASTER_EMAIL, raw);
+    await env.NOTIFY_EMAIL.send(msg);
+    return { sent: true };
+  } catch (err) {
+    return { sent: false, reason: String(err && err.message ? err.message : err) };
+  }
+}
 
 function jsonResponse(data, status = 200, extraHeaders = {}) {
   return new Response(JSON.stringify(data), {
@@ -267,7 +334,118 @@ async function handleApi(request, env, url) {
       )
       .run();
 
-    return jsonResponse({ ok: true, briefing_id: briefingId, client_id: clientId }, 201);
+    // 4. Notifica o proprietário por e-mail via Cloudflare Email Routing
+    const dateBr = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+    const subject = `[VibeTech|CMD] Novo Briefing Recebido — ${clientCompany || clientName} (${trackLabel})`;
+    const textBody = [
+      'Novo Briefing Interativo recebido no site VibeTech|CMD!',
+      '',
+      `Data/Hora: ${dateBr}`,
+      `Trilha: ${trackLabel}`,
+      `Cliente: ${clientName}`,
+      `Empresa / Projeto: ${clientCompany || 'Não informado'}`,
+      `WhatsApp: ${clientWhatsapp}`,
+      `E-mail: ${clientEmail || 'Não informado'}`,
+      '',
+      '--- RESUMO DO BRIEFING ---',
+      brainstormSummary || 'Sem resumo adicional.',
+      '',
+      'Acesse o painel Master para gerar o orçamento ou acompanhar no Kanban:',
+      'https://vibetechcmd.com.br/admin/'
+    ].join('\n');
+
+    const htmlBody = `
+      <div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;margin:0 auto;background:#f8fafc;padding:24px;border-radius:12px;color:#0f172a;">
+        <div style="background:#050b18;color:#f8fafc;padding:18px 22px;border-radius:10px;margin-bottom:18px;">
+          <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#00d9f5;font-weight:700;">VibeTech|CMD · Notificação Automática</div>
+          <h2 style="margin:6px 0 0;font-size:20px;">Novo Briefing Recebido</h2>
+        </div>
+        <table style="width:100%;border-collapse:collapse;background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;margin-bottom:16px;">
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-weight:700;width:160px;">Data/Hora</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">${escapeHtmlEmail(dateBr)}</td></tr>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-weight:700;">Trilha</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">${escapeHtmlEmail(trackLabel)}</td></tr>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-weight:700;">Cliente</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">${escapeHtmlEmail(clientName)}</td></tr>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-weight:700;">Empresa / Projeto</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">${escapeHtmlEmail(clientCompany || 'Não informado')}</td></tr>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-weight:700;">WhatsApp</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">${escapeHtmlEmail(clientWhatsapp)}</td></tr>
+          <tr><td style="padding:10px 14px;font-weight:700;">E-mail</td><td style="padding:10px 14px;">${escapeHtmlEmail(clientEmail || 'Não informado')}</td></tr>
+        </table>
+        <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;padding:14px 16px;margin-bottom:18px;">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:#075bce;margin-bottom:8px;">Resumo do Briefing</div>
+          <pre style="white-space:pre-wrap;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.55;margin:0;color:#1e293b;">${escapeHtmlEmail(brainstormSummary || 'Sem resumo adicional.')}</pre>
+        </div>
+        <a href="https://vibetechcmd.com.br/admin/" style="display:inline-block;background:#087bff;color:#ffffff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:8px;">Abrir no Painel Master ↗</a>
+      </div>
+    `;
+
+    const mailRes = await sendOwnerNotificationEmail(env, {
+      subject,
+      textBody,
+      htmlBody,
+      replyTo: clientEmail
+    });
+
+    return jsonResponse({ ok: true, briefing_id: briefingId, client_id: clientId, email_notified: mailRes.sent }, 201);
+  }
+
+  /* ==================== ROTA PÚBLICA: NOTIFICAÇÃO DE ORÇAMENTO VIA WHATSAPP ==================== */
+  if (path === '/api/public/whatsapp-lead' && method === 'POST') {
+    const body = await request.json().catch(() => ({}));
+    const source = String(body.source || 'resumo_rapido_whatsapp').slice(0, 60);
+    const type = String(body.type || 'Projeto sob medida').trim().slice(0, 120);
+    const name = String(body.name || '').trim().slice(0, 120);
+    const company = String(body.company || '').trim().slice(0, 120);
+    const goal = String(body.goal || '').trim().slice(0, 1500);
+    const page = String(body.page || 'https://vibetechcmd.com.br/').trim().slice(0, 300);
+    const dateBr = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+
+    const isForm = source === 'resumo_rapido_whatsapp';
+    const headline = isForm
+      ? 'Nova Solicitação de Orçamento via WhatsApp'
+      : 'Novo Clique Direto para Orçamento no WhatsApp';
+    const subject = isForm
+      ? `[VibeTech|CMD] Solicitação via WhatsApp — ${name || company || type}`
+      : `[VibeTech|CMD] Interessado clicou no WhatsApp (${type})`;
+
+    const textBody = [
+      `${headline} no site VibeTech|CMD!`,
+      '',
+      `Data/Hora: ${dateBr}`,
+      `Origem: ${isForm ? 'Formulário "Monte um resumo rápido" (#contato)' : 'Botão direto do WhatsApp'}`,
+      `Tipo / Botão: ${type}`,
+      ...(name ? [`Nome: ${name}`] : []),
+      ...(company ? [`Empresa / Projeto: ${company}`] : []),
+      ...(goal ? ['', '--- IDEIA / OBJETIVO ---', goal] : []),
+      '',
+      `Página: ${page}`,
+      'Painel Master: https://vibetechcmd.com.br/admin/'
+    ].join('\n');
+
+    const htmlBody = `
+      <div style="font-family:Arial,Helvetica,sans-serif;max-width:640px;margin:0 auto;background:#f8fafc;padding:24px;border-radius:12px;color:#0f172a;">
+        <div style="background:#050b18;color:#f8fafc;padding:18px 22px;border-radius:10px;margin-bottom:18px;">
+          <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#00d6a0;font-weight:700;">VibeTech|CMD · Alerta de Orçamento (WhatsApp)</div>
+          <h2 style="margin:6px 0 0;font-size:20px;">${escapeHtmlEmail(headline)}</h2>
+        </div>
+        <table style="width:100%;border-collapse:collapse;background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;margin-bottom:16px;">
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-weight:700;width:160px;">Data/Hora</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">${escapeHtmlEmail(dateBr)}</td></tr>
+          <tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-weight:700;">Tipo / Ação</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">${escapeHtmlEmail(type)}</td></tr>
+          ${name ? `<tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-weight:700;">Nome</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">${escapeHtmlEmail(name)}</td></tr>` : ''}
+          ${company ? `<tr><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;font-weight:700;">Empresa / Projeto</td><td style="padding:10px 14px;border-bottom:1px solid #e2e8f0;">${escapeHtmlEmail(company)}</td></tr>` : ''}
+          <tr><td style="padding:10px 14px;font-weight:700;">Página</td><td style="padding:10px 14px;">${escapeHtmlEmail(page)}</td></tr>
+        </table>
+        ${
+          goal
+            ? `<div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;padding:14px 16px;margin-bottom:18px;">
+                <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:#075bce;margin-bottom:8px;">Ideia / Objetivo informado</div>
+                <p style="white-space:pre-wrap;font-size:13px;line-height:1.55;margin:0;color:#1e293b;">${escapeHtmlEmail(goal)}</p>
+              </div>`
+            : ''
+        }
+        <a href="https://vibetechcmd.com.br/admin/" style="display:inline-block;background:#00a87e;color:#ffffff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:8px;">Abrir Painel Master ↗</a>
+      </div>
+    `;
+
+    const mailRes = await sendOwnerNotificationEmail(env, { subject, textBody, htmlBody });
+    return jsonResponse({ ok: true, email_notified: mailRes.sent });
   }
 
   /* ==================== AUTENTICAÇÃO MASTER ==================== */
