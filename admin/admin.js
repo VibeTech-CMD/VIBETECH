@@ -30,7 +30,8 @@
   let currentMonthKey = new Date().toISOString().slice(0, 7);
 
   let currentId = null;
-  let currentCode = 'NOVO';
+  let currentCode = 'ORC-001';
+  let currentContractNumber = '';
   let isSetupMode = false;
 
   /* ---------- Utilitários ---------- */
@@ -241,8 +242,8 @@
     const today = new Date();
     const validUntil = addDays(today, 7);
 
-    editorCodeBadge.textContent = currentId ? currentCode : 'Nova Proposta';
-    contractCodeBadge.textContent = currentId ? currentCode : 'Contrato Oficial';
+    editorCodeBadge.textContent = currentId ? `${currentCode}${currentContractNumber ? ` · ${currentContractNumber}` : ''}` : 'Novo Orçamento';
+    contractCodeBadge.textContent = currentContractNumber ? `${currentContractNumber} · Ref. ${currentCode}` : `Ref. ${currentCode}`;
 
     const addonsListText = [
       ...(s.meta.addons_labels || []),
@@ -347,20 +348,19 @@
       </div>
     `;
 
-    // MÓDULO 3 — CONTRATO INTEGRAL DA SEÇÃO 5
+    // MÓDULO 3 — CONTRATO DE PRESTAÇÃO DE SERVIÇOS (LIMPO A4 + CHANCELA VIBETECH|CMD)
     const contractText = s.contract_clauses.trim() || buildFullContractText(s, providerProfile);
+    const ctrLabel = currentContractNumber || 'CTR-PENDENTE';
     contractPreviewDoc.innerHTML = `
-      <div class="doc-header">
-        <div class="doc-brand">
-          <img src="/assets/vibetech-logo.svg" alt="VibeTech|CMD">
-          <div>
-            <h3>CONTRATO PARTICULAR DE PRESTAÇÃO DE SERVIÇOS</h3>
-            <small>Webdesign e Desenvolvimento Web · VibeTech|CMD</small>
-          </div>
+      <div class="doc-contract-header">
+        <div>
+          <h3>CONTRATO DE PRESTAÇÃO DE SERVIÇOS</h3>
+          <small>Webdesign e Desenvolvimento Web · VibeTech|CMD</small>
         </div>
-        <div class="doc-meta-right">
-          <strong>CONTRATO Nº ${esc(s.code)}</strong>
-          <div>Base: Lei 10.406/02 · Lei 9.609/98 · LGPD</div>
+        <div class="doc-contract-ref">
+          <strong>CONTRATO Nº ${esc(ctrLabel)}</strong>
+          <div>Referente ao Orçamento Nº <strong>${esc(s.code)}</strong></div>
+          <div>Foro: Macaé – RJ</div>
         </div>
       </div>
 
@@ -377,11 +377,21 @@
             CPF/CNPJ: ${esc(s.client_document || '—')}
           </div>
         </div>
+
+        <div class="chancela-wrap">
+          <div class="chancela-seal">
+            <img src="/assets/favicon-48.png" alt="Chancela VibeTech|CMD">
+            <div class="chancela-seal-text">
+              <strong>Chancela Oficial VibeTech|CMD</strong>
+              <span>Contrato ${esc(ctrLabel)} · Orçamento ${esc(s.code)}</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="doc-footer">
         <span>VibeTech|CMD · https://vibetechcmd.com.br</span>
-        <span>Contrato Nº ${esc(s.code)} · Foro de Macaé – RJ</span>
+        <span>Contrato Nº ${esc(ctrLabel)} · Orçamento Nº ${esc(s.code)}</span>
       </div>
     `;
   }
@@ -409,9 +419,10 @@
       if (res.proposal) {
         currentId = res.proposal.id;
         currentCode = res.proposal.code;
+        currentContractNumber = res.proposal.contract_number || '';
         await refreshAllData();
         renderProposalAndContract();
-        showToast(`Salvo no Cloudflare D1 (${currentCode})!`);
+        showToast(`Salvo (${currentCode}${currentContractNumber ? ` · ${currentContractNumber}` : ''})!`);
         return res.proposal;
       }
     } catch (err) {
@@ -422,7 +433,8 @@
 
   function loadProposalIntoEditor(p, tab = 'quote') {
     currentId = p.id;
-    currentCode = p.code || 'VT';
+    currentCode = p.code || 'ORC-001';
+    currentContractNumber = p.contract_number || '';
     const m = p.meta || {};
     fCrmSelect.value = m.client_id || '';
     fClientName.value = p.client_name || '';
@@ -457,7 +469,7 @@
   /* ---------- Renderização do Dashboard + Alerta Dia 15 ---------- */
   function renderDashboard() {
     const nowMonth = new Date().toISOString().slice(0, 7);
-    const closedStatuses = new Set(['validado', 'contrato_gerado']);
+    const closedStatuses = new Set(['aceito', 'validado', 'contrato_gerado']);
 
     const monthRev = allProposals
       .filter((p) => closedStatuses.has(p.status) && String(p.updated_at || '').startsWith(nowMonth))
@@ -536,57 +548,98 @@
   function renderHistoryList() {
     const q = (document.getElementById('history-search').value || '').trim().toLowerCase();
     const filter = document.getElementById('history-filter').value || 'all';
-    const labels = { rascunho: 'Rascunho', enviado: 'Enviado', validado: 'Validado', contrato_gerado: 'Contrato Gerado' };
+    const labels = {
+      rascunho: 'Rascunho',
+      enviado: 'Enviado',
+      aceito: 'Aceito',
+      validado: 'Aceito',
+      recusado: 'Recusado',
+      contrato_gerado: 'Contrato Gerado'
+    };
 
     const list = allProposals.filter((p) => {
-      if (filter !== 'all' && p.status !== filter) return false;
+      if (filter !== 'all') {
+        if (filter === 'aceito' && p.status !== 'aceito' && p.status !== 'validado') return false;
+        else if (filter !== 'aceito' && p.status !== filter) return false;
+      }
       if (!q) return true;
-      return `${p.code} ${p.client_name} ${p.client_company} ${p.project_title}`.toLowerCase().includes(q);
+      return `${p.code} ${p.contract_number || ''} ${p.client_name} ${p.client_company} ${p.project_title}`.toLowerCase().includes(q);
     });
 
+    const envCount = allProposals.filter((p) => p.status === 'enviado').length;
+    const accCount = allProposals.filter((p) => ['aceito', 'validado', 'contrato_gerado'].includes(p.status)).length;
+    const recCount = allProposals.filter((p) => p.status === 'recusado').length;
     const sum = list.reduce((a, p) => a + Number(p.total_value || 0), 0);
-    document.getElementById('history-summary').textContent = `${list.length} proposta(s) · Total exibido: ${formatBRL(sum)}`;
+    document.getElementById('history-summary').textContent = `${list.length} exibido(s) · Enviados: ${envCount} · Aceitos: ${accCount} · Recusados: ${recCount} · Soma: ${formatBRL(sum)}`;
 
     const grid = document.getElementById('history-grid');
     grid.innerHTML = '';
     if (!list.length) {
-      grid.innerHTML = '<p style="color:#9eb0c8;font-size:.88rem;">Nenhuma proposta encontrada.</p>';
-      return;
+      grid.innerHTML = '<p style="color:#9eb0c8;font-size:.88rem;">Nenhum orçamento encontrado.</p>';
+    } else {
+      list.forEach((p) => {
+        const card = document.createElement('article');
+        card.className = 'history-card';
+        card.innerHTML = `
+          <div class="history-top"><span class="code-tag">${esc(p.code)}${p.contract_number ? ` → ${esc(p.contract_number)}` : ''}</span><span class="status-badge st-${esc(p.status)}">${esc(labels[p.status] || p.status)}</span></div>
+          <h3>${esc(p.client_name)}${p.client_company ? ` · ${esc(p.client_company)}` : ''}</h3>
+          <div class="history-meta">${esc(p.project_title)}</div>
+          <div class="history-price">${esc(formatBRL(p.total_value))}</div>
+          <div class="history-actions"></div>
+        `;
+        const act = card.querySelector('.history-actions');
+        const b1 = document.createElement('button');
+        b1.className = 'btn btn-primary btn-sm';
+        b1.textContent = 'Orçamento';
+        b1.onclick = () => loadProposalIntoEditor(p, 'quote');
+
+        const b2 = document.createElement('button');
+        b2.className = 'btn btn-success btn-sm';
+        b2.textContent = p.contract_number ? `Ver ${p.contract_number}` : 'Contrato';
+        b2.onclick = () => loadProposalIntoEditor(p, 'contract');
+
+        const b3 = document.createElement('button');
+        b3.className = 'btn btn-danger btn-sm';
+        b3.textContent = 'Excluir';
+        b3.onclick = async () => {
+          if (!confirm(`Excluir ${p.code}?`)) return;
+          await api(`/api/proposals/${p.id}`, { method: 'DELETE' });
+          await refreshAllData();
+          showToast(`${p.code} excluído.`);
+        };
+        act.append(b1, b2, b3);
+        grid.appendChild(card);
+      });
     }
 
-    list.forEach((p) => {
-      const card = document.createElement('article');
-      card.className = 'history-card';
-      card.innerHTML = `
-        <div class="history-top"><span class="code-tag">${esc(p.code)}</span><span class="status-badge st-${esc(p.status)}">${esc(labels[p.status] || p.status)}</span></div>
-        <h3>${esc(p.client_name)}${p.client_company ? ` · ${esc(p.client_company)}` : ''}</h3>
-        <div class="history-meta">${esc(p.project_title)}</div>
-        <div class="history-price">${esc(formatBRL(p.total_value))}</div>
-        <div class="history-actions"></div>
-      `;
-      const act = card.querySelector('.history-actions');
-      const b1 = document.createElement('button');
-      b1.className = 'btn btn-primary btn-sm';
-      b1.textContent = 'Orçamento';
-      b1.onclick = () => loadProposalIntoEditor(p, 'quote');
-
-      const b2 = document.createElement('button');
-      b2.className = 'btn btn-success btn-sm';
-      b2.textContent = 'Contrato';
-      b2.onclick = () => loadProposalIntoEditor(p, 'contract');
-
-      const b3 = document.createElement('button');
-      b3.className = 'btn btn-danger btn-sm';
-      b3.textContent = 'Excluir';
-      b3.onclick = async () => {
-        if (!confirm(`Excluir ${p.code}?`)) return;
-        await api(`/api/proposals/${p.id}`, { method: 'DELETE' });
-        await refreshAllData();
-        showToast(`${p.code} excluído.`);
-      };
-      act.append(b1, b2, b3);
-      grid.appendChild(card);
-    });
+    // Banco dedicado de Contratos (na aba Contratos)
+    const cBank = document.getElementById('contracts-bank-grid');
+    if (cBank) {
+      const contracts = allProposals.filter((p) => p.contract_number);
+      cBank.innerHTML = '';
+      if (!contracts.length) {
+        cBank.innerHTML = '<p style="color:#9eb0c8;font-size:.86rem;">Nenhum contrato emitido ainda. Ao aceitar um orçamento (em <strong>Orçamentos → Aceitar → Gerar Contrato</strong>), ele recebe o número sequencial <strong>CTR-001</strong> vinculado ao orçamento e aparece aqui.</p>';
+      } else {
+        contracts.forEach((c) => {
+          const card = document.createElement('article');
+          card.className = 'history-card';
+          card.innerHTML = `
+            <div class="history-top"><span class="code-tag">${esc(c.contract_number)}</span><span class="status-badge st-contrato_gerado">Ref. ${esc(c.code)}</span></div>
+            <h3>${esc(c.client_name)}${c.client_company ? ` · ${esc(c.client_company)}` : ''}</h3>
+            <div class="history-meta">${esc(c.project_title)}</div>
+            <div class="history-price">${esc(formatBRL(c.total_value))}</div>
+            <div class="history-actions"></div>
+          `;
+          const act = card.querySelector('.history-actions');
+          const bOpen = document.createElement('button');
+          bOpen.className = 'btn btn-primary btn-sm';
+          bOpen.textContent = 'Abrir / Imprimir Contrato';
+          bOpen.onclick = () => loadProposalIntoEditor(c, 'contract');
+          act.appendChild(bOpen);
+          cBank.appendChild(card);
+        });
+      }
+    }
   }
 
   /* ---------- Renderização CRM, Kanban & Briefings ---------- */
@@ -879,10 +932,10 @@
   document.getElementById('btn-validate-contract').addEventListener('click', async () => {
     const s = readProposalState();
     fContractClauses.value = buildFullContractText(s, providerProfile);
-    const saved = await saveProposal('validado');
+    const saved = await saveProposal('aceito');
     if (saved) {
       switchTab('contract');
-      showToast('Orçamento validado e Contrato das 14 cláusulas preenchido!');
+      showToast(`Orçamento ${saved.code} aceito → Contrato ${saved.contract_number} gerado!`);
     }
   });
   document.getElementById('btn-reset-clauses').addEventListener('click', () => {
@@ -1043,16 +1096,16 @@
     const stamp = new Date().toISOString().slice(0, 10);
     const csvCell = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
     const rows = [
-      ['TIPO', 'CODIGO_ID', 'CLIENTE', 'EMPRESA', 'TITULO_DETALHE', 'STATUS', 'VALOR_BRL', 'DATA'].join(';')
+      ['TIPO', 'ORCAMENTO_NUM', 'CONTRATO_NUM', 'CLIENTE', 'EMPRESA', 'TITULO_DETALHE', 'STATUS', 'VALOR_BRL', 'DATA'].join(';')
     ];
     (backup.proposals || []).forEach((p) =>
-      rows.push(['PROPOSTA', p.code, p.client_name, p.client_company, p.project_title, p.status, p.total_value, p.updated_at].map(csvCell).join(';'))
+      rows.push(['ORCAMENTO', p.code, p.contract_number || '', p.client_name, p.client_company, p.project_title, p.status, p.total_value, p.updated_at].map(csvCell).join(';'))
     );
     (backup.clients || []).forEach((c) =>
-      rows.push(['CLIENTE', c.id, c.name, c.company, `${c.domain || ''} | Plano: ${c.maintenance_plan}`, c.maintenance_plan, 0, c.created_at].map(csvCell).join(';'))
+      rows.push(['CLIENTE', '', '', c.name, c.company, `${c.domain || ''} | Plano: ${c.maintenance_plan}`, c.maintenance_plan, 0, c.created_at].map(csvCell).join(';'))
     );
     (backup.projects || []).forEach((p) =>
-      rows.push(['KANBAN', p.id, p.client_name, '', p.title, p.stage, p.value, p.published_at || p.updated_at].map(csvCell).join(';'))
+      rows.push(['KANBAN', '', '', p.client_name, '', p.title, p.stage, p.value, p.published_at || p.updated_at].map(csvCell).join(';'))
     );
     downloadFile(`vibetech-planilha-${stamp}.csv`, '\uFEFF' + rows.join('\n'), 'text/csv;charset=utf-8');
     showToast('Planilha consolidada .CSV baixada!');

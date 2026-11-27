@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#030712">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#050b18">
   <meta name="robots" content="noindex, nofollow">
   <title>Ecossistema Master — VibeTech|CMD</title>
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
@@ -11,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/admin/admin.css">
+  <link rel="stylesheet" href="/admin/admin.css?v=20261127b">
 </head>
 <body>
   <!-- ==================== LOGIN MASTER ==================== -->
@@ -121,17 +122,18 @@
         <div class="panel">
           <div class="history-toolbar" style="margin-bottom:14px;">
             <div>
-              <h2 style="margin-bottom:4px;">Propostas e Contratos Recentes (Nuvem D1)</h2>
+              <h2 style="margin-bottom:4px;">Banco de Orçamentos (Enviados, Aceitos e Recusados)</h2>
               <span id="history-summary" style="font-size:.82rem;color:#9eb0c8;">Carregando...</span>
             </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
               <input class="input" id="history-search" type="search" placeholder="Buscar cliente ou código..." style="width:230px;">
-              <select class="select" id="history-filter" style="width:165px;">
+              <select class="select" id="history-filter" style="width:175px;">
                 <option value="all">Todos os status</option>
                 <option value="rascunho">Rascunho</option>
-                <option value="enviado">Enviado</option>
-                <option value="validado">Validado</option>
-                <option value="contrato_gerado">Contrato gerado</option>
+                <option value="enviado">Orçamento Enviado</option>
+                <option value="aceito">Orçamento Aceito</option>
+                <option value="recusado">Orçamento Recusado</option>
+                <option value="contrato_gerado">Contrato Gerado</option>
               </select>
             </div>
           </div>
@@ -316,21 +318,22 @@
               <div class="field"><label for="f-delivery">Prazo de desenvolvimento</label><input class="input" id="f-delivery" type="text" value="Até 15 dias"></div>
               <div class="field"><label for="f-revisions">Rodadas de revisão</label><input class="input" id="f-revisions" type="number" min="1" max="5" value="2"></div>
               <div class="field">
-                <label for="f-status">Status</label>
+                <label for="f-status">Status do Orçamento</label>
                 <select class="select" id="f-status">
                   <option value="rascunho">Rascunho</option>
                   <option value="enviado">Enviado</option>
-                  <option value="validado">Validado</option>
+                  <option value="aceito">Aceito</option>
+                  <option value="recusado">Recusado</option>
                   <option value="contrato_gerado">Contrato gerado</option>
                 </select>
               </div>
             </div>
 
             <div class="action-bar">
-              <button type="button" class="btn btn-primary" id="btn-save-quote">Salvar no D1</button>
+              <button type="button" class="btn btn-primary" id="btn-save-quote">Salvar Orçamento</button>
               <button type="button" class="btn btn-secondary" id="btn-print-quote">Imprimir / PDF</button>
               <button type="button" class="btn btn-secondary" id="btn-copy-wa">Copiar Resumo WhatsApp</button>
-              <button type="button" class="btn btn-success" id="btn-validate-contract">Validar → Gerar Contrato</button>
+              <button type="button" class="btn btn-success" id="btn-validate-contract">Aceitar → Gerar Contrato</button>
             </div>
           </div>
 
@@ -344,23 +347,28 @@
         </div>
       </section>
 
-      <!-- ==================== MÓDULO 3: CONTRATO INTEGRAL (14 CLÁUSULAS) ==================== -->
+      <!-- ==================== MÓDULO 3: CONTRATO INTEGRAL (14 CLÁUSULAS) & BANCO DE CONTRATOS ==================== -->
       <section id="tab-contract" class="tab-view is-hidden">
+        <div class="panel no-print" style="margin-bottom:20px;">
+          <h2><span>Banco de Contratos Emitidos (com rastreabilidade de Orçamento)</span></h2>
+          <div class="history-grid" id="contracts-bank-grid"></div>
+        </div>
+
         <div class="split-layout">
           <div class="panel no-print">
             <h2>
-              <span>Contrato Integral (14 Cláusulas)</span>
-              <span class="code-tag" id="contract-code-badge">Oficial</span>
+              <span>Contrato de Prestação de Serviços</span>
+              <span class="code-tag" id="contract-code-badge">CTR-001</span>
             </h2>
             <div class="info-banner">
-              Preenchido automaticamente com dados do cliente, <strong>Cleisson Martins Diogo</strong>, valor por extenso, regra Pix (40/30/30 vs 50/50) e cláusula de rodapé (crédito vs isenção).
+              Numeração sequencial própria (<strong>CTR-001, CTR-002...</strong>) vinculada automaticamente ao número do Orçamento (<strong>ORC-XXX</strong>), com <strong>Chancela Oficial VibeTech|CMD</strong> e visual limpo em fundo branco A4.
             </div>
             <div class="field">
               <label for="f-contract-clauses">Texto Integral do Contrato (editável se precisar ajustar algum caso específico)</label>
               <textarea class="textarea" id="f-contract-clauses" style="min-height:460px;font-size:.82rem;"></textarea>
             </div>
             <div class="action-bar">
-              <button type="button" class="btn btn-primary" id="btn-save-contract">Salvar Contrato no D1</button>
+              <button type="button" class="btn btn-primary" id="btn-save-contract">Salvar Contrato</button>
               <button type="button" class="btn btn-success" id="btn-print-contract">Imprimir / Salvar Contrato PDF</button>
               <button type="button" class="btn btn-secondary" id="btn-reset-clauses">Regerar Cláusulas Oficiais</button>
             </div>
@@ -368,7 +376,7 @@
 
           <div class="preview-column">
             <div class="preview-toolbar no-print">
-              <span style="font-size:.82rem;color:#9eb0c8;">Contrato Particular de Prestação de Serviços (A4)</span>
+              <span style="font-size:.82rem;color:#9eb0c8;">Contrato de Prestação de Serviços (A4 Limpo + Chancela VibeTech|CMD)</span>
               <button type="button" class="btn btn-success btn-sm" id="btn-print-contract-top">Imprimir / Salvar PDF ↗</button>
             </div>
             <article class="doc-paper" id="contract-preview-doc"></article>
@@ -380,7 +388,8 @@
       <section id="tab-profile" class="tab-view is-hidden no-print">
         <div class="split-layout">
           <div class="panel">
-            <h2>Dados Oficiais da CONTRATADA (salvos no D1)</h2>
+            <h2>Dados da VibeTech (Contratada)</h2>
+            <p style="margin:0 0 16px;color:#9eb0c8;font-size:.84rem;"><strong>Contratada</strong> é a sua empresa (VibeTech|CMD — quem presta o serviço). <strong>Contratante</strong> é o seu cliente.</p>
             <form id="profile-form">
               <div class="grid-2">
                 <div class="field"><label for="p-company">Marca Comercial</label><input class="input" id="p-company" required></div>
@@ -400,16 +409,16 @@
                 <div class="field"><label for="p-email">E-mail</label><input class="input" id="p-email" type="email" required></div>
                 <div class="field"><label for="p-web">Site Oficial</label><input class="input" id="p-web" type="url" required></div>
               </div>
-              <button type="submit" class="btn btn-primary">Salvar Dados na Nuvem (D1)</button>
+              <button type="submit" class="btn btn-primary">Salvar Dados da Contratada</button>
             </form>
           </div>
 
           <div class="panel">
             <h2>Central de Backup Físico Local</h2>
-            <p style="color:#9eb0c8;font-size:.88rem;line-height:1.6;">Baixe uma cópia completa de toda a base armazenada no Cloudflare D1 (Clientes, Briefings, Propostas, Contratos, Projetos Kanban e Histórico de Manutenção) para guardar no seu computador.</p>
+            <p style="color:#9eb0c8;font-size:.88rem;line-height:1.6;">Baixe a planilha consolidada em <strong>.CSV pronta para abrir direto no Excel</strong> (com todos os orçamentos, contratos, clientes e projetos) ou o arquivo técnico <strong>.JSON</strong> de backup completo.</p>
             <div style="display:grid;gap:12px;margin-top:18px;">
-              <button type="button" class="btn btn-primary" id="btn-export-json">⬇ Exportar Backup Completo (.JSON)</button>
-              <button type="button" class="btn btn-success" id="btn-export-csv">⬇ Exportar Planilha Consolidada (.CSV)</button>
+              <button type="button" class="btn btn-success" id="btn-export-csv">⬇ Exportar Planilha para Excel (.CSV)</button>
+              <button type="button" class="btn btn-secondary" id="btn-export-json">⬇ Exportar Backup Técnico Completo (.JSON)</button>
             </div>
           </div>
         </div>
@@ -418,7 +427,7 @@
   </div>
 
   <div class="toast" id="admin-toast" role="status" aria-live="polite"></div>
-  <script src="/admin/prd-data.js" defer></script>
-  <script src="/admin/admin.js" defer></script>
+  <script src="/admin/prd-data.js?v=20261127b" defer></script>
+  <script src="/admin/admin.js?v=20261127b" defer></script>
 </body>
 </html>

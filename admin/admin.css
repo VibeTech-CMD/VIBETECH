@@ -3,8 +3,9 @@
    ========================================================================== */
 
 :root {
-  --black: #030712;
-  --navy: #071426;
+  color-scheme: dark only;
+  --black: #050b18;
+  --navy: #0a192f;
   --navy-2: #0c1f3a;
   --blue: #075BCE;
   --electric: #087BFF;
@@ -675,4 +676,82 @@ button, input, textarea, select { font-family: inherit; }
 }
 @media (max-width: 680px) {
   .kpi-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Estética Jurídica Sóbria do Contrato + Chancela Oficial VibeTech ---------- */
+.doc-contract-header {
+  background: #ffffff;
+  color: #0f172a;
+  padding: 28px 34px 20px;
+  border-bottom: 2px solid #0f172a;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.doc-contract-header h3 {
+  margin: 0 0 4px;
+  font-family: Montserrat, sans-serif;
+  font-size: 1.24rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -.01em;
+}
+.doc-contract-header small { color: #475569; font-size: .8rem; display: block; }
+.doc-contract-ref {
+  text-align: right;
+  font-size: .8rem;
+  color: #334155;
+  line-height: 1.55;
+}
+.doc-contract-ref strong {
+  display: block;
+  color: #075BCE;
+  font-family: Montserrat, sans-serif;
+  font-size: .92rem;
+}
+
+/* Chancela oficial circular discreta da VibeTech|CMD */
+.chancela-wrap {
+  margin-top: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+.chancela-seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1.5px solid #075BCE;
+  background: #f8fafc;
+  color: #0f172a;
+}
+.chancela-seal img { width: 30px; height: 30px; display: block; }
+.chancela-seal-text {
+  font-size: .7rem;
+  line-height: 1.35;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: #334155;
+}
+.chancela-seal-text strong {
+  display: block;
+  font-family: Montserrat, sans-serif;
+  font-size: .78rem;
+  color: #075BCE;
+}
+
+.st-aceito { background: rgba(0, 214, 160, .18); color: #6ee7b7; }
+.st-recusado { background: rgba(239, 68, 68, .18); color: #fca5a5; }
+
+/* Responsividade fina das abas do Painel Master no celular */
+@media (max-width: 680px) {
+  .master-bar { padding: 10px 12px; gap: 10px; }
+  .nav-tabs { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .bar-actions { width: 100%; justify-content: space-between; }
+  .doc-contract-header { flex-direction: column; padding: 20px; }
+  .doc-contract-ref { text-align: left; }
 }

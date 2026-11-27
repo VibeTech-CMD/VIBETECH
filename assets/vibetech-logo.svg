@@ -67,10 +67,9 @@
       </feMerge>
     </filter>
     <clipPath id="vt-clip"><circle cx="100" cy="100" r="62"/></clipPath>
-    <mask id="vt-orbit-mask" maskUnits="userSpaceOnUse" x="-120" y="-120" width="240" height="240">
-      <rect x="-120" y="-120" width="240" height="240" fill="#fff"/>
-      <path d="M-62 0 A62 62 0 0 1 62 0 Z" fill="#000"/>
-    </mask>
+    <clipPath id="vt-orbit-clip">
+      <path clip-rule="evenodd" d="M-120 -120 H120 V120 H-120 Z M-63 0 A63 63 0 0 1 63 0 Z"/>
+    </clipPath>
   </defs>
 
   <g transform="translate(100 100) rotate(-20)" fill="none">
@@ -103,6 +102,6 @@
 
   <g transform="translate(100 100) rotate(-20)" fill="none">
     <path d="M90 0A90 26 0 0 1 -90 0" stroke="url(#vt-ring)" stroke-width="2.6" stroke-linecap="round" filter="url(#vt-glow)"/>
-    <path class="vt-spark" pathLength="100" d="M0 -26 A90 26 0 1 1 0 26 A90 26 0 1 1 0 -26" stroke="#F8FAFC" stroke-width="2.9" stroke-linecap="round" filter="url(#vt-glow)" mask="url(#vt-orbit-mask)"/>
+    <path class="vt-spark" pathLength="100" d="M0 -26 A90 26 0 1 1 0 26 A90 26 0 1 1 0 -26" stroke="#F8FAFC" stroke-width="2.9" stroke-linecap="round" filter="url(#vt-glow)" clip-path="url(#vt-orbit-clip)"/>
   </g>
 </svg>

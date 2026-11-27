@@ -4,10 +4,11 @@
    ========================================================================== */
 
 :root {
-  /* Paleta oficial VibeTech|CMD */
-  --black: #030712;
-  --navy: #071426;
-  --navy-elevated: #0a1b34;
+  color-scheme: dark only;
+  /* Paleta oficial VibeTech|CMD — tom mais leve, limpo e imune à inversão do modo escuro */
+  --black: #050b18;
+  --navy: #0a192f;
+  --navy-elevated: #0f223d;
   --blue: #075BCE;
   --electric: #087BFF;
   --cyan: #00D9F5;
@@ -226,11 +227,13 @@ main, footer { position: relative; z-index: 1; }
   border: 1px solid transparent;
   font-weight: 700;
   font-size: .94rem;
-  white-space: nowrap;
-  flex-shrink: 0;
+  text-align: center;
+  line-height: 1.3;
+  max-width: 100%;
   transition: transform .2s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
   cursor: pointer;
 }
+.nav-cta { white-space: nowrap; flex-shrink: 0; }
 .button-sm { min-height: 38px; padding: 8px 14px; font-size: .82rem; white-space: nowrap; flex-shrink: 0; }
 
 .nav-cta, .button-primary {
@@ -1040,7 +1043,9 @@ h2.section-title {
   position: relative;
   overflow: hidden;
   border-color: rgba(8, 123, 255, .34);
+  max-width: 100%;
 }
+.contact-info, .direct-channel, .briefing-form, .briefing-form > * { min-width: 0; max-width: 100%; }
 .contact-panel::after {
   content: "";
   position: absolute;
@@ -1287,8 +1292,11 @@ html.js-reveal .reveal.is-visible {
   section { padding: 58px 0; }
   .metrics-grid, .portfolio-grid, .github-grid, .why-cards, .process-grid, .form-row { grid-template-columns: 1fr; }
   .hero-actions .button { width: 100%; }
-  .contact-panel { padding: 22px 18px; }
-  .briefing-form { padding: 18px; }
+  .contact-panel { padding: 20px 16px; gap: 22px; }
+  .briefing-form { padding: 16px; gap: 13px; }
+  .briefing-form .button, .direct-channel .button { padding: 12px 16px; font-size: .88rem; }
+  .type-pill { padding: 7px 11px; font-size: .78rem; }
+  .card-surface, .metric-item, .faq-item { backdrop-filter: none; -webkit-backdrop-filter: none; }
   .wa-float span { display: none; }
   .wa-float { padding: 14px; right: 16px; bottom: 16px; }
 }

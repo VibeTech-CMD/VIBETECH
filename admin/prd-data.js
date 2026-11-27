@@ -162,7 +162,7 @@ window.VT_PRD = (() => {
       ? 'Mediante pagamento da taxa adicional específica inclusa no orçamento, fica dispensada a exibição do crédito da CONTRATADA no rodapé do projeto.'
       : 'A CONTRATANTE autoriza expressamente a CONTRATADA a manter, no rodapé do projeto entregue, assinatura discreta contendo crédito de desenvolvimento com link clicável direcionado ao domínio oficial https://vibetechcmd.com.br, comprometendo-se a não removê-lo sem prévio acordo. A eventual remoção do crédito poderá ser contratada mediante taxa adicional de 20% (vinte por cento) sobre o valor do projeto ou mínimo de R$ 250,00 (duzentos e cinquenta reais).';
 
-    return `Pelo presente instrumento particular, de um lado:
+    return `Pelo presente instrumento de prestação de serviços, de um lado:
 
 CONTRATADA: ${contratadaNome}, pessoa física, inscrita no CPF sob o nº ${contratadaCpf}, residente e domiciliada em ${contratadaEnd}, operando sob a marca comercial VibeTech|CMD (https://vibetechcmd.com.br), doravante denominada simplesmente CONTRATADA;
 
@@ -173,7 +173,7 @@ CONTRATANTE: ${s.client_name || '[Nome ou Razão Social]'}${s.client_company ? `
 Têm entre si, justas e acordadas, as seguintes cláusulas e condições que regerão a presente relação contratual:
 
 CLÁUSULA 1ª — DO OBJETO E DO ESCOPO FECHADO
-1.1. O presente contrato tem por objeto a prestação de serviços técnicos especializados de webdesign e desenvolvimento web pela CONTRATADA em favor da CONTRATANTE, consistentes na criação de ${packageName}, conforme especificações técnicas detalhadas na Proposta Comercial nº ${s.code}, que passa a integrar este instrumento como parte indissociável.
+1.1. O presente contrato tem por objeto a prestação de serviços técnicos especializados de webdesign e desenvolvimento web pela CONTRATADA em favor da CONTRATANTE, consistentes na criação de ${packageName}, conforme especificações técnicas detalhadas no Orçamento / Proposta Comercial nº ${s.code}, que passa a integrar este instrumento como parte indissociável.
 1.2. Compreendem o escopo contratado:
 ${scopeList || '   1. Conforme escopo aprovado na proposta comercial.'}
 1.3. Ficam expressamente EXCLUÍDOS do presente contrato, salvo contratação formal de aditivo apartado:

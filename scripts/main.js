@@ -573,9 +573,10 @@
       canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+      const isMobile = w <= 768;
       const areaFactor = (w * h) / (1440 * 900);
-      const nodeCount = Math.round(Math.min(62, Math.max(22, 46 * Math.sqrt(areaFactor))));
-      const starCount = Math.round(Math.min(115, Math.max(42, 85 * Math.sqrt(areaFactor))));
+      const nodeCount = isMobile ? 16 : Math.round(Math.min(54, Math.max(20, 42 * Math.sqrt(areaFactor))));
+      const starCount = isMobile ? 32 : Math.round(Math.min(95, Math.max(38, 76 * Math.sqrt(areaFactor))));
 
       nodes = Array.from({ length: nodeCount }, () => ({
         x: Math.random() * w,

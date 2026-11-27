@@ -152,11 +152,17 @@ async function authenticateRequest(request, env) {
 }
 
 async function generateProposalCode(db) {
-  const year = new Date().getFullYear();
-  const prefix = `VT-${year}-`;
-  const row = await db.prepare('SELECT COUNT(*) as total FROM proposals WHERE code LIKE ?').bind(`${prefix}%`).first();
+  const row = await db.prepare('SELECT COUNT(*) as total FROM proposals').first();
   const nextNum = Number(row?.total || 0) + 1;
-  return `${prefix}${String(nextNum).padStart(3, '0')}`;
+  return `ORC-${String(nextNum).padStart(3, '0')}`;
+}
+
+async function generateContractNumber(db) {
+  const row = await db
+    .prepare("SELECT COUNT(*) as total FROM proposals WHERE contract_number IS NOT NULL AND contract_number != ''")
+    .first();
+  const nextNum = Number(row?.total || 0) + 1;
+  return `CTR-${String(nextNum).padStart(3, '0')}`;
 }
 
 function getQuotaForPlan(plan) {
@@ -376,19 +382,24 @@ async function handleApi(request, env, url) {
     const discount = Number(body.discount || 0);
     const totalValue = Number(body.total_value ?? Math.max(0, items.reduce((a, i) => a + Number(i.price || 0), 0) - discount));
 
+    const status = String(body.status || 'rascunho');
+    const contractNumber =
+      body.contract_number || (status === 'aceito' || status === 'contrato_gerado' ? await generateContractNumber(env.DB) : null);
+
     await env.DB.prepare(
       `INSERT INTO proposals (
-        id, code, status, template_id,
+        id, code, contract_number, status, template_id,
         client_name, client_company, client_document, client_whatsapp, client_email,
         project_title, project_summary, items_json, discount, total_value,
         delivery_days, validity_days, payment_terms, notes, contract_clauses,
         provider_json, meta_json, validated_at, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     )
       .bind(
         id,
         code,
-        String(body.status || 'rascunho'),
+        contractNumber,
+        status,
         String(body.template_id || 'personalizado'),
         String(body.client_name || 'Cliente sem nome').trim(),
         String(body.client_company || '').trim(),
@@ -444,16 +455,20 @@ async function handleApi(request, env, url) {
           ? Number(body.total_value)
           : Math.max(0, items.reduce((a, i) => a + Number(i.price || 0), 0) - discount);
       const status = String(body.status || existing.status);
+      const shouldHaveContract = status === 'aceito' || status === 'contrato_gerado' || body.generate_contract;
+      const contractNumber =
+        existing.contract_number ||
+        (shouldHaveContract ? await generateContractNumber(env.DB) : null);
       const validatedAt =
         body.validated_at !== undefined
           ? body.validated_at
-          : status === 'validado' || status === 'contrato_gerado'
+          : shouldHaveContract
           ? existing.validated_at || now
           : existing.validated_at;
 
       await env.DB.prepare(
         `UPDATE proposals SET
-          status = ?, template_id = ?,
+          contract_number = ?, status = ?, template_id = ?,
           client_name = ?, client_company = ?, client_document = ?, client_whatsapp = ?, client_email = ?,
           project_title = ?, project_summary = ?, items_json = ?, discount = ?, total_value = ?,
           delivery_days = ?, validity_days = ?, payment_terms = ?, notes = ?, contract_clauses = ?,
@@ -461,6 +476,7 @@ async function handleApi(request, env, url) {
         WHERE id = ?`
       )
         .bind(
+          contractNumber,
           status,
           String(body.template_id ?? existing.template_id),
           String(body.client_name ?? existing.client_name).trim(),

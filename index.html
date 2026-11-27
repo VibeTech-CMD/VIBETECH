@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#030712">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#050b18">
   <meta name="description" content="VibeTech — Criação de sites profissionais, web design moderno, landing pages e aplicativos web sob medida em Macaé RJ e todo o Brasil. Conheça a VibeTech|CMD.">
   <meta name="keywords" content="VibeTech, VibeTech CMD, VibeTechCMD, Vibe Tech, Vibe Tech CMD, criação de sites, web design, desenvolvimento de sites, landing page profissional, criação de aplicativos, sistemas web sob medida, Macaé RJ">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -122,7 +123,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/main.css?v=20261127">
+  <link rel="stylesheet" href="styles/main.css?v=20261127b">
 
   <!-- Google tag (gtag.js) — Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-93015S10D6"></script>
@@ -176,10 +177,9 @@
         <feGaussianBlur stdDeviation="2.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
       </filter>
       <clipPath id="vt-clip"><circle cx="100" cy="100" r="62"/></clipPath>
-      <mask id="vt-orbit-mask" maskUnits="userSpaceOnUse" x="-120" y="-120" width="240" height="240">
-        <rect x="-120" y="-120" width="240" height="240" fill="#fff"/>
-        <path d="M-62 0 A62 62 0 0 1 62 0 Z" fill="#000"/>
-      </mask>
+      <clipPath id="vt-orbit-clip">
+        <path clip-rule="evenodd" d="M-120 -120 H120 V120 H-120 Z M-63 0 A63 63 0 0 1 63 0 Z"/>
+      </clipPath>
     </defs>
 
     <symbol id="vt-sphere" viewBox="0 0 200 200">
@@ -215,7 +215,7 @@
 
       <g transform="translate(100 100) rotate(-20)" fill="none">
         <path d="M90 0A90 26 0 0 1 -90 0" stroke="url(#vt-ring)" stroke-width="2.6" stroke-linecap="round" filter="url(#vt-glow)"/>
-        <path class="vt-spark" pathLength="100" d="M0 -26 A90 26 0 1 1 0 26 A90 26 0 1 1 0 -26" stroke="#F8FAFC" stroke-width="2.9" stroke-linecap="round" filter="url(#vt-glow)" mask="url(#vt-orbit-mask)"/>
+        <path class="vt-spark" pathLength="100" d="M0 -26 A90 26 0 1 1 0 26 A90 26 0 1 1 0 -26" stroke="#F8FAFC" stroke-width="2.9" stroke-linecap="round" filter="url(#vt-glow)" clip-path="url(#vt-orbit-clip)"/>
       </g>
     </symbol>
   </svg>
@@ -841,6 +841,6 @@
   <!-- Toast de aviso amigável -->
   <div class="toast" id="vt-toast" role="status" aria-live="polite"></div>
 
-  <script src="scripts/main.js?v=20261127" defer></script>
+  <script src="scripts/main.js?v=20261127b" defer></script>
 </body>
 </html>
